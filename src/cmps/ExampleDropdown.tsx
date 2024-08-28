@@ -1,6 +1,7 @@
 import { useState } from "react";
 import GenericDropdown from "../genericCmps/dropdown/GenericDropdown";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
+import pokemonsData from "../data/pokemon.json";
 
 const ExampleDropdown = () => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
@@ -10,19 +11,25 @@ const ExampleDropdown = () => {
     console.log("Selected Item:", label);
   };
 
-  const options: DropdownItem[] = [
-    { label: "Bulbasaur", detail: "20px" },
-    { label: "Caterpie", detail: "22px" },
-    { label: "Wartortle", detail: "30px" },
-    { label: "Pidgey", detail: "26px" },
-    { label: "Weedle", detail: "10px" },
-  ];
+  const pokemons: DropdownItem[] = pokemonsData
+    .slice(0, 5)
+    .map((pokemon: any) => ({
+      label: pokemon.name.english,
+      icon: (
+        <img
+          src={pokemon.image.thumbnail}
+          alt={pokemon.name.english}
+          style={{ width: "20px", height: "20px" }}
+        />
+      ),
+      attack: pokemon.base.Attack,
+    }));
 
   return (
     <div>
       <GenericDropdown
         label="Sort by"
-        options={options}
+        options={pokemons}
         withSearch={true}
         onSelect={handleSelect}
       />

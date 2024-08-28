@@ -1,7 +1,7 @@
 export interface DropdownItem {
   label: string;
   icon?: React.ReactNode;
-  detail?: string;
+  attack?: number;
 }
 
 export interface GenericDropdownProps {

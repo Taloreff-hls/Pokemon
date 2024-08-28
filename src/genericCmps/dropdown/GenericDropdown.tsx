@@ -50,12 +50,17 @@ const GenericDropdown = ({
                 onClick={() => handleSelect(option)}
                 sx={dropdownStyles.item}
               >
-                {option.icon && (
-                  <Box sx={dropdownStyles.icon}>{option.icon}</Box>
-                )}
-                {option.label}
-                {option.detail && (
-                  <Box sx={dropdownStyles.detail}>{option.detail}</Box>
+                <Box sx={dropdownStyles.leftItems}>
+                  {option.icon && (
+                    <Box sx={dropdownStyles.icon}>{option.icon}</Box>
+                  )}
+                  {option.label}
+                </Box>
+                {option.attack && (
+                  <Box sx={dropdownStyles.attack}>
+                    {option.attack}
+                    <Box sx={dropdownStyles.px}>px</Box>
+                  </Box>
                 )}
               </Box>
             ))}

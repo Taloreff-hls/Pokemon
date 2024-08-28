@@ -35,14 +35,33 @@ export const dropdownStyles = {
     alignItems: "center",
     cursor: "pointer",
     "&:hover": {
-      backgroundColor: "#f5f5f5",
+      backgroundColor: "#F2F5F7",
     },
   },
-  icon: {
-    marginRight: "8px",
+  leftItems: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  detail: {
+  icon: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: "8px",
+    backgroundColor: "#EBEFF6BA",
+    width: "25px",
+    height: "25px",
+    borderRadius: "50%",
+  },
+  attack: {
+    display: "flex",
     marginLeft: "auto",
     color: "#44484C",
+    fontWeight: "700",
+    fontSize: "12px",
+  },
+  px: {
+    fontWeight: "400",
+    fontSize: "11px",
   },
 };
