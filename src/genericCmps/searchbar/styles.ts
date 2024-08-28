@@ -37,6 +37,7 @@ export const searchbarStyles = {
     hover: {
       border: "1px solid #71787F",
       color: "#44484C",
+      cursor: "pointer",
     },
     pressed: {
       border: "1px solid #2D3033",

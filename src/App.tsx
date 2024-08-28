@@ -1,8 +1,11 @@
-import ExampleSearchbar from "./cmps/ExampleSearchbar";
+import GlobalStyle from "./assets/globalStyles/GlobalStyle";
+import ExampleDropdown from "./cmps/ExampleDropdown";
+
 function App() {
   return (
     <>
-      <ExampleSearchbar />
+      <GlobalStyle />
+      <ExampleDropdown />
     </>
   );
 }
