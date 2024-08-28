@@ -1,7 +1,7 @@
 export const dropdownStyles = {
   container: {
     position: "relative",
-    width: "200px",
+    width: "fit-content",
   },
   trigger: {
     display: "flex",
@@ -11,7 +11,7 @@ export const dropdownStyles = {
     border: "1px solid #A8AEB5",
     borderRadius: "8px",
     cursor: "pointer",
-    width: "110px",
+    width: "fit-content",
     height: "38px",
     backgroundColor: "transparent",
   },
