@@ -2,7 +2,7 @@ export type SearchbarState =
   | "default"
   | "hover"
   | "pressed"
-  | "afterSearch"
+  | "filled"
   | "disabled";
 
 export interface GenericSearchbarProps {
