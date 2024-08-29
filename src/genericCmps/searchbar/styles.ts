@@ -7,6 +7,7 @@ export const searchbarStyles = {
   },
   base: {
     borderRadius: "8px",
+    height: "38px",
     padding: "8px 80px 8px 40px",
     width: "100%",
     boxSizing: "border-box",
