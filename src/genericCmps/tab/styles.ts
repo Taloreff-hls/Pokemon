@@ -34,6 +34,6 @@ export const tabStyles = {
     borderBottom: `2px solid ${colors.greys.black}`,
   },
   icon: {
-    marginRight: "4px",
+    marginRight: "8px",
   },
 };
