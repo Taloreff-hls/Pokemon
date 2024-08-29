@@ -1,34 +1,37 @@
+import colors from "../../assets/constants/colors";
+import paddings from "../../assets/constants/paddings";
+import typography from "../../assets/constants/typography";
+
 export const tabStyles = {
   container: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     height: "38px",
-    padding: "4px 8px",
+    padding: paddings.tab.small,
     borderRadius: "4px",
-    color: "#000",
+    color: colors.greys.black,
     textTransform: "capitalize",
-    fontFamily: "Mulish",
-    fontWeight: "400",
-    fontSize: "14px",
-    lineHeight: "22px",
+    ...typography.bodyRegular,
+    "&:hover": {
+      backgroundColor: colors.neutrals.n100,
+    },
+  },
+  innerContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%",
   },
   base: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderBottom: "2px solid transparent",
     paddingBottom: "2px",
   },
-  states: {
-    default: {},
-    hover: {
-      cursor: "pointer",
-      backgroundColor: "#EBEFF6",
-    },
-    pressed: {
-      borderBottom: "2px solid #000",
-    },
+  border: {
+    width: "110%",
+    borderBottom: `2px solid ${colors.greys.black}`,
   },
   icon: {
     marginRight: "4px",

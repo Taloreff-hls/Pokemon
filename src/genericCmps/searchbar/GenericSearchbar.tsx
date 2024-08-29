@@ -6,23 +6,12 @@ import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
 const GenericSearchbar = ({
-  state,
   placeholder = "Search",
   value = "",
   onChange,
   disabled = false,
 }: GenericSearchbarProps) => {
   const [isFocused, setIsFocused] = useState(false);
-  const stateStyle = searchbarStyles.states[state] || {};
-
-  const inputStyles = {
-    ...searchbarStyles.base,
-    ...stateStyle,
-    ...(value && !isFocused ? searchbarStyles.states.filled : stateStyle),
-    ...(disabled ? searchbarStyles.states.disabled : {}),
-    "&:focus": searchbarStyles.states.pressed,
-    "&:hover": searchbarStyles.states.hover,
-  };
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
@@ -33,7 +22,11 @@ const GenericSearchbar = ({
       <Box
         component="input"
         type="text"
-        sx={inputStyles}
+        sx={{
+          ...searchbarStyles.base,
+          ...(value && !isFocused ? searchbarStyles.filled : {}),
+          ...(disabled && searchbarStyles.disabled),
+        }}
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}

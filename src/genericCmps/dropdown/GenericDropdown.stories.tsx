@@ -5,6 +5,7 @@ import pokemonsData from "../../data/pokemon.json";
 
 const pokemons: DropdownItem[] = pokemonsData
   .slice(0, 5)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   .map((pokemon: any) => ({
     label: pokemon.name.english,
     icon: (

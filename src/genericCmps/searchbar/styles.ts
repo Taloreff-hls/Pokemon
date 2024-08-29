@@ -1,17 +1,48 @@
+import colors from "../../assets/constants/colors";
+import paddings from "../../assets/constants/paddings";
+import typography from "../../assets/constants/typography";
+import fonts from "../../assets/constants/fonts";
+
 export const searchbarStyles = {
   container: {
     position: "relative",
     display: "inline-block",
     width: "100%",
-    fontSize: "14px",
+    ...typography.bodyRegular,
+    fontFamily: fonts.roboto,
   },
   base: {
     borderRadius: "8px",
     height: "38px",
-    padding: "8px 80px 8px 40px",
+    padding: paddings.input.search,
     width: "100%",
     boxSizing: "border-box",
     outline: "none",
+    border: `1px solid ${colors.neutrals.n200}`,
+    color: colors.greys.g100,
+
+    "&:hover": {
+      border: `1px solid ${colors.greys.g100}`,
+      color: colors.greys.g300,
+      cursor: "pointer",
+    },
+
+    "&:focus": {
+      border: `1px solid ${colors.neutrals.n500}`,
+      color: colors.neutrals.n500,
+    },
+
+    "&:active": {
+      border: `1px solid ${colors.neutrals.n500}`,
+      color: colors.neutrals.n500,
+    },
+
+    "&:disabled": {
+      border: `1px solid ${colors.greys.g400}`,
+      color: colors.neutrals.n100,
+      padding: paddings.input.after,
+      cursor: "not-allowed",
+    },
   },
   icon: {
     position: "absolute",
@@ -19,7 +50,7 @@ export const searchbarStyles = {
     top: "50%",
     transform: "translateY(-50%)",
     pointerEvents: "none",
-    color: "#71787F",
+    color: colors.greys.g100,
   },
   closeIcon: {
     position: "absolute",
@@ -27,36 +58,16 @@ export const searchbarStyles = {
     top: "50%",
     transform: "translateY(-50%)",
     cursor: "pointer",
-    color: "#0B0C0D",
+    color: colors.greys.g200,
     height: "20px",
   },
-  states: {
-    default: {
-      border: "1px solid #A8AEB5",
-      color: "#71787F",
-    },
-    hover: {
-      border: "1px solid #71787F",
-      color: "#44484C",
-      cursor: "pointer",
-    },
-    pressed: {
-      border: "1px solid #2D3033",
-      color: "#2D3033",
-    },
-    filled: {
-      border: "1px solid #2D3033",
-      color: "#2D3033",
-    },
-    afterSearch: {
-      border: "1px solid #929AA3",
-      color: "#0B0C0D",
-      padding: "8px 16px 8px 12px",
-    },
-    disabled: {
-      border: "1px solid #929AA3",
-      color: "#F2F5F7",
-      padding: "8px 16px 8px 12px",
-    },
+  filled: {
+    border: `1px solid ${colors.neutrals.n500}`,
+    color: colors.neutrals.n500,
+  },
+  disabled: {
+    border: `1px solid ${colors.greys.g400}`,
+    color: colors.neutrals.n100,
+    padding: paddings.input.after,
   },
 };

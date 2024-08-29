@@ -1,121 +1,114 @@
+import colors from "../../assets/constants/colors";
+import typography from "../../assets/constants/typography";
+import paddings from "../../assets/constants/paddings";
+
 export const buttonStyles = {
-    base: {
-      borderRadius: '4px',
-      fontWeight: '400',
+  base: {
+    borderRadius: "4px",
+    fontWeight: typography.bodyRegular.fontWeight,
+  },
+  sizes: {
+    small: {
+      padding: paddings.button.small,
+      fontSize: typography.bodyRegular.fontSize,
     },
-    sizes: {
-      small: {
-        padding: '9px 16px',
-        fontSize: '14px',
-      },
-      medium: {
-        padding: '10px 16px',
-        fontSize: '16px',
-      },
-      large: {
-        padding: '12px 16px',
-        fontSize: '16px',
-      },
+    medium: {
+      padding: paddings.button.medium,
+      fontSize: typography.buttonMediumBig.fontSize,
     },
-    variants: {
-      primary: {
-        default: {
-          backgroundColor: '#3B5AA6',
-          color: '#FFFFFF',
-        },
-        hover: {
-          backgroundColor: '#293F74',
-          color: '#FFFFFF',
-        },
-        pressed: {
-          backgroundColor: '#182442',
-          color: '#FFFFFF',
-        },
-        disabled: {
-          backgroundColor: '#E3E6E9',
-          color: '#A8AEB5',
-        },
+    large: {
+      padding: paddings.button.large,
+      fontSize: typography.buttonMediumBig.fontSize,
+    },
+  },
+  types: {
+    primary: {
+      backgroundColor: colors.primary.p300,
+      color: colors.neutrals.white,
+      "&:hover": {
+        backgroundColor: colors.primary.p400,
+        color: colors.neutrals.white,
       },
-      secondary: {
-        default: {
-          backgroundColor: 'transparent',
-          color: '#3B5AA6',
-          border: '1px solid #3B5AA6',
-        },
-        hover: {
-          backgroundColor: '#EBEFF6',
-          color: '#3B5AA6',
-          border: '1px solid #3B5AA6',
-        },
-        pressed: {
-          backgroundColor: '#B1BDDB',
-          color: '#3B5AA6',
-          border: '1px solid #3B5AA6',
-        },
-        disabled: {
-          backgroundColor: 'transparent',
-          color: '#C7CDD3',
-          border: '1px solid #C7CDD3',
-        },
+      "&:active": {
+        backgroundColor: colors.primary.p500,
+        color: colors.neutrals.white,
       },
-      'secondary-grey': {
-        default: {
-          backgroundColor: 'transparent',
-          color: '#44484C',
-          border: '1px solid #44484C',
-        },
-        hover: {
-          backgroundColor: '#F2F5F7',
-          color: '#5A6066',
-          border: '1px solid #44484C',
-        },
-        pressed: {
-          backgroundColor: '#F2F5F7',
-          color: '#44484C',
-          border: '1px solid #44484C',
-        },
-        disabled: {
-          backgroundColor: '#transparent',
-          color: '#C7CDD3',
-          border: '1px solid #C7CDD3',
-        },
-      },
-      tertiary: {
-        default: {
-          backgroundColor: 'transparent',
-          color: '#3B5AA6',
-        },
-        hover: {
-          backgroundColor: '#EBEFF6',
-          color: '#3B5AA6',
-        },
-        pressed: {
-          backgroundColor: '#B1BDDB',
-          color: '#3B5AA6',
-        },
-        disabled: {
-          backgroundColor: 'transparent',
-          color: '#C7CDD3',
-        },
-      },
-      'tertiary-grey': {
-        default: {
-          backgroundColor: 'transparent',
-          color: '#44484C',
-        },
-        hover: {
-          backgroundColor: '#F2F5F7',
-          color: '#5A6066',
-        },
-        pressed: {
-          backgroundColor: '#F2F5F7',
-          color: '#44484C',
-        },
-        disabled: {
-          backgroundColor: 'transparent',
-          color: '#C7CDD3',
-        },
+      disabled: {
+        backgroundColor: colors.neutrals.n100,
+        color: colors.neutrals.n200,
       },
     },
-  };
-  
+    secondary: {
+      backgroundColor: "transparent",
+      color: colors.primary.p300,
+      border: `1px solid ${colors.primary.p300}`,
+      "&:hover": {
+        backgroundColor: colors.primary.p50,
+        color: colors.primary.p300,
+        border: `1px solid ${colors.primary.p300}`,
+      },
+      "&:active": {
+        backgroundColor: colors.primary.p100,
+        color: colors.primary.p300,
+        border: `1px solid ${colors.primary.p300}`,
+      },
+      disabled: {
+        backgroundColor: "transparent",
+        color: colors.neutrals.n200,
+        border: `1px solid ${colors.neutrals.n200}`,
+      },
+    },
+    "secondary-grey": {
+      backgroundColor: "transparent",
+      color: colors.neutrals.n400,
+      border: `1px solid ${colors.neutrals.n400}`,
+      "&:hover": {
+        backgroundColor: colors.neutrals.n100,
+        color: colors.neutrals.n300,
+        border: `1px solid ${colors.neutrals.n400}`,
+      },
+      "&:active": {
+        backgroundColor: colors.neutrals.n100,
+        color: colors.neutrals.n400,
+        border: `1px solid ${colors.neutrals.n400}`,
+      },
+      disabled: {
+        backgroundColor: "transparent",
+        color: colors.neutrals.n200,
+        border: `1px solid ${colors.neutrals.n200}`,
+      },
+    },
+    tertiary: {
+      backgroundColor: "transparent",
+      color: colors.primary.p300,
+      "&:hover": {
+        backgroundColor: colors.primary.p50,
+        color: colors.primary.p300,
+      },
+      "&:active": {
+        backgroundColor: colors.primary.p100,
+        color: colors.primary.p300,
+      },
+      disabled: {
+        backgroundColor: "transparent",
+        color: colors.neutrals.n200,
+      },
+    },
+    "tertiary-grey": {
+      backgroundColor: "transparent",
+      color: colors.neutrals.n400,
+      "&:hover": {
+        backgroundColor: colors.neutrals.n100,
+        color: colors.neutrals.n300,
+      },
+      "&:active": {
+        backgroundColor: colors.neutrals.n100,
+        color: colors.neutrals.n400,
+      },
+      disabled: {
+        backgroundColor: "transparent",
+        color: colors.neutrals.n200,
+      },
+    },
+  },
+};

@@ -4,12 +4,6 @@ import GenericSearchbar from "./GenericSearchbar";
 const meta: Meta<typeof GenericSearchbar> = {
   component: GenericSearchbar,
   argTypes: {
-    state: {
-      control: {
-        type: "select",
-        options: ["default", "hover", "pressed", "afterSearch", "disabled"],
-      },
-    },
     placeholder: {
       control: "text",
       defaultValue: "Search",
@@ -30,7 +24,6 @@ type Story = StoryObj<typeof GenericSearchbar>;
 
 export const Searchbar: Story = {
   args: {
-    state: "default",
     placeholder: "Search",
     value: "",
     disabled: false,

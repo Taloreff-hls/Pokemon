@@ -1,3 +1,8 @@
+import colors from "../../assets/constants/colors";
+import fonts from "../../assets/constants/fonts";
+import paddings from "../../assets/constants/paddings";
+import typography from "../../assets/constants/typography";
+
 export const dropdownStyles = {
   container: {
     position: "relative",
@@ -7,36 +12,38 @@ export const dropdownStyles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: "8px 12px",
-    border: "1px solid #A8AEB5",
+    padding: paddings.dropdown.medium,
+    border: `1px solid ${colors.neutrals.n200}`,
     borderRadius: "8px",
     cursor: "pointer",
     width: "fit-content",
     height: "38px",
     backgroundColor: "transparent",
+    ...typography.bodyRegular,
+    fontFamily: fonts.roboto,
   },
   menu: {
-    padding: "8px",
+    padding: paddings.dropdown.small,
     marginTop: "10px",
-    background: "#fff",
+    background: colors.neutrals.white,
     borderRadius: "4px",
     boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.1)",
     zIndex: 10,
   },
   list: {
-    maxHeight: "200px",
+    maxHeight: "264px",
     overflowY: "auto",
   },
   item: {
-    fontFamily: "Mulish",
-    padding: "8px",
-    fontSize: "14px",
+    ...typography.bodyRegular,
+    padding: paddings.dropdown.small,
     display: "flex",
     alignItems: "center",
     cursor: "pointer",
     "&:hover": {
-      backgroundColor: "#F2F5F7",
+      backgroundColor: colors.neutrals.n100,
     },
+    minWidth: "206px",
   },
   leftItems: {
     display: "flex",
@@ -54,14 +61,12 @@ export const dropdownStyles = {
     borderRadius: "50%",
   },
   attack: {
+    ...typography.captionBold,
     display: "flex",
     marginLeft: "auto",
-    color: "#44484C",
-    fontWeight: "700",
-    fontSize: "12px",
+    color: colors.neutrals.n400,
   },
   px: {
-    fontWeight: "400",
-    fontSize: "11px",
+    ...typography.xSmallRegular,
   },
 };

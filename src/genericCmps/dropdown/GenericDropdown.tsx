@@ -40,7 +40,6 @@ const GenericDropdown = ({
               value={searchValue}
               onChange={setSearchValue}
               placeholder="Search"
-              state="default"
             />
           )}
           <Box sx={dropdownStyles.list}>
