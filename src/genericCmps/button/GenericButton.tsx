@@ -6,6 +6,8 @@ const GenericButton = ({
   type,
   size,
   label,
+  fontSize,
+  fontWeight,
   onClick,
   disabled = false,
   selected = false,
@@ -16,6 +18,8 @@ const GenericButton = ({
         ...buttonStyles.base,
         ...buttonStyles.sizes[size],
         ...buttonStyles.types[type],
+        ...(fontSize && { fontSize }),
+        ...(fontWeight && { fontWeight }),
         ...(selected && buttonStyles.types[type]["&:hover"]),
         ...(disabled && buttonStyles.types[type].disabled),
       }}
