@@ -3,22 +3,21 @@ import paddings from "../../assets/constants/paddings";
 import typography from "../../assets/constants/typography";
 import fonts from "../../assets/constants/fonts";
 import { SPACING } from "../../assets/constants/spacings";
-import { CURSORS, HEIGHTS, WIDTHS } from "../../assets/constants/dimensions";
 import { BORDERS } from "../../assets/constants/borders";
 
 export const searchbarStyles = {
   container: {
     position: "relative",
     display: "inline-block",
-    width: WIDTHS.fullWidth,
+    width: "100%",
     ...typography.body,
     fontFamily: fonts.roboto,
   },
   base: {
     borderRadius: `${SPACING[2]}`,
-    height: HEIGHTS.medium,
+    height: "38px",
     padding: paddings.input.search,
-    width: WIDTHS.fullWidth,
+    width: "100%",
     boxSizing: "border-box",
     outline: "none",
     backgroundColor: colors.neutrals.transparent,
@@ -28,7 +27,7 @@ export const searchbarStyles = {
     "&:hover": {
       border: BORDERS.lightGrey,
       color: colors.greys[300],
-      cursor: CURSORS.pointer,
+      cursor: "pointer",
     },
 
     "&:focus": {
@@ -45,7 +44,7 @@ export const searchbarStyles = {
       border: BORDERS.disabled,
       color: colors.neutrals[100],
       padding: paddings.input.after,
-      cursor: CURSORS.disabled,
+      cursor: "not-allowed",
     },
   },
   icon: {
@@ -61,9 +60,9 @@ export const searchbarStyles = {
     right: "12px",
     top: "50%",
     transform: "translateY(-50%)",
-    cursor: CURSORS.pointer,
+    cursor: "pointer",
     color: colors.greys[200],
-    height: HEIGHTS.xsmall,
+    height: "20px",
   },
   filled: {
     border: BORDERS.darkGrey,

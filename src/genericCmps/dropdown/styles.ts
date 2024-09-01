@@ -3,24 +3,22 @@ import fonts from "../../assets/constants/fonts";
 import paddings from "../../assets/constants/paddings";
 import typography from "../../assets/constants/typography";
 import { SPACING } from "../../assets/constants/spacings";
-import { WIDTHS, HEIGHTS, CURSORS } from "../../assets/constants/dimensions";
-import { ALIGNMENTS, JUSTIFY_CONTENT } from "../../assets/constants/flex";
 import { BORDERS } from "../../assets/constants/borders";
 
 export const dropdownStyles = {
   container: {
     position: "relative",
-    width: WIDTHS.fitContent,
+    width: "fit-content",
   },
   trigger: {
     display: "flex",
-    alignItems: ALIGNMENTS.center,
-    justifyContent: JUSTIFY_CONTENT.between,
+    alignItems: "center",
+    justifyContent: "space-between",
     padding: paddings.dropdown.medium,
     border: BORDERS.disabled,
     borderRadius: `${SPACING[2]}`,
-    cursor: CURSORS.pointer,
-    width: WIDTHS.fitContent,
+    cursor: "pointer",
+    width: "fit-content",
     backgroundColor: colors.neutrals.transparent,
     ...typography.body,
     fontFamily: fonts.roboto,
@@ -36,7 +34,7 @@ export const dropdownStyles = {
     zIndex: 10,
   },
   list: {
-    maxHeight: HEIGHTS.max,
+    maxHeight: "264px",
     overflowY: "auto",
   },
   item: {
@@ -44,26 +42,26 @@ export const dropdownStyles = {
     ...typography.body,
     padding: paddings.dropdown.small,
     display: "flex",
-    alignItems: ALIGNMENTS.center,
-    cursor: CURSORS.pointer,
+    alignItems: "center",
+    cursor: "pointer",
     "&:hover": {
       backgroundColor: colors.neutrals[100],
     },
-    minWidth: WIDTHS.small,
+    minWidth: "206px",
   },
   leftItems: {
     display: "flex",
-    justifyContent: JUSTIFY_CONTENT.center,
-    alignItems: ALIGNMENTS.center,
+    justifyContent: "center",
+    alignItems: "center",
   },
   icon: {
     display: "flex",
-    alignItems: ALIGNMENTS.center,
-    justifyContent: JUSTIFY_CONTENT.center,
+    alignItems: "center",
+    justifyContent: "center",
     marginRight: `${SPACING[2]}`,
     backgroundColor: colors.greys[500],
-    width: HEIGHTS.small,
-    height: HEIGHTS.small,
+    width: "25px",
+    height: "25px",
     borderRadius: "50%",
   },
   attack: {
