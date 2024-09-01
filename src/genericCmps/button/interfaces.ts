@@ -12,4 +12,5 @@ export interface GenericButtonProps {
   label: string;
   onClick: () => void;
   disabled?: boolean;
+  selected?: boolean;
 }

@@ -2,10 +2,12 @@ import colors from "../../assets/constants/colors";
 import typography from "../../assets/constants/typography";
 import paddings from "../../assets/constants/paddings";
 import { SPACING } from "../../assets/constants/spacings";
+import { BORDERS } from "../../assets/constants/borders";
 
 export const buttonStyles = {
   base: {
     borderRadius: `${SPACING[1]}`,
+    textTransform: "none",
   },
   sizes: {
     small: {
@@ -44,41 +46,41 @@ export const buttonStyles = {
     secondary: {
       backgroundColor: colors.neutrals.transparent,
       color: colors.primary[300],
-      border: `1px solid ${colors.primary[300]}`,
+      border: BORDERS.primary,
       "&:hover": {
         backgroundColor: colors.primary[50],
         color: colors.primary[300],
-        border: `1px solid ${colors.primary[300]}`,
+        border: BORDERS.primary,
       },
       "&:active": {
         backgroundColor: colors.primary[100],
         color: colors.primary[300],
-        border: `1px solid ${colors.primary[300]}`,
+        border: BORDERS.primary,
       },
       disabled: {
         backgroundColor: colors.neutrals.transparent,
         color: colors.neutrals[200],
-        border: `1px solid ${colors.neutrals[200]}`,
+        border: BORDERS.disabled,
       },
     },
     "secondary-grey": {
       backgroundColor: colors.neutrals.transparent,
       color: colors.neutrals[400],
-      border: `1px solid ${colors.neutrals[400]}`,
+      border: BORDERS.grey,
       "&:hover": {
         backgroundColor: colors.neutrals[100],
         color: colors.neutrals[300],
-        border: `1px solid ${colors.neutrals[400]}`,
+        border: BORDERS.grey,
       },
       "&:active": {
         backgroundColor: colors.neutrals[100],
         color: colors.neutrals[400],
-        border: `1px solid ${colors.neutrals[400]}`,
+        border: BORDERS.grey,
       },
       disabled: {
         backgroundColor: colors.neutrals.transparent,
         color: colors.neutrals[200],
-        border: `1px solid ${colors.neutrals[200]}`,
+        border: BORDERS.disabled,
       },
     },
     tertiary: {

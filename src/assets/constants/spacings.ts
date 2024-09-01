@@ -1,4 +1,5 @@
 export const SPACING = {
+  0: "2px",
   1: "4px",
   2: "8px",
   3: "9px",

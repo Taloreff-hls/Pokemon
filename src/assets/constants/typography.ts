@@ -1,35 +1,35 @@
 const typography = {
   "heading-md": {
-    fontSize: "18px",
-    lineHeight: "20px",
+    fontSize: "1.8rem",
+    lineHeight: "2.0rem",
   },
   "heading-lg": {
-    fontSize: "24px",
-    lineHeight: "34px",
+    fontSize: "2.4rem",
+    lineHeight: "3.4rem",
   },
   "heading-xl": {
-    fontSize: "28px",
-    lineHeight: "37px",
+    fontSize: "2.8rem",
+    lineHeight: "3.7rem",
   },
   "heading-xxl": {
-    fontSize: "32px",
-    lineHeight: "40px",
+    fontSize: "3.2rem",
+    lineHeight: "4.0rem",
   },
   subheading: {
-    fontSize: "16px",
-    lineHeight: "24px",
+    fontSize: "1.6rem",
+    lineHeight: "2.4rem",
   },
   body: {
-    fontSize: "14px",
-    lineHeight: "22px",
+    fontSize: "1.4rem",
+    lineHeight: "2.2rem",
   },
   caption: {
-    fontSize: "12px",
-    lineHeight: "19px",
+    fontSize: "1.2rem",
+    lineHeight: "1.9rem",
   },
   "x-small": {
-    fontSize: "11px",
-    lineHeight: "16px",
+    fontSize: "1.1rem",
+    lineHeight: "1.6rem",
   },
 };
 

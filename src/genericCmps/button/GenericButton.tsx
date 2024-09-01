@@ -8,6 +8,7 @@ const GenericButton = ({
   label,
   onClick,
   disabled = false,
+  selected = false,
 }: GenericButtonProps) => {
   return (
     <Button
@@ -15,6 +16,7 @@ const GenericButton = ({
         ...buttonStyles.base,
         ...buttonStyles.sizes[size],
         ...buttonStyles.types[type],
+        ...(selected && buttonStyles.types[type]["&:hover"]),
         ...(disabled && buttonStyles.types[type].disabled),
       }}
       onClick={onClick}

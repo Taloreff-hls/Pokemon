@@ -5,6 +5,7 @@ import typography from "../../assets/constants/typography";
 import { SPACING } from "../../assets/constants/spacings";
 import { WIDTHS, HEIGHTS, CURSORS } from "../../assets/constants/dimensions";
 import { ALIGNMENTS, JUSTIFY_CONTENT } from "../../assets/constants/flex";
+import { BORDERS } from "../../assets/constants/borders";
 
 export const dropdownStyles = {
   container: {
@@ -16,16 +17,17 @@ export const dropdownStyles = {
     alignItems: ALIGNMENTS.center,
     justifyContent: JUSTIFY_CONTENT.between,
     padding: paddings.dropdown.medium,
-    border: `1px solid ${colors.neutrals[200]}`,
+    border: BORDERS.disabled,
     borderRadius: `${SPACING[2]}`,
     cursor: CURSORS.pointer,
     width: WIDTHS.fitContent,
-    height: HEIGHTS.medium,
     backgroundColor: colors.neutrals.transparent,
     ...typography.body,
     fontFamily: fonts.roboto,
   },
   menu: {
+    position: "absolute",
+    right: SPACING[1],
     padding: paddings.dropdown.small,
     marginTop: `${SPACING[4]}`,
     background: colors.neutrals.white,

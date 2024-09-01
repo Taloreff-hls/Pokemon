@@ -16,6 +16,7 @@ const Typography = styled.p<TypographyProps>`
   line-height: ${(props) =>
     props.fontType ? typography[props.fontType].lineHeight : "22px"};
   color: ${(props) => props.color || "#000"};
+  margin: 0;
 `;
 
 export default Typography;

@@ -4,6 +4,7 @@ import typography from "../../assets/constants/typography";
 import { SPACING } from "../../assets/constants/spacings";
 import { WIDTHS, HEIGHTS } from "../../assets/constants/dimensions";
 import { ALIGNMENTS, JUSTIFY_CONTENT } from "../../assets/constants/flex";
+import { BORDERS } from "../../assets/constants/borders";
 
 export const tabStyles = {
   container: {
@@ -30,11 +31,12 @@ export const tabStyles = {
     display: "flex",
     justifyContent: JUSTIFY_CONTENT.center,
     alignItems: ALIGNMENTS.center,
-    paddingBottom: "2px",
+    paddingBottom: SPACING[1],
   },
   border: {
     width: WIDTHS.extended,
-    borderBottom: `2px solid ${colors.greys.black}`,
+    borderBottom: BORDERS.bottom,
+    borderWidth: SPACING[0],
   },
   icon: {
     marginRight: `${SPACING[2]}`,

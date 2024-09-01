@@ -1,7 +1,7 @@
 export const WIDTHS = {
   fitContent: "fit-content",
   fullWidth: "100%",
-  extended: "110%",
+  extended: "130%",
   small: "206px",
 };
 

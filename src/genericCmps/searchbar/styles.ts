@@ -4,6 +4,7 @@ import typography from "../../assets/constants/typography";
 import fonts from "../../assets/constants/fonts";
 import { SPACING } from "../../assets/constants/spacings";
 import { CURSORS, HEIGHTS, WIDTHS } from "../../assets/constants/dimensions";
+import { BORDERS } from "../../assets/constants/borders";
 
 export const searchbarStyles = {
   container: {
@@ -20,27 +21,28 @@ export const searchbarStyles = {
     width: WIDTHS.fullWidth,
     boxSizing: "border-box",
     outline: "none",
-    border: `1px solid ${colors.neutrals[200]}`,
+    backgroundColor: colors.neutrals.transparent,
+    border: BORDERS.disabled,
     color: colors.greys[100],
 
     "&:hover": {
-      border: `1px solid ${colors.greys[100]}`,
+      border: BORDERS.lightGrey,
       color: colors.greys[300],
       cursor: CURSORS.pointer,
     },
 
     "&:focus": {
-      border: `1px solid ${colors.neutrals[500]}`,
+      border: BORDERS.darkGrey,
       color: colors.neutrals[500],
     },
 
     "&:active": {
-      border: `1px solid ${colors.neutrals[500]}`,
+      border: BORDERS.darkGrey,
       color: colors.neutrals[500],
     },
 
     "&:disabled": {
-      border: `1px solid ${colors.greys[400]}`,
+      border: BORDERS.disabled,
       color: colors.neutrals[100],
       padding: paddings.input.after,
       cursor: CURSORS.disabled,
@@ -64,11 +66,11 @@ export const searchbarStyles = {
     height: HEIGHTS.xsmall,
   },
   filled: {
-    border: `1px solid ${colors.neutrals[500]}`,
+    border: BORDERS.darkGrey,
     color: colors.neutrals[500],
   },
   disabled: {
-    border: `1px solid ${colors.greys[400]}`,
+    border: BORDERS.disabled,
     color: colors.neutrals[100],
     padding: paddings.input.after,
   },
