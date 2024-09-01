@@ -1,113 +1,116 @@
 import colors from "../../assets/constants/colors";
 import typography from "../../assets/constants/typography";
 import paddings from "../../assets/constants/paddings";
+import { SPACING } from "../../assets/constants/spacings";
 
 export const buttonStyles = {
   base: {
-    borderRadius: "4px",
-    fontWeight: typography.bodyRegular.fontWeight,
+    borderRadius: `${SPACING[1]}`,
   },
   sizes: {
     small: {
       padding: paddings.button.small,
-      fontSize: typography.bodyRegular.fontSize,
+      fontSize: typography.body.fontSize,
+      lineHeight: typography.body.lineHeight,
     },
     medium: {
       padding: paddings.button.medium,
-      fontSize: typography.buttonMediumBig.fontSize,
+      fontSize: typography["heading-md"].fontSize,
+      lineHeight: typography["heading-md"].lineHeight,
     },
     large: {
       padding: paddings.button.large,
-      fontSize: typography.buttonMediumBig.fontSize,
+      fontSize: typography["heading-md"].fontSize,
+      lineHeight: typography["heading-md"].lineHeight,
     },
   },
   types: {
     primary: {
-      backgroundColor: colors.primary.p300,
+      backgroundColor: colors.primary[300],
       color: colors.neutrals.white,
       "&:hover": {
-        backgroundColor: colors.primary.p400,
+        backgroundColor: colors.primary[400],
         color: colors.neutrals.white,
       },
       "&:active": {
-        backgroundColor: colors.primary.p500,
+        backgroundColor: colors.primary[500],
         color: colors.neutrals.white,
       },
       disabled: {
-        backgroundColor: colors.neutrals.n100,
-        color: colors.neutrals.n200,
+        backgroundColor: colors.neutrals[100],
+        color: colors.neutrals[200],
       },
     },
     secondary: {
-      backgroundColor: "transparent",
-      color: colors.primary.p300,
-      border: `1px solid ${colors.primary.p300}`,
+      backgroundColor: colors.neutrals.transparent,
+      color: colors.primary[300],
+      border: `1px solid ${colors.primary[300]}`,
       "&:hover": {
-        backgroundColor: colors.primary.p50,
-        color: colors.primary.p300,
-        border: `1px solid ${colors.primary.p300}`,
+        backgroundColor: colors.primary[50],
+        color: colors.primary[300],
+        border: `1px solid ${colors.primary[300]}`,
       },
       "&:active": {
-        backgroundColor: colors.primary.p100,
-        color: colors.primary.p300,
-        border: `1px solid ${colors.primary.p300}`,
+        backgroundColor: colors.primary[100],
+        color: colors.primary[300],
+        border: `1px solid ${colors.primary[300]}`,
       },
       disabled: {
-        backgroundColor: "transparent",
-        color: colors.neutrals.n200,
-        border: `1px solid ${colors.neutrals.n200}`,
+        backgroundColor: colors.neutrals.transparent,
+        color: colors.neutrals[200],
+        border: `1px solid ${colors.neutrals[200]}`,
       },
     },
     "secondary-grey": {
-      backgroundColor: "transparent",
-      color: colors.neutrals.n400,
-      border: `1px solid ${colors.neutrals.n400}`,
+      backgroundColor: colors.neutrals.transparent,
+      color: colors.neutrals[400],
+      border: `1px solid ${colors.neutrals[400]}`,
       "&:hover": {
-        backgroundColor: colors.neutrals.n100,
-        color: colors.neutrals.n300,
-        border: `1px solid ${colors.neutrals.n400}`,
+        backgroundColor: colors.neutrals[100],
+        color: colors.neutrals[300],
+        border: `1px solid ${colors.neutrals[400]}`,
       },
       "&:active": {
-        backgroundColor: colors.neutrals.n100,
-        color: colors.neutrals.n400,
-        border: `1px solid ${colors.neutrals.n400}`,
+        backgroundColor: colors.neutrals[100],
+        color: colors.neutrals[400],
+        border: `1px solid ${colors.neutrals[400]}`,
       },
       disabled: {
-        backgroundColor: "transparent",
-        color: colors.neutrals.n200,
-        border: `1px solid ${colors.neutrals.n200}`,
+        backgroundColor: colors.neutrals.transparent,
+        color: colors.neutrals[200],
+        border: `1px solid ${colors.neutrals[200]}`,
       },
     },
     tertiary: {
-      backgroundColor: "transparent",
-      color: colors.primary.p300,
+      backgroundColor: colors.neutrals.transparent,
+      color: colors.primary[300],
       "&:hover": {
-        backgroundColor: colors.primary.p50,
-        color: colors.primary.p300,
+        backgroundColor: colors.primary[50],
+        color: colors.primary[300],
       },
       "&:active": {
-        backgroundColor: colors.primary.p100,
-        color: colors.primary.p300,
+        backgroundColor: colors.primary[100],
+        color: colors.primary[300],
       },
       disabled: {
-        backgroundColor: "transparent",
-        color: colors.neutrals.n200,
+        backgroundColor: colors.neutrals.transparent,
+        color: colors.neutrals[200],
       },
     },
     "tertiary-grey": {
-      backgroundColor: "transparent",
-      color: colors.neutrals.n400,
+      backgroundColor: colors.neutrals.transparent,
+      color: colors.neutrals[400],
       "&:hover": {
-        backgroundColor: colors.neutrals.n100,
-        color: colors.neutrals.n300,
+        backgroundColor: colors.neutrals[100],
+        color: colors.neutrals[300],
       },
       "&:active": {
-        backgroundColor: colors.neutrals.n100,
-        color: colors.neutrals.n400,
+        backgroundColor: colors.neutrals[100],
+        color: colors.neutrals[400],
       },
       disabled: {
-        backgroundColor: "transparent",
-        color: colors.neutrals.n200,
+        backgroundColor: colors.neutrals.transparent,
+        color: colors.neutrals[200],
       },
     },
   },

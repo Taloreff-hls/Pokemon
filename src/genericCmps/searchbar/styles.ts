@@ -2,46 +2,48 @@ import colors from "../../assets/constants/colors";
 import paddings from "../../assets/constants/paddings";
 import typography from "../../assets/constants/typography";
 import fonts from "../../assets/constants/fonts";
+import { SPACING } from "../../assets/constants/spacings";
+import { CURSORS, HEIGHTS, WIDTHS } from "../../assets/constants/dimensions";
 
 export const searchbarStyles = {
   container: {
     position: "relative",
     display: "inline-block",
-    width: "100%",
-    ...typography.bodyRegular,
+    width: WIDTHS.fullWidth,
+    ...typography.body,
     fontFamily: fonts.roboto,
   },
   base: {
-    borderRadius: "8px",
-    height: "38px",
+    borderRadius: `${SPACING[2]}`,
+    height: HEIGHTS.medium,
     padding: paddings.input.search,
-    width: "100%",
+    width: WIDTHS.fullWidth,
     boxSizing: "border-box",
     outline: "none",
-    border: `1px solid ${colors.neutrals.n200}`,
-    color: colors.greys.g100,
+    border: `1px solid ${colors.neutrals[200]}`,
+    color: colors.greys[100],
 
     "&:hover": {
-      border: `1px solid ${colors.greys.g100}`,
-      color: colors.greys.g300,
-      cursor: "pointer",
+      border: `1px solid ${colors.greys[100]}`,
+      color: colors.greys[300],
+      cursor: CURSORS.pointer,
     },
 
     "&:focus": {
-      border: `1px solid ${colors.neutrals.n500}`,
-      color: colors.neutrals.n500,
+      border: `1px solid ${colors.neutrals[500]}`,
+      color: colors.neutrals[500],
     },
 
     "&:active": {
-      border: `1px solid ${colors.neutrals.n500}`,
-      color: colors.neutrals.n500,
+      border: `1px solid ${colors.neutrals[500]}`,
+      color: colors.neutrals[500],
     },
 
     "&:disabled": {
-      border: `1px solid ${colors.greys.g400}`,
-      color: colors.neutrals.n100,
+      border: `1px solid ${colors.greys[400]}`,
+      color: colors.neutrals[100],
       padding: paddings.input.after,
-      cursor: "not-allowed",
+      cursor: CURSORS.disabled,
     },
   },
   icon: {
@@ -50,24 +52,24 @@ export const searchbarStyles = {
     top: "50%",
     transform: "translateY(-50%)",
     pointerEvents: "none",
-    color: colors.greys.g100,
+    color: colors.greys[100],
   },
   closeIcon: {
     position: "absolute",
     right: "12px",
     top: "50%",
     transform: "translateY(-50%)",
-    cursor: "pointer",
-    color: colors.greys.g200,
-    height: "20px",
+    cursor: CURSORS.pointer,
+    color: colors.greys[200],
+    height: HEIGHTS.xsmall,
   },
   filled: {
-    border: `1px solid ${colors.neutrals.n500}`,
-    color: colors.neutrals.n500,
+    border: `1px solid ${colors.neutrals[500]}`,
+    color: colors.neutrals[500],
   },
   disabled: {
-    border: `1px solid ${colors.greys.g400}`,
-    color: colors.neutrals.n100,
+    border: `1px solid ${colors.greys[400]}`,
+    color: colors.neutrals[100],
     padding: paddings.input.after,
   },
 };

@@ -2,19 +2,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 import GenericDropdown from "./GenericDropdown";
 import { DropdownItem } from "./interfaces";
 import pokemonsData from "../../data/pokemon.json";
+import { CatchingPokemon } from "@mui/icons-material";
 
 const pokemons: DropdownItem[] = pokemonsData
   .slice(0, 5)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   .map((pokemon: any) => ({
     label: pokemon.name.english,
-    icon: (
-      <img
-        src={pokemon.image.thumbnail}
-        alt={pokemon.name.english}
-        style={{ width: "20px", height: "20px" }}
-      />
-    ),
+    icon: <CatchingPokemon style={{ width: "20px", height: "20px" }} />,
     attack: pokemon.base.Attack,
   }));
 

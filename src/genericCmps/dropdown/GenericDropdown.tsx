@@ -10,6 +10,7 @@ const GenericDropdown = ({
   label,
   withSearch = false,
   onSelect,
+  placeholder,
 }: GenericDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -30,7 +31,7 @@ const GenericDropdown = ({
   return (
     <Box sx={dropdownStyles.container}>
       <Box onClick={toggleDropdown} sx={dropdownStyles.trigger}>
-        {selectedItem ? selectedItem.label : label}
+        {selectedItem?.label ?? label}
         <KeyboardArrowDownIcon />
       </Box>
       {isOpen && (
@@ -39,7 +40,7 @@ const GenericDropdown = ({
             <GenericSearchbar
               value={searchValue}
               onChange={setSearchValue}
-              placeholder="Search"
+              placeholder={placeholder}
             />
           )}
           <Box sx={dropdownStyles.list}>

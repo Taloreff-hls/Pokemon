@@ -1,23 +1,25 @@
+import { SPACING } from "./spacings";
+
 const paddings = {
-  small: "9px 16px",
-  medium: "10px 16px",
-  large: "12px 16px",
+  small: `${SPACING[3]} ${SPACING[6]}`,
+  medium: `${SPACING[4]} ${SPACING[6]}`,
+  large: `${SPACING[5]} ${SPACING[6]}`,
   button: {
-    small: "9px 16px",
-    medium: "10px 16px",
-    large: "12px 16px",
+    small: `${SPACING[3]} ${SPACING[6]}`,
+    medium: `${SPACING[4]} ${SPACING[6]}`,
+    large: `${SPACING[5]} ${SPACING[6]}`,
   },
   dropdown: {
-    small: "8px",
-    medium: "8px 12px",
+    small: SPACING[2],
+    medium: `${SPACING[2]} ${SPACING[5]}`,
   },
   input: {
-    base: "8px 40px 8px 12px",
-    search: "8px 80px 8px 40px",
-    after: "8px 16px 8px 12px",
+    base: `${SPACING[2]} ${SPACING[9]} ${SPACING[2]} ${SPACING[9]}`,
+    search: `${SPACING[2]} ${SPACING[12]} ${SPACING[2]} ${SPACING[9]}`,
+    after: `${SPACING[2]} ${SPACING[6]} ${SPACING[2]} ${SPACING[9]}`,
   },
   tab: {
-    small: "4px 8px",
+    small: `${SPACING[1]} ${SPACING[2]}`,
   },
 };
 

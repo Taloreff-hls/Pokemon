@@ -9,4 +9,5 @@ export interface GenericDropdownProps {
   label: string;
   withSearch?: boolean;
   onSelect: (item: string) => void;
+  placeholder?: string;
 }
