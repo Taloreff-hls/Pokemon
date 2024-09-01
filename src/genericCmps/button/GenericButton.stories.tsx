@@ -4,7 +4,7 @@ import GenericButton from "./GenericButton";
 const meta: Meta<typeof GenericButton> = {
   component: GenericButton,
   argTypes: {
-    variant: {
+    type: {
       control: {
         type: "select",
       },
@@ -38,7 +38,7 @@ type Story = StoryObj<typeof GenericButton>;
 
 export const Button: Story = {
   args: {
-    variant: "primary",
+    type: "primary",
     size: "medium",
     label: "Button",
     disabled: false,

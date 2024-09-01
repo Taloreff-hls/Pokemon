@@ -1,28 +1,28 @@
-import Button from "@mui/material/Button";
-import { buttonStyles } from "./styles";
+import { Button, Box } from "@mui/material";
 import { GenericButtonProps } from "./interfaces";
+import { buttonStyles } from "./styles";
 
 const GenericButton = ({
-  variant,
+  type,
   size,
   label,
   onClick,
   disabled = false,
-}: Omit<GenericButtonProps, "state">) => {
-  const sizeStyle = buttonStyles.sizes[size] || {};
-  const variantStyle = buttonStyles.variants[variant] || {};
-  const inputStyles = {
-    ...buttonStyles.base,
-    ...sizeStyle,
-    ...variantStyle.default,
-    "&:hover": disabled ? {} : variantStyle.hover || {},
-    "&:active": disabled ? {} : variantStyle.pressed || {},
-    "&:disabled": variantStyle.disabled || {},
-  };
-
+  selected = false,
+}: GenericButtonProps) => {
   return (
-    <Button sx={inputStyles} onClick={onClick} disabled={disabled}>
-      {label}
+    <Button
+      sx={{
+        ...buttonStyles.base,
+        ...buttonStyles.sizes[size],
+        ...buttonStyles.types[type],
+        ...(selected && buttonStyles.types[type]["&:hover"]),
+        ...(disabled && buttonStyles.types[type].disabled),
+      }}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      <Box>{label}</Box>
     </Button>
   );
 };

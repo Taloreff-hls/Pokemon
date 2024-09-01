@@ -1,16 +1,11 @@
-import ExampleBtn1 from "./cmps/ExampleBtn1"
-import ExampleBtn2 from "./cmps/ExampleBtn2"
-import ExampleBtn3 from "./cmps/ExampleBtn3"
+import GlobalStyle from "./assets/globalStyles/GlobalStyle";
 
 function App() {
-  
   return (
     <>
-      <ExampleBtn1/>
-      <ExampleBtn2/>
-      <ExampleBtn3/>
+      <GlobalStyle />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

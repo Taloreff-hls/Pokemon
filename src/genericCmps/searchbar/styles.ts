@@ -1,14 +1,51 @@
+import colors from "../../assets/constants/colors";
+import paddings from "../../assets/constants/paddings";
+import typography from "../../assets/constants/typography";
+import fonts from "../../assets/constants/fonts";
+import { SPACING } from "../../assets/constants/spacings";
+import { BORDERS } from "../../assets/constants/borders";
+
 export const searchbarStyles = {
   container: {
     position: "relative",
     display: "inline-block",
     width: "100%",
+    ...typography.body,
+    fontFamily: fonts.roboto,
   },
   base: {
-    borderRadius: "8px",
-    padding: "8px 80px 8px 40px",
+    borderRadius: `${SPACING[2]}`,
+    height: "38px",
+    padding: paddings.input.search,
     width: "100%",
     boxSizing: "border-box",
+    outline: "none",
+    backgroundColor: colors.neutrals.transparent,
+    border: BORDERS.disabled,
+    color: colors.greys[100],
+
+    "&:hover": {
+      border: BORDERS.lightGrey,
+      color: colors.greys[300],
+      cursor: "pointer",
+    },
+
+    "&:focus": {
+      border: BORDERS.darkGrey,
+      color: colors.neutrals[500],
+    },
+
+    "&:active": {
+      border: BORDERS.darkGrey,
+      color: colors.neutrals[500],
+    },
+
+    "&:disabled": {
+      border: BORDERS.disabled,
+      color: colors.neutrals[100],
+      padding: paddings.input.after,
+      cursor: "not-allowed",
+    },
   },
   icon: {
     position: "absolute",
@@ -16,30 +53,24 @@ export const searchbarStyles = {
     top: "50%",
     transform: "translateY(-50%)",
     pointerEvents: "none",
-    color: "#71787F",
+    color: colors.greys[100],
   },
-  states: {
-    default: {
-      border: "1px solid #A8AEB5",
-      color: "#71787F",
-    },
-    hover: {
-      border: "1px solid #71787F",
-      color: "#44484C",
-    },
-    pressed: {
-      border: "1px solid #2D3033",
-      color: "#2D3033",
-    },
-    afterSearch: {
-      border: "1px solid #929AA3",
-      color: "#0B0C0D",
-      padding: "8px 16px 8px 12px",
-    },
-    disabled: {
-      border: "1px solid #929AA3",
-      color: "#F2F5F7",
-      padding: "8px 16px 8px 12px",
-    },
+  closeIcon: {
+    position: "absolute",
+    right: "12px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    cursor: "pointer",
+    color: colors.greys[200],
+    height: "20px",
+  },
+  filled: {
+    border: BORDERS.darkGrey,
+    color: colors.neutrals[500],
+  },
+  disabled: {
+    border: BORDERS.disabled,
+    color: colors.neutrals[100],
+    padding: paddings.input.after,
   },
 };
