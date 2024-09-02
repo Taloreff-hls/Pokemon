@@ -22,6 +22,12 @@ export const dropdownStyles = {
     backgroundColor: colors.neutrals.transparent,
     ...typography.body,
     fontFamily: fonts.roboto,
+    color: colors.greys[300],
+  },
+  arrowIcon: {
+    marginLeft: SPACING[1],
+    width: SPACING[6],
+    height: SPACING[6],
   },
   menu: {
     position: "absolute",
