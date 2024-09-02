@@ -4,6 +4,7 @@ import { SPACING } from "./spacings";
 export const BORDERS = {
   primary: `1px solid ${colors.primary[300]}`,
   secondary: `1px solid ${colors.primary[200]}`,
+  neutral: `1px solid ${colors.neutrals[100]}`,
   grey: `1px solid ${colors.neutrals[400]}`,
   lightGrey: `1px solid ${colors.greys[100]}`,
   darkGrey: `1px solid ${colors.neutrals[500]}`,

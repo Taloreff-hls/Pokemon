@@ -19,6 +19,10 @@ const typography = {
     fontSize: "1.6rem",
     lineHeight: "2.4rem",
   },
+  "subheading-lg": {
+    fontSize: "1.8rem",
+    lineHeight: "2.7rem",
+  },
   body: {
     fontSize: "1.4rem",
     lineHeight: "2.2rem",
@@ -26,6 +30,10 @@ const typography = {
   caption: {
     fontSize: "1.2rem",
     lineHeight: "1.9rem",
+  },
+  small: {
+    fontSize: "1.2rem",
+    lineHeight: "1.4rem",
   },
   "x-small": {
     fontSize: "1.1rem",
