@@ -3,7 +3,6 @@ import fonts from "../../assets/constants/fonts";
 import paddings from "../../assets/constants/paddings";
 import typography from "../../assets/constants/typography";
 import { SPACING } from "../../assets/constants/spacings";
-import { BORDERS } from "../../assets/constants/borders";
 
 export const dropdownStyles = {
   container: {
@@ -15,7 +14,7 @@ export const dropdownStyles = {
     alignItems: "center",
     justifyContent: "space-between",
     padding: paddings.dropdown.medium,
-    border: BORDERS.disabled,
+    border: `1px solid ${colors.neutrals[200]}`,
     borderRadius: `${SPACING[2]}`,
     cursor: "pointer",
     width: "fit-content",

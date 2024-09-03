@@ -1,13 +1,14 @@
 import { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
+import { TableBody } from "@mui/material";
 import { CatchingPokemon } from "@mui/icons-material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import rows from "../data/mock_pokemon.json";
+import emptyPokemons from "../assets/imgs/no_pokemon.png";
 
 import {
   StyledTableContainer,
@@ -16,6 +17,7 @@ import {
   StyledTableRow,
   StyledTableCell,
   StyledTablePagination,
+  EmptyPokemons,
 } from "../styles/StyledTable";
 
 const columns = [
@@ -51,33 +53,36 @@ export default function PokemonTable() {
           <StyledTableHead>
             <TableRow>
               {columns.map((column) => (
-                <StyledTableHeadCell
-                  key={column.id}
-                  style={{
-                    width: column.width,
-                  }}
-                >
+                <StyledTableHeadCell key={column.id} width={column.width}>
                   {column.label}
                 </StyledTableHeadCell>
               ))}
             </TableRow>
           </StyledTableHead>
           <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
+            {rows.length > 0 ? (
+              rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => (
                   <StyledTableRow
                     hover
                     role="checkbox"
                     tabIndex={-1}
-                    key={row.id}
+                    key={index}
                   >
                     {columns.map((column) => {
                       const value = row[column.id as keyof typeof row];
                       return (
-                        <StyledTableCell key={column.id}>
-                          {column.id === "name" && (
+                        <StyledTableCell
+                          key={column.id}
+                          sx={{
+                            ":first-of-type": {
+                              display: "flex",
+                              alignItems: "center",
+                            },
+                          }}
+                        >
+                          {column.id === "name" ? (
                             <>
                               <CatchingPokemon
                                 style={{
@@ -88,14 +93,30 @@ export default function PokemonTable() {
                               />
                               {value}
                             </>
+                          ) : (
+                            value
                           )}
-                          {column.id !== "name" && value}
                         </StyledTableCell>
                       );
                     })}
                   </StyledTableRow>
-                );
-              })}
+                ))
+            ) : (
+              <StyledTableRow>
+                <StyledTableCell
+                  colSpan={columns.length}
+                  style={{
+                    textAlign: "center",
+                    height: "433px",
+                  }}
+                >
+                  <EmptyPokemons>
+                    <img src={emptyPokemons} alt="no pokemons" />
+                    No Pokemons found.
+                  </EmptyPokemons>
+                </StyledTableCell>
+              </StyledTableRow>
+            )}
           </TableBody>
         </Table>
       </StyledTableContainer>

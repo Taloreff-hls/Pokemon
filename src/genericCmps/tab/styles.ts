@@ -2,7 +2,6 @@ import colors from "../../assets/constants/colors";
 import paddings from "../../assets/constants/paddings";
 import typography from "../../assets/constants/typography";
 import { SPACING } from "../../assets/constants/spacings";
-import { BORDERS } from "../../assets/constants/borders";
 
 export const tabStyles = {
   container: {
@@ -37,7 +36,7 @@ export const tabStyles = {
   },
   border: {
     width: "130%",
-    borderBottom: BORDERS.bottom,
+    borderBottom: `2px solid ${colors.greys.black}`,
     borderWidth: SPACING[0],
   },
   icon: {
