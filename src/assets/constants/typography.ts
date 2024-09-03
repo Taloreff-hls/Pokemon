@@ -3,6 +3,10 @@ const typography = {
     fontSize: "1.8rem",
     lineHeight: "2.0rem",
   },
+  "heading-md-lg": {
+    fontSize: "2.4rem",
+    lineHeight: "2.6rem",
+  },
   "heading-lg": {
     fontSize: "2.4rem",
     lineHeight: "3.4rem",

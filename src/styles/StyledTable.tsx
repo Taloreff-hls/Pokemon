@@ -56,6 +56,8 @@ export const StyledTableRow = styled(TableRow)`
 export const StyledTableCell = styled(TableCell)`
   && {
     &:first-of-type {
+      display: flex;
+      align-items: center;
       ${typography["subheading-lg"]};
       color: ${colors.greys[600]};
       padding-left: ${SPACING[6]};
@@ -64,7 +66,9 @@ export const StyledTableCell = styled(TableCell)`
     &:nth-child(5) {
       padding-right: ${SPACING[6]};
     }
+    height: 72px;
     padding: ${SPACING[6]} ${SPACING[9]} ${SPACING[6]} 0;
+    padding: 1px ${SPACING[9]} 1px 0; // Set vertical padding to 0 to maintain the 72px height
     ${typography.body};
     color: ${colors.neutrals[300]};
     font-family: ${fonts.mulish};

@@ -1,15 +1,8 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableRow from "@mui/material/TableRow";
-import { TableBody } from "@mui/material";
-import { CatchingPokemon } from "@mui/icons-material";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import rows from "../data/mock_pokemon.json";
-import emptyPokemons from "../assets/imgs/no_pokemon.png";
-
+import TableBody from "@mui/material/TableBody";
 import {
   StyledTableContainer,
   StyledTableHead,
@@ -19,6 +12,15 @@ import {
   StyledTablePagination,
   EmptyPokemons,
 } from "../styles/StyledTable";
+import PokemonModal from "./PokemonModal";
+import { Pokemon } from "../interfaces/Pokemon";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Avatar } from "@mui/material";
+import typography from "../assets/constants/typography";
+import fonts from "../assets/constants/fonts";
+import colors from "../assets/constants/colors";
 
 const columns = [
   { id: "name", label: "Pokemon name", width: "21%" },
@@ -28,9 +30,21 @@ const columns = [
   { id: "hpLevel", label: "HP level", width: "5.5%" },
 ];
 
-export default function PokemonTable() {
+const PokemonTable: React.FC = () => {
+  const [data, setData] = useState<Pokemon[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/src/data/pokemon.json");
+      const pokemonData = await response.json();
+      setData(pokemonData);
+    };
+
+    fetchData();
+  }, []);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -46,6 +60,10 @@ export default function PokemonTable() {
     setPage(0);
   };
 
+  const handleRowClick = (pokemon: Pokemon) => {
+    setSelectedPokemon(pokemon);
+  };
+
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <StyledTableContainer>
@@ -53,52 +71,55 @@ export default function PokemonTable() {
           <StyledTableHead>
             <TableRow>
               {columns.map((column) => (
-                <StyledTableHeadCell key={column.id} width={column.width}>
+                <StyledTableHeadCell
+                  key={column.id}
+                  style={{
+                    width: column.width,
+                  }}
+                >
                   {column.label}
                 </StyledTableHeadCell>
               ))}
             </TableRow>
           </StyledTableHead>
           <TableBody>
-            {rows.length > 0 ? (
-              rows
+            {data.length > 0 ? (
+              data
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
+                .map((pokemon) => (
                   <StyledTableRow
                     hover
                     role="checkbox"
                     tabIndex={-1}
-                    key={index}
+                    key={pokemon.id}
+                    onClick={() => handleRowClick(pokemon)}
                   >
-                    {columns.map((column) => {
-                      const value = row[column.id as keyof typeof row];
-                      return (
-                        <StyledTableCell
-                          key={column.id}
-                          sx={{
-                            ":first-of-type": {
-                              display: "flex",
-                              alignItems: "center",
-                            },
-                          }}
-                        >
-                          {column.id === "name" ? (
-                            <>
-                              <CatchingPokemon
-                                style={{
-                                  marginRight: "16px",
-                                  width: "54px",
-                                  height: "54px",
-                                }}
-                              />
-                              {value}
-                            </>
-                          ) : (
-                            value
-                          )}
-                        </StyledTableCell>
-                      );
-                    })}
+                    <StyledTableCell>
+                      <Avatar
+                        src={pokemon.image.hires}
+                        sx={{
+                          width: 50,
+                          height: 50,
+                          padding: 1,
+                          marginRight: 2,
+                          bgcolor: "rgba(235, 239, 246, 0.6)",
+                        }}
+                        alt={pokemon.name.english}
+                      />
+                      {pokemon.name.english}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      sx={{
+                        ...typography.body,
+                        fontFamily: fonts.mulish,
+                        color: colors.neutrals[300],
+                      }}
+                    >{`#${pokemon.id.toString().padStart(4, "0")}`}</StyledTableCell>
+                    <StyledTableCell>{pokemon.description}</StyledTableCell>
+                    <StyledTableCell>
+                      {pokemon.base.Attack} Power
+                    </StyledTableCell>
+                    <StyledTableCell>{pokemon.base.HP} HP</StyledTableCell>
                   </StyledTableRow>
                 ))
             ) : (
@@ -110,10 +131,7 @@ export default function PokemonTable() {
                     height: "433px",
                   }}
                 >
-                  <EmptyPokemons>
-                    <img src={emptyPokemons} alt="no pokemons" />
-                    No Pokemons found.
-                  </EmptyPokemons>
+                  <EmptyPokemons>No Pokemons found.</EmptyPokemons>
                 </StyledTableCell>
               </StyledTableRow>
             )}
@@ -122,7 +140,7 @@ export default function PokemonTable() {
       </StyledTableContainer>
       <StyledTablePagination
         rowsPerPageOptions={[10, 25, 100]}
-        count={rows.length}
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
@@ -137,6 +155,14 @@ export default function PokemonTable() {
           },
         }}
       />
+      {selectedPokemon && (
+        <PokemonModal
+          pokemon={selectedPokemon}
+          onClose={() => setSelectedPokemon(null)}
+        />
+      )}
     </Paper>
   );
-}
+};
+
+export default PokemonTable;
