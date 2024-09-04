@@ -3,15 +3,16 @@ import CalendarViewMonthIcon from "@mui/icons-material/CalendarViewMonth";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { useState } from "react";
 import { StyledTabContainer } from "../styles/StyledTabContainer";
+import { ViewMode } from "../interfaces/ViewMode";
 
 interface TabContainerProps {
-  setViewMode: (mode: "list" | "card") => void;
+  setViewMode: (mode: ViewMode["mode"]) => void;
 }
 
 const TabContainer = ({ setViewMode }: TabContainerProps) => {
   const [selectedTab, setSelectedTab] = useState(0);
 
-  const handleTabClick = (tabIndex: number, mode: "list" | "card") => {
+  const handleTabClick = (tabIndex: number, mode: ViewMode["mode"]) => {
     setSelectedTab(tabIndex);
     setViewMode(mode);
   };
