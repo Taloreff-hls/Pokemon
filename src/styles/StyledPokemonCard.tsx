@@ -21,6 +21,9 @@ export const PokemonCard = styled.div`
 
 export const AvatarContainer = styled.div`
   && {
+    display: flex;
+    justify-content: center;
+    height: 190px;
     position: relative;
     padding: ${SPACING[7]};
     background-color: rgba(235, 239, 246, 0.6);
@@ -30,7 +33,6 @@ export const AvatarContainer = styled.div`
 
 export const PokemonAvatar = styled.img`
   && {
-    width: 100%;
     height: 100%;
   }
 `;
@@ -54,7 +56,7 @@ export const PowerLevel = styled.div`
 export const CardGrid = styled(Grid2)`
   && {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: ${SPACING[7]};
   }
 `;
