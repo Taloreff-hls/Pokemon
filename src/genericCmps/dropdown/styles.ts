@@ -3,7 +3,6 @@ import fonts from "../../assets/constants/fonts";
 import paddings from "../../assets/constants/paddings";
 import typography from "../../assets/constants/typography";
 import { SPACING } from "../../assets/constants/spacings";
-import { BORDERS } from "../../assets/constants/borders";
 
 export const dropdownStyles = {
   container: {
@@ -15,13 +14,19 @@ export const dropdownStyles = {
     alignItems: "center",
     justifyContent: "space-between",
     padding: paddings.dropdown.medium,
-    border: BORDERS.disabled,
+    border: `1px solid ${colors.neutrals[200]}`,
     borderRadius: `${SPACING[2]}`,
     cursor: "pointer",
     width: "fit-content",
     backgroundColor: colors.neutrals.transparent,
     ...typography.body,
     fontFamily: fonts.roboto,
+    color: colors.greys[300],
+  },
+  arrowIcon: {
+    marginLeft: SPACING[1],
+    width: SPACING[6],
+    height: SPACING[6],
   },
   menu: {
     position: "absolute",
@@ -30,7 +35,7 @@ export const dropdownStyles = {
     marginTop: `${SPACING[4]}`,
     background: colors.neutrals.white,
     borderRadius: `${SPACING[1]}`,
-    boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.1)",
+    boxShadow: "0px 4px 4px 0px #0000001A",
     zIndex: 10,
   },
   list: {

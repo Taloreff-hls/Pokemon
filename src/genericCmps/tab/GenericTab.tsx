@@ -13,7 +13,14 @@ const GenericTab = ({
       <Box sx={tabStyles.innerContainer}>
         <Box sx={tabStyles.base}>
           <Icon sx={tabStyles.icon} />
-          {label}
+          <Box
+            sx={{
+              ...tabStyles.label,
+              fontWeight: isSelected ? 700 : 400,
+            }}
+          >
+            {label}
+          </Box>
         </Box>
         {isSelected && <Box sx={tabStyles.border} />}
       </Box>

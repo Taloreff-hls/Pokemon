@@ -32,7 +32,7 @@ const GenericDropdown = ({
     <Box sx={dropdownStyles.container}>
       <Box onClick={toggleDropdown} sx={dropdownStyles.trigger}>
         {selectedItem?.label ?? label}
-        <KeyboardArrowDownIcon />
+        <KeyboardArrowDownIcon sx={dropdownStyles.arrowIcon} />
       </Box>
       {isOpen && (
         <Box sx={dropdownStyles.menu}>

@@ -10,6 +10,8 @@ export interface GenericButtonProps {
   type: ButtonType;
   size: ButtonSize;
   label: string;
+  fontSize?: string;
+  fontWeight?: string;
   onClick: () => void;
   disabled?: boolean;
   selected?: boolean;

@@ -2,7 +2,6 @@ import colors from "../../assets/constants/colors";
 import paddings from "../../assets/constants/paddings";
 import typography from "../../assets/constants/typography";
 import { SPACING } from "../../assets/constants/spacings";
-import { BORDERS } from "../../assets/constants/borders";
 
 export const tabStyles = {
   container: {
@@ -31,12 +30,18 @@ export const tabStyles = {
     alignItems: "center",
     paddingBottom: SPACING[1],
   },
+  label: {
+    fontSize: typography.body.fontSize,
+    lineHeight: typography.body.lineHeight,
+  },
   border: {
     width: "130%",
-    borderBottom: BORDERS.bottom,
+    borderBottom: `2px solid ${colors.greys.black}`,
     borderWidth: SPACING[0],
   },
   icon: {
+    width: SPACING[7],
+    height: SPACING[7],
     marginRight: `${SPACING[2]}`,
   },
 };
