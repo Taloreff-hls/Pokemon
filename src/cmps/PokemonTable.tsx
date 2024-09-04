@@ -17,7 +17,8 @@ import { Pokemon } from "../interfaces/Pokemon";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Avatar } from "@mui/material";
+import { Avatar, TableCell } from "@mui/material";
+import emptyPokemons from "../assets/imgs/no_pokemon.png";
 import typography from "../assets/constants/typography";
 import fonts from "../assets/constants/fonts";
 import colors from "../assets/constants/colors";
@@ -124,15 +125,18 @@ const PokemonTable: React.FC = () => {
                 ))
             ) : (
               <StyledTableRow>
-                <StyledTableCell
+                <TableCell
                   colSpan={columns.length}
                   style={{
                     textAlign: "center",
                     height: "433px",
                   }}
                 >
-                  <EmptyPokemons>No Pokemons found.</EmptyPokemons>
-                </StyledTableCell>
+                  <EmptyPokemons>
+                    <img src={emptyPokemons} alt="no pokemons" />
+                    No Pokemons found.
+                  </EmptyPokemons>
+                </TableCell>
               </StyledTableRow>
             )}
           </TableBody>
