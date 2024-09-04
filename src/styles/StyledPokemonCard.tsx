@@ -14,7 +14,7 @@ export const PokemonCard = styled.div`
 
     &:hover {
       cursor: pointer;
-      background-color: rgba(255, 255, 255, 0.6);
+      background-color: ${colors.neutrals[700]};
     }
   }
 `;
@@ -26,7 +26,7 @@ export const AvatarContainer = styled.div`
     height: 190px;
     position: relative;
     padding: ${SPACING[7]};
-    background-color: rgba(235, 239, 246, 0.6);
+    background-color: ${colors.neutrals[600]};
     margin-bottom: ${SPACING[4]};
   }
 `;
