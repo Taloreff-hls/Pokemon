@@ -1,12 +1,10 @@
 import React from "react";
 import { Pokemon } from "../interfaces/Pokemon";
-import GenericButton from "../genericCmps/button/GenericButton";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   Ability,
   CloseButton,
   DetailsContainer,
-  Footer,
   ImageContainer,
   InnerContainer,
   ModalContainer,
@@ -67,16 +65,6 @@ const PokemonModal: React.FC<PokemonModalProps> = ({ pokemon, onClose }) => {
             </PokemonStats>
           </DetailsContainer>
         </InnerContainer>
-        <Footer>
-          <GenericButton
-            label="Start a Fight"
-            onClick={() => console.log("starting fight")}
-            size="large"
-            type="primary"
-            fontWeight="400"
-            fontSize="16px"
-          />
-        </Footer>
       </ModalContainer>
     </ModalOverlay>
   );
