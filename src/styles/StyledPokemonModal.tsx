@@ -10,7 +10,7 @@ export const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${colors.greys[900]};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,8 +22,8 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   background-color: white;
   border-radius: ${SPACING[1]};
-  width: 30%;
-  box-shadow: 0px ${SPACING[1]} 6px rgba(0, 0, 0, 0.1);
+  width: 22%;
+  box-shadow: 0px ${SPACING[1]} 6px ${colors.greys[50]};
   position: relative;
 `;
 

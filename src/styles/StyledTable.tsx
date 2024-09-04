@@ -148,3 +148,11 @@ export const StyledTablePagination = styled(TablePagination)`
     }
   }
 `;
+
+export const avatarStyles = {
+  width: 50,
+  height: 50,
+  padding: 1,
+  marginRight: 2,
+  bgcolor: colors.neutrals[600],
+};

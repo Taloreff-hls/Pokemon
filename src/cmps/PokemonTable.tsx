@@ -11,6 +11,7 @@ import {
   StyledTableCell,
   StyledTablePagination,
   EmptyPokemons,
+  avatarStyles,
 } from "../styles/StyledTable";
 import PokemonModal from "./PokemonModal";
 import { Pokemon } from "../interfaces/Pokemon";
@@ -22,14 +23,7 @@ import emptyPokemons from "../assets/imgs/no_pokemon.png";
 import typography from "../assets/constants/typography";
 import fonts from "../assets/constants/fonts";
 import colors from "../assets/constants/colors";
-
-const columns = [
-  { id: "name", label: "Pokemon name", width: "21%" },
-  { id: "id", label: "ID", width: "20%" },
-  { id: "description", label: "Description", width: "47%" },
-  { id: "powerLevel", label: "Power level", width: "6%" },
-  { id: "hpLevel", label: "HP level", width: "5.5%" },
-];
+import { columns } from "../assets/constants/tableColumns";
 
 interface PokemonTableProps {
   pokemons: Pokemon[];
@@ -91,13 +85,7 @@ const PokemonTable = ({ pokemons }: PokemonTableProps) => {
                     <StyledTableCell>
                       <Avatar
                         src={pokemon.image.hires}
-                        sx={{
-                          width: 50,
-                          height: 50,
-                          padding: 1,
-                          marginRight: 2,
-                          bgcolor: "rgba(235, 239, 246, 0.6)",
-                        }}
+                        sx={avatarStyles}
                         alt={pokemon.name.english}
                       />
                       {pokemon.name.english}
