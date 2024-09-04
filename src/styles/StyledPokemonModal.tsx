@@ -81,7 +81,7 @@ export const DetailsContainer = styled.div`
 `;
 
 export const PokemonDetail = styled.p`
-  ${typography["heading-md"]};
+  ${typography.medium};
   color: ${colors.neutrals[500]};
   font-family: ${fonts.mulish};
   font-weight: 400;
@@ -108,8 +108,20 @@ export const PokemonStat = styled.div`
   font-family: ${fonts.mulish};
 `;
 
+export const StatCategory = styled.span`
+  ${typography["body-sm"]};
+  color: ${colors.neutrals[400]};
+  font-weight: 400;
+  font-family: ${fonts.mulish};
+`;
+
 export const Ability = styled.div`
   text-align: center;
+  margin-top: ${SPACING[2]};
+  ${typography.medium};
+  color: ${colors.neutrals[500]};
+  font-weight: 400;
+  font-family: ${fonts.mulish};
 `;
 
 export const Footer = styled.footer`

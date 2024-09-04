@@ -31,6 +31,10 @@ const typography = {
     fontSize: "1.4rem",
     lineHeight: "2.2rem",
   },
+  "body-sm": {
+    fontSize: "1.4rem",
+    lineHeight: "1.8rem",
+  },
   caption: {
     fontSize: "1.2rem",
     lineHeight: "1.9rem",
@@ -38,6 +42,10 @@ const typography = {
   small: {
     fontSize: "1.2rem",
     lineHeight: "1.4rem",
+  },
+  medium: {
+    fontSize: "1.8rem",
+    lineHeight: "2.2rem",
   },
   "x-small": {
     fontSize: "1.1rem",

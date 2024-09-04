@@ -17,6 +17,7 @@ import {
   PokemonName,
   PokemonStat,
   PokemonStats,
+  StatCategory,
 } from "../styles/StyledPokemonModal";
 
 interface PokemonModalProps {
@@ -48,19 +49,19 @@ const PokemonModal: React.FC<PokemonModalProps> = ({ pokemon, onClose }) => {
             <PokemonDetail>{pokemon.description}</PokemonDetail>
             <PokemonStats>
               <PokemonStat>
-                <div>Height</div>
-                <div>{pokemon.profile.height}</div>
+                <StatCategory>Height</StatCategory>
+                <Ability>{pokemon.profile.height}</Ability>
               </PokemonStat>
               <PokemonStat>
-                <div>Weight</div>
-                <div>{pokemon.profile.weight}</div>
+                <StatCategory>Weight</StatCategory>
+                <Ability>{pokemon.profile.weight}</Ability>
               </PokemonStat>
               <PokemonStat>
-                <div>Category</div>
-                <div>{pokemon.type[0]}</div>
+                <StatCategory>Category</StatCategory>
+                <Ability>{pokemon.type[0]}</Ability>
               </PokemonStat>
               <PokemonStat>
-                <div>Abilities</div>
+                <StatCategory>Abilities</StatCategory>
                 <Ability>{pokemon.profile.ability[0][0]}</Ability>
               </PokemonStat>
             </PokemonStats>
@@ -70,7 +71,7 @@ const PokemonModal: React.FC<PokemonModalProps> = ({ pokemon, onClose }) => {
           <GenericButton
             label="Start a Fight"
             onClick={() => console.log("starting fight")}
-            size="medium"
+            size="large"
             type="primary"
             fontWeight="400"
             fontSize="16px"
