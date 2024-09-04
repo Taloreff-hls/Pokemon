@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableRow from "@mui/material/TableRow";
@@ -31,21 +31,14 @@ const columns = [
   { id: "hpLevel", label: "HP level", width: "5.5%" },
 ];
 
-const PokemonTable: React.FC = () => {
-  const [data, setData] = useState<Pokemon[]>([]);
+interface PokemonTableProps {
+  pokemons: Pokemon[];
+}
+
+const PokemonTable = ({ pokemons }: PokemonTableProps) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("/src/data/pokemon.json");
-      const pokemonData = await response.json();
-      setData(pokemonData);
-    };
-
-    fetchData();
-  }, []);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -84,8 +77,8 @@ const PokemonTable: React.FC = () => {
             </TableRow>
           </StyledTableHead>
           <TableBody>
-            {data.length > 0 ? (
-              data
+            {pokemons.length > 0 ? (
+              pokemons
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((pokemon) => (
                   <StyledTableRow
@@ -144,18 +137,18 @@ const PokemonTable: React.FC = () => {
       </StyledTableContainer>
       <StyledTablePagination
         rowsPerPageOptions={[10, 25, 100]}
-        count={data.length}
+        count={pokemons.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
         slotProps={{
           select: {
-            IconComponent: KeyboardArrowDownIcon,
+            IconComponent: () => <KeyboardArrowDownIcon key="keyboard-down" />,
           },
           actions: {
-            previousButtonIcon: <ChevronLeftIcon />,
-            nextButtonIcon: <ChevronRightIcon />,
+            previousButtonIcon: <ChevronLeftIcon key="chevron-left" />,
+            nextButtonIcon: <ChevronRightIcon key="chevron-right" />,
           },
         }}
       />

@@ -4,6 +4,7 @@ import typography from "../assets/constants/typography";
 
 interface TypographyProps {
   weight?: number;
+  margin?: string;
   type?: keyof typeof typography;
   color?: string;
 }
@@ -16,7 +17,7 @@ const Typography = styled.p<TypographyProps>`
   line-height: ${(props) =>
     props.type ? typography[props.type].lineHeight : "22px"};
   color: ${(props) => props.color || "#000"};
-  margin: 0;
+  margin: ${(props) => props.margin || "0"};
 `;
 
 export default Typography;

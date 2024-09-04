@@ -4,20 +4,30 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { useState } from "react";
 import { StyledTabContainer } from "../styles/StyledTabContainer";
 
-const TabContainer = () => {
+interface TabContainerProps {
+  setViewMode: (mode: "list" | "card") => void;
+}
+
+const TabContainer = ({ setViewMode }: TabContainerProps) => {
   const [selectedTab, setSelectedTab] = useState(0);
+
+  const handleTabClick = (tabIndex: number, mode: "list" | "card") => {
+    setSelectedTab(tabIndex);
+    setViewMode(mode);
+  };
+
   return (
     <StyledTabContainer>
       <GenericTab
         icon={FormatListBulletedIcon}
         label="List"
-        onClick={() => setSelectedTab(0)}
+        onClick={() => handleTabClick(0, "list")}
         isSelected={selectedTab === 0}
       />
       <GenericTab
         icon={CalendarViewMonthIcon}
         label="Card"
-        onClick={() => setSelectedTab(1)}
+        onClick={() => handleTabClick(1, "card")}
         isSelected={selectedTab === 1}
       />
     </StyledTabContainer>

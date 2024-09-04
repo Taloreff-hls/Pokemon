@@ -1,9 +1,9 @@
-import { useState } from "react";
 import GenericSearchbar from "../genericCmps/searchbar/GenericSearchbar";
 import { ControlsContainer, StyledActionBar } from "../styles/StyledActionbar";
 import TabContainer from "./TabContainer";
 import GenericDropdown from "../genericCmps/dropdown/GenericDropdown";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
+import { useState } from "react";
 
 const SORTING_OPTIONS: DropdownItem[] = [
   { label: "Alphabetical A-Z" },
@@ -14,7 +14,11 @@ const SORTING_OPTIONS: DropdownItem[] = [
   { label: "HP (Low to high)" },
 ];
 
-const ActionBar = () => {
+interface ActionBarProps {
+  setViewMode: (mode: "list" | "card") => void;
+}
+
+const ActionBar = ({ setViewMode }: ActionBarProps) => {
   const [searchValue, setSearchValue] = useState("");
 
   return (
@@ -25,7 +29,7 @@ const ActionBar = () => {
           value={searchValue}
           onChange={setSearchValue}
         />
-        <TabContainer />
+        <TabContainer setViewMode={setViewMode} />
       </ControlsContainer>
       <GenericDropdown
         label="Sort By"
