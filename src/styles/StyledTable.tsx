@@ -154,5 +154,5 @@ export const avatarStyles = {
   height: 50,
   padding: 1,
   marginRight: 2,
-  bgcolor: "#EBEFF699",
+  bgcolor: colors.neutrals[600],
 };
