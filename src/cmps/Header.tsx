@@ -43,7 +43,7 @@ const Header = () => {
         label="Start a Fight"
         fontSize="1.6rem"
         fontWeight="400"
-        onClick={() => console.log("starting a fight...")}
+        onClick={() => {}}
       />
     </HeaderContainer>
   );

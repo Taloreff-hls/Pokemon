@@ -11,6 +11,7 @@ import {
   StyledTableCell,
   StyledTablePagination,
   EmptyPokemons,
+  avatarStyles,
 } from "../styles/StyledTable";
 import PokemonModal from "./PokemonModal";
 import { Pokemon } from "../interfaces/Pokemon";
@@ -98,13 +99,7 @@ const PokemonTable: React.FC = () => {
                     <StyledTableCell>
                       <Avatar
                         src={pokemon.image.hires}
-                        sx={{
-                          width: 50,
-                          height: 50,
-                          padding: 1,
-                          marginRight: 2,
-                          bgcolor: "rgba(235, 239, 246, 0.6)",
-                        }}
+                        sx={avatarStyles}
                         alt={pokemon.name.english}
                       />
                       {pokemon.name.english}

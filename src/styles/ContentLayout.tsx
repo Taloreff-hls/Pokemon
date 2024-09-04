@@ -7,5 +7,5 @@ export const ContentLayout = styled.div`
   padding: 53px ${SPACING[9]};
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: ${SPACING[6]};
 `;

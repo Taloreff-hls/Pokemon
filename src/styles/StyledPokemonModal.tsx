@@ -10,7 +10,7 @@ export const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #00000080;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +23,7 @@ export const ModalContainer = styled.div`
   background-color: white;
   border-radius: ${SPACING[1]};
   width: 22%;
-  box-shadow: 0px ${SPACING[1]} 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px ${SPACING[1]} 6px #0000001a;
   position: relative;
 `;
 
