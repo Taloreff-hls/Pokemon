@@ -11,6 +11,11 @@ export const PokemonCard = styled.div`
     flex-direction: column;
     justify-content: space-between;
     background-color: ${colors.neutrals.white};
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.6);
+    }
   }
 `;
 

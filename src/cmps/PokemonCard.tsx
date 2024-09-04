@@ -13,11 +13,12 @@ import { SPACING } from "../assets/constants/spacings";
 
 interface PokemonCardProps {
   pokemon: Pokemon;
+  onClick: () => void;
 }
 
-const PokemonCardComponent = ({ pokemon }: PokemonCardProps) => {
+const PokemonCardComponent = ({ pokemon, onClick }: PokemonCardProps) => {
   return (
-    <PokemonCard>
+    <PokemonCard onClick={onClick}>
       <AvatarContainer>
         <PowerLevelContainer>
           <PowerLevel>
