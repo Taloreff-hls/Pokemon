@@ -5,9 +5,10 @@ import ActionBar from "./ActionBar";
 import PokemonTable from "./PokemonTable";
 import PokemonGrid from "./PokemonGrid";
 import { Pokemon } from "../interfaces/Pokemon";
+import { ViewMode } from "../interfaces/ViewMode";
 
 const PokemonContent = () => {
-  const [viewMode, setViewMode] = useState<"list" | "card">("list");
+  const [viewMode, setViewMode] = useState<ViewMode["mode"]>("list");
   const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
 
   useEffect(() => {
