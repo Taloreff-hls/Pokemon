@@ -4,21 +4,27 @@ import TabContainer from "./TabContainer";
 import GenericDropdown from "../genericCmps/dropdown/GenericDropdown";
 import { SORTING_OPTIONS } from "../assets/constants/sortingOptions";
 import { useState } from "react";
+import { ViewMode } from "../interfaces/ViewMode";
 
 interface ActionBarProps {
-  setViewMode: (mode: "list" | "card") => void;
+  setViewMode: (mode: ViewMode["mode"]) => void;
+  setSearchValue: (value: string) => void;
 }
 
-const ActionBar = ({ setViewMode }: ActionBarProps) => {
-  const [searchValue, setSearchValue] = useState("");
+const ActionBar = ({ setViewMode, setSearchValue }: ActionBarProps) => {
+  const [searchValue, setSearch] = useState("");
 
+  function handleSearch(value: string) {
+    setSearch(value);
+    setSearchValue(value);
+  }
   return (
     <StyledActionBar>
       <ControlsContainer>
         <GenericSearchbar
           placeholder="Search Pokemon"
           value={searchValue}
-          onChange={setSearchValue}
+          onChange={handleSearch}
         />
         <TabContainer setViewMode={setViewMode} />
       </ControlsContainer>
