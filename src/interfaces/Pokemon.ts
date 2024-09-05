@@ -1,3 +1,5 @@
+import { PokemonType } from "../enums/PokemonEnum";
+
 export interface Pokemon {
   id: number;
   name: {
@@ -6,7 +8,7 @@ export interface Pokemon {
     chinese?: string;
     french?: string;
   };
-  type: string[];
+  type: PokemonType[];
   base: {
     HP: number;
     Attack: number;
@@ -30,4 +32,5 @@ export interface Pokemon {
     thumbnail: string;
     hires: string;
   };
+  belongsToUser: boolean;
 }

@@ -11,7 +11,11 @@ import { SORTING_OPTIONS } from "../assets/constants/sortingOptions";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
 import { pokemonService } from "../services/pokemon.service";
 
-const PokemonContent = () => {
+interface PokemonContentProps {
+  selectedCtg: number;
+}
+
+const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
   const [viewMode, setViewMode] = useState<ViewMode["mode"]>("list");
   const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
   const [searchValue, setSearchValue] = useState("");
@@ -29,9 +33,11 @@ const PokemonContent = () => {
     setPokemonData(data);
   };
 
-  const filteredPokemonData = pokemonData.filter((pokemon) =>
-    pokemon.name.english.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  const filteredPokemonData = pokemonData
+    .filter((pokemon) =>
+      pokemon.name.english.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    .filter((pokemon) => (selectedCtg === 1 ? pokemon.belongsToUser : true));
 
   const sortedPokemonData = pokemonService.sort(
     filteredPokemonData,

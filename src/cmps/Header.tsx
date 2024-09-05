@@ -7,11 +7,13 @@ import {
 
 import logo from "../assets/imgs/logo.png";
 import GenericButton from "../genericCmps/button/GenericButton";
-import { useState } from "react";
 
-const Header = () => {
-  const [selectedCtg, setSelectedCtg] = useState(0);
+interface HeaderProps {
+  setSelectedCtg: (ctg: number) => void;
+  selectedCtg: number;
+}
 
+const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
   return (
     <HeaderContainer>
       <HeaderNavigationContainer>
