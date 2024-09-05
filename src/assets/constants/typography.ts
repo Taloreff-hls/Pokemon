@@ -23,6 +23,10 @@ const typography = {
     fontSize: "1.6rem",
     lineHeight: "2.4rem",
   },
+  "subheading-md": {
+    fontSize: "1.6rem",
+    lineHeight: "2.6rem",
+  },
   "subheading-lg": {
     fontSize: "1.8rem",
     lineHeight: "2.7rem",

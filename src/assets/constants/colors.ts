@@ -8,6 +8,7 @@ const colors = {
     400: "#44484C",
     500: "#2D3033",
     600: "#EBEFF699",
+    700: "#FFFFFF99",
   },
   primary: {
     50: "#EBEFF6",
