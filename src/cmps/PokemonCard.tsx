@@ -27,7 +27,7 @@ const PokemonCardComponent = ({ pokemon, onClick }: PokemonCardProps) => {
               $weight={700}
               color={colors.neutrals[500]}
             >
-              {pokemon.base?.Attack}
+              {pokemon.base?.Attack ?? 0}
             </Typography>
             <Typography
               type="x-small"
