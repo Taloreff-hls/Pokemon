@@ -76,7 +76,7 @@ export const StyledTableCell = styled(TableCell)`
   }
 `;
 
-export const EmptyPokemons = styled.div`
+export const EmptyPokemons = styled.span`
   && {
     display: flex;
     flex-direction: column;
@@ -95,14 +95,10 @@ export const EmptyPokemons = styled.div`
 
 export const StyledTablePagination = styled(TablePagination)`
   && {
-    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 ${SPACING[6]};
 
-    .MuiTablePagination-toolbar {
-      width: 100%;
-    }
     .MuiTablePagination-spacer {
       flex: 0 1 auto;
     }

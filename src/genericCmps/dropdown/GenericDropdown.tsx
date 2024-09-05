@@ -21,7 +21,7 @@ const GenericDropdown = ({
   const handleSelect = (item: DropdownItem) => {
     setSelectedItem(item);
     setIsOpen(false);
-    onSelect(item.label);
+    onSelect(item);
   };
 
   const filteredOptions = options.filter((option) =>

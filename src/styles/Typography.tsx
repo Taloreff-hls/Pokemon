@@ -3,7 +3,7 @@ import fonts from "../assets/constants/fonts";
 import typography from "../assets/constants/typography";
 
 interface TypographyProps {
-  weight?: number;
+  $weight?: number;
   margin?: string;
   type?: keyof typeof typography;
   color?: string;
@@ -11,7 +11,7 @@ interface TypographyProps {
 
 const Typography = styled.p<TypographyProps>`
   font-family: ${fonts.mulish};
-  font-weight: ${(props) => props.weight || 400}; // Default to Regular
+  font-weight: ${(props) => props.$weight || 400}; // Default to Regular
   font-size: ${(props) =>
     props.type ? typography[props.type].fontSize : "14px"};
   line-height: ${(props) =>

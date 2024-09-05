@@ -3,6 +3,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
+import TableFooter from "@mui/material/TableFooter";
 import {
   StyledTableContainer,
   StyledTableHead,
@@ -99,9 +100,11 @@ const PokemonTable = ({ pokemons }: PokemonTableProps) => {
                     >{`#${pokemon.id.toString().padStart(4, "0")}`}</StyledTableCell>
                     <StyledTableCell>{pokemon.description}</StyledTableCell>
                     <StyledTableCell>
-                      {pokemon.base.Attack} Power
+                      {pokemon.base?.Attack ?? "N/A"} Power
                     </StyledTableCell>
-                    <StyledTableCell>{pokemon.base.HP} HP</StyledTableCell>
+                    <StyledTableCell>
+                      {pokemon.base?.HP ?? "N/A"} HP
+                    </StyledTableCell>
                   </StyledTableRow>
                 ))
             ) : (
@@ -121,25 +124,25 @@ const PokemonTable = ({ pokemons }: PokemonTableProps) => {
               </StyledTableRow>
             )}
           </TableBody>
+          <TableFooter>
+            <TableRow>
+              <StyledTablePagination
+                rowsPerPageOptions={[10, 25, 100]}
+                count={pokemons.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                SelectProps={{
+                  IconComponent: KeyboardArrowDownIcon,
+                }}
+                backIconButtonProps={{ children: <ChevronLeftIcon /> }}
+                nextIconButtonProps={{ children: <ChevronRightIcon /> }}
+              />
+            </TableRow>
+          </TableFooter>
         </Table>
       </StyledTableContainer>
-      <StyledTablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        count={pokemons.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        slotProps={{
-          select: {
-            IconComponent: () => <KeyboardArrowDownIcon key="keyboard-down" />,
-          },
-          actions: {
-            previousButtonIcon: <ChevronLeftIcon key="chevron-left" />,
-            nextButtonIcon: <ChevronRightIcon key="chevron-right" />,
-          },
-        }}
-      />
       {selectedPokemon && (
         <PokemonModal
           pokemon={selectedPokemon}

@@ -24,14 +24,14 @@ const PokemonCardComponent = ({ pokemon, onClick }: PokemonCardProps) => {
           <PowerLevel>
             <Typography
               type="caption"
-              weight={700}
+              $weight={700}
               color={colors.neutrals[500]}
             >
               {pokemon.base?.Attack}
             </Typography>
             <Typography
               type="x-small"
-              weight={400}
+              $weight={400}
               color={colors.neutrals[500]}
               margin={`0 ${SPACING[1]} 0 0`}
             >

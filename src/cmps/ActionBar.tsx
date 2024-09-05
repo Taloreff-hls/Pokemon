@@ -5,13 +5,19 @@ import GenericDropdown from "../genericCmps/dropdown/GenericDropdown";
 import { SORTING_OPTIONS } from "../assets/constants/sortingOptions";
 import { useState } from "react";
 import { ViewMode } from "../interfaces/ViewMode";
+import { DropdownItem } from "../genericCmps/dropdown/interfaces";
 
 interface ActionBarProps {
   setViewMode: (mode: ViewMode["mode"]) => void;
   setSearchValue: (value: string) => void;
+  setSortOption: (value: DropdownItem) => void;
 }
 
-const ActionBar = ({ setViewMode, setSearchValue }: ActionBarProps) => {
+const ActionBar = ({
+  setViewMode,
+  setSearchValue,
+  setSortOption,
+}: ActionBarProps) => {
   const [searchValue, setSearch] = useState("");
 
   function handleSearch(value: string) {
@@ -30,7 +36,9 @@ const ActionBar = ({ setViewMode, setSearchValue }: ActionBarProps) => {
       </ControlsContainer>
       <GenericDropdown
         label="Sort By"
-        onSelect={() => {}}
+        onSelect={(item) => {
+          setSortOption(item);
+        }}
         options={SORTING_OPTIONS}
       />
     </StyledActionBar>
