@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { ContentLayout } from "../styles/ContentLayout";
+import { useState } from "react";
 import Typography from "../styles/Typography";
 import ActionBar from "./ActionBar";
 import PokemonTable from "./PokemonTable";
@@ -10,28 +9,19 @@ import colors from "../assets/constants/colors";
 import { SORTING_OPTIONS } from "../assets/constants/sortingOptions";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
 import { pokemonService } from "../services/pokemon.service";
+import { LayoutContainer, ContentLayout } from "../styles/LayoutContainer";
 
 interface PokemonContentProps {
   selectedCtg: number;
+  pokemonData: Pokemon[];
 }
 
-const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
+const PokemonContent = ({ selectedCtg, pokemonData }: PokemonContentProps) => {
   const [viewMode, setViewMode] = useState<ViewMode["mode"]>("list");
-  const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [sortOption, setSortOption] = useState<DropdownItem>(
     SORTING_OPTIONS[0]
   );
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const response = await fetch("/src/data/pokemon.json");
-    const data = await response.json();
-    setPokemonData(data);
-  };
 
   const filteredPokemonData = pokemonData
     .filter((pokemon) =>
@@ -45,22 +35,28 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
   );
 
   return (
-    <ContentLayout>
-      <Typography fontWeight={500} type="heading-lg" color={colors.greys[300]}>
-        All Pokemons
-      </Typography>
-      <ActionBar
-        setViewMode={setViewMode}
-        setSearchValue={setSearchValue}
-        setSortOption={setSortOption}
-      />
+    <LayoutContainer>
+      <ContentLayout>
+        <Typography
+          fontWeight={500}
+          type="heading-lg"
+          color={colors.greys[300]}
+        >
+          All Pokemons
+        </Typography>
+        <ActionBar
+          setViewMode={setViewMode}
+          setSearchValue={setSearchValue}
+          setSortOption={setSortOption}
+        />
 
-      {viewMode === "list" ? (
-        <PokemonTable pokemons={sortedPokemonData} />
-      ) : (
-        <PokemonGrid pokemons={sortedPokemonData} />
-      )}
-    </ContentLayout>
+        {viewMode === "list" ? (
+          <PokemonTable pokemons={sortedPokemonData} />
+        ) : (
+          <PokemonGrid pokemons={sortedPokemonData} />
+        )}
+      </ContentLayout>
+    </LayoutContainer>
   );
 };
 
