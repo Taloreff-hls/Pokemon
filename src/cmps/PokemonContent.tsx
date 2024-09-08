@@ -46,7 +46,7 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
 
   return (
     <ContentLayout>
-      <Typography $weight={500} type="heading-lg" color={colors.greys[300]}>
+      <Typography fontWeight={500} type="heading-lg" color={colors.greys[300]}>
         All Pokemons
       </Typography>
       <ActionBar
