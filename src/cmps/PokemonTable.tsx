@@ -13,18 +13,18 @@ import {
   StyledTablePagination,
   EmptyPokemons,
   avatarStyles,
+  paginationStyles,
 } from "../styles/StyledTable";
 import PokemonModal from "./PokemonModal";
 import { Pokemon } from "../interfaces/Pokemon";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
 import { Avatar, TableCell } from "@mui/material";
 import emptyPokemons from "../assets/imgs/no_pokemon.png";
 import typography from "../assets/constants/typography";
 import fonts from "../assets/constants/fonts";
 import colors from "../assets/constants/colors";
 import { columns } from "../assets/constants/tableColumns";
+import { NO_VALUE } from "../assets/constants/placeholders";
 
 interface PokemonTableProps {
   pokemons: Pokemon[];
@@ -100,10 +100,10 @@ const PokemonTable = ({ pokemons }: PokemonTableProps) => {
                     >{`#${pokemon.id.toString().padStart(4, "0")}`}</StyledTableCell>
                     <StyledTableCell>{pokemon.description}</StyledTableCell>
                     <StyledTableCell>
-                      {pokemon.base?.Attack ?? "N/A"} Power
+                      {pokemon.base?.Attack ?? NO_VALUE} Power
                     </StyledTableCell>
                     <StyledTableCell>
-                      {pokemon.base?.HP ?? "N/A"} HP
+                      {pokemon.base?.HP ?? NO_VALUE} HP
                     </StyledTableCell>
                   </StyledTableRow>
                 ))
@@ -127,17 +127,12 @@ const PokemonTable = ({ pokemons }: PokemonTableProps) => {
           <TableFooter>
             <TableRow>
               <StyledTablePagination
-                rowsPerPageOptions={[10, 25, 100]}
+                {...paginationStyles}
                 count={pokemons.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
-                SelectProps={{
-                  IconComponent: KeyboardArrowDownIcon,
-                }}
-                backIconButtonProps={{ children: <ChevronLeftIcon /> }}
-                nextIconButtonProps={{ children: <ChevronRightIcon /> }}
               />
             </TableRow>
           </TableFooter>
