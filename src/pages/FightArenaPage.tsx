@@ -10,18 +10,30 @@ import { SPACING } from "../assets/constants/spacings";
 
 interface FightArenaProps {
   userPokemons: Pokemon[];
+  allPokemons: Pokemon[];
 }
 
-const FightArenaPage = ({ userPokemons }: FightArenaProps) => {
+const FightArenaPage = ({ userPokemons, allPokemons }: FightArenaProps) => {
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon>(
     userPokemons[0]
   );
+  const [opponentPokemon, setOpponentPokemon] = useState<Pokemon | null>(null);
 
   useEffect(() => {
     if (userPokemons.length > 0 && !selectedPokemon) {
       setSelectedPokemon(userPokemons[0]);
     }
   }, [userPokemons, selectedPokemon]);
+
+  useEffect(() => {
+    const nonUserPokemons = allPokemons.filter(
+      (pokemon) =>
+        !userPokemons.some((userPokemon) => userPokemon.id === pokemon.id)
+    );
+    const randomOpponent =
+      nonUserPokemons[Math.floor(Math.random() * nonUserPokemons.length)];
+    setOpponentPokemon(randomOpponent);
+  }, [allPokemons, userPokemons]);
 
   const handleSelectPokemon = (selectedItem: DropdownItem) => {
     const pokemon = userPokemons.find(
@@ -52,7 +64,7 @@ const FightArenaPage = ({ userPokemons }: FightArenaProps) => {
           fontWeight={700}
           type="heading-xxxl"
           color={colors.neutrals[400]}
-          alignText="center"
+          aligntext="center"
         >
           Fighting arena
         </Typography>
@@ -60,7 +72,7 @@ const FightArenaPage = ({ userPokemons }: FightArenaProps) => {
           fontWeight={400}
           type="medium"
           color={colors.neutrals[500]}
-          alignText="center"
+          aligntext="center"
           margin={`0 0 -${SPACING[6]} 0`}
         >
           Press fight button until your or your enemy's power ends
@@ -72,7 +84,10 @@ const FightArenaPage = ({ userPokemons }: FightArenaProps) => {
           withSearch
           menuPosition="left"
         />
-        <FightArena selectedPokemon={selectedPokemon} />
+        <FightArena
+          selectedPokemon={selectedPokemon}
+          opponentPokemon={opponentPokemon}
+        />
       </ContentLayout>
     </LayoutContainer>
   );

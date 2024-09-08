@@ -13,7 +13,7 @@ import { PowerLevel } from "../styles/StyledPokemonCard";
 import { SPACING } from "../assets/constants/spacings";
 
 interface GamingCardProps {
-  pokemon: Pokemon;
+  pokemon: Pokemon | null;
 }
 
 const GamingCard = ({ pokemon }: GamingCardProps) => {
@@ -23,7 +23,7 @@ const GamingCard = ({ pokemon }: GamingCardProps) => {
         fontWeight={700}
         type="heading-md-lg"
         color={colors.neutrals[400]}
-        alignText="center"
+        aligntext="center"
       >
         You
       </Typography>
@@ -58,13 +58,13 @@ const GamingCard = ({ pokemon }: GamingCardProps) => {
         fontWeight={400}
         type="subheading-md"
         color={colors.neutrals[200]}
-        alignText="center"
+        aligntext="center"
       >{`#${pokemon?.id.toString().padStart(4, "0")}`}</Typography>
       <Typography
         fontWeight={400}
         type="heading-lg"
         color={colors.neutrals[500]}
-        alignText="center"
+        aligntext="center"
       >
         {pokemon?.name.english}
       </Typography>

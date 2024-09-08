@@ -8,7 +8,7 @@ interface TypographyProps {
   margin?: string;
   type?: keyof typeof typography;
   color?: string;
-  alignText?: string;
+  aligntext?: string;
 }
 
 const Typography = styled.p<TypographyProps>`
@@ -20,7 +20,7 @@ const Typography = styled.p<TypographyProps>`
     props.type ? typography[props.type].lineHeight : "22px"};
   color: ${(props) => props.color || colors.neutrals.white};
   margin: ${(props) => props.margin || "0"};
-  text-align: ${(props) => props.alignText};
+  text-align: ${(props) => props.aligntext || "left"};
 `;
 
 export default Typography;

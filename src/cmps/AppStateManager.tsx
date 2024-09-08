@@ -38,7 +38,12 @@ function AppStateManager() {
         />
         <Route
           path="/fight-arena"
-          element={<FightArenaPage userPokemons={userPokemons} />}
+          element={
+            <FightArenaPage
+              userPokemons={userPokemons}
+              allPokemons={pokemonData}
+            />
+          }
         />
       </Routes>
     </Router>

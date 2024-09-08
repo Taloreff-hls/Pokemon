@@ -8,9 +8,10 @@ import { StyledBtnsContainer } from "../styles/StyledBtnContainer";
 
 interface FightArenaProps {
   selectedPokemon: Pokemon;
+  opponentPokemon: Pokemon | null;
 }
 
-const FightArena = ({ selectedPokemon }: FightArenaProps) => {
+const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
   const [isFightClicked, setIsFightClicked] = useState(false);
 
   const handleFightClick = () => {
@@ -54,7 +55,7 @@ const FightArena = ({ selectedPokemon }: FightArenaProps) => {
           </ArenaButton>
         </StyledBtnsContainer>
       )}
-      <GamingCard pokemon={selectedPokemon} />
+      <GamingCard pokemon={opponentPokemon} />
     </StyledFightArena>
   );
 };
