@@ -3,6 +3,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
+import TableFooter from "@mui/material/TableFooter";
 import {
   StyledTableContainer,
   StyledTableHead,
@@ -12,18 +13,18 @@ import {
   StyledTablePagination,
   EmptyPokemons,
   avatarStyles,
+  paginationStyles,
 } from "../styles/StyledTable";
 import PokemonModal from "./PokemonModal";
 import { Pokemon } from "../interfaces/Pokemon";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
 import { Avatar, TableCell } from "@mui/material";
 import emptyPokemons from "../assets/imgs/no_pokemon.png";
 import typography from "../assets/constants/typography";
 import fonts from "../assets/constants/fonts";
 import colors from "../assets/constants/colors";
 import { columns } from "../assets/constants/tableColumns";
+import { NO_VALUE } from "../assets/constants/placeholders";
 
 interface PokemonTableProps {
   pokemons: Pokemon[];
@@ -99,9 +100,11 @@ const PokemonTable = ({ pokemons }: PokemonTableProps) => {
                     >{`#${pokemon.id.toString().padStart(4, "0")}`}</StyledTableCell>
                     <StyledTableCell>{pokemon.description}</StyledTableCell>
                     <StyledTableCell>
-                      {pokemon.base.Attack} Power
+                      {pokemon.base?.Attack ?? NO_VALUE} Power
                     </StyledTableCell>
-                    <StyledTableCell>{pokemon.base.HP} HP</StyledTableCell>
+                    <StyledTableCell>
+                      {pokemon.base?.HP ?? NO_VALUE} HP
+                    </StyledTableCell>
                   </StyledTableRow>
                 ))
             ) : (
@@ -121,25 +124,20 @@ const PokemonTable = ({ pokemons }: PokemonTableProps) => {
               </StyledTableRow>
             )}
           </TableBody>
+          <TableFooter>
+            <TableRow>
+              <StyledTablePagination
+                {...paginationStyles}
+                count={pokemons.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </TableRow>
+          </TableFooter>
         </Table>
       </StyledTableContainer>
-      <StyledTablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        count={pokemons.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        slotProps={{
-          select: {
-            IconComponent: () => <KeyboardArrowDownIcon key="keyboard-down" />,
-          },
-          actions: {
-            previousButtonIcon: <ChevronLeftIcon key="chevron-left" />,
-            nextButtonIcon: <ChevronRightIcon key="chevron-right" />,
-          },
-        }}
-      />
       {selectedPokemon && (
         <PokemonModal
           pokemon={selectedPokemon}

@@ -6,10 +6,22 @@ import PokemonTable from "./PokemonTable";
 import PokemonGrid from "./PokemonGrid";
 import { Pokemon } from "../interfaces/Pokemon";
 import { ViewMode } from "../interfaces/ViewMode";
+import colors from "../assets/constants/colors";
+import { SORTING_OPTIONS } from "../assets/constants/sortingOptions";
+import { DropdownItem } from "../genericCmps/dropdown/interfaces";
+import { pokemonService } from "../services/pokemon.service";
 
-const PokemonContent = () => {
+interface PokemonContentProps {
+  selectedCtg: number;
+}
+
+const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
   const [viewMode, setViewMode] = useState<ViewMode["mode"]>("list");
   const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [sortOption, setSortOption] = useState<DropdownItem>(
+    SORTING_OPTIONS[0]
+  );
 
   useEffect(() => {
     fetchData();
@@ -21,17 +33,32 @@ const PokemonContent = () => {
     setPokemonData(data);
   };
 
+  const filteredPokemonData = pokemonData
+    .filter((pokemon) =>
+      pokemon.name.english.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    .filter((pokemon) => (selectedCtg === 1 ? pokemon.belongsToUser : true));
+
+  const sortedPokemonData = pokemonService.sort(
+    filteredPokemonData,
+    sortOption
+  );
+
   return (
     <ContentLayout>
-      <Typography weight={500} type="heading-lg" color="#44484C">
+      <Typography fontWeight={500} type="heading-lg" color={colors.greys[300]}>
         All Pokemons
       </Typography>
-      <ActionBar setViewMode={setViewMode} />
+      <ActionBar
+        setViewMode={setViewMode}
+        setSearchValue={setSearchValue}
+        setSortOption={setSortOption}
+      />
 
       {viewMode === "list" ? (
-        <PokemonTable pokemons={pokemonData} />
+        <PokemonTable pokemons={sortedPokemonData} />
       ) : (
-        <PokemonGrid pokemons={pokemonData} />
+        <PokemonGrid pokemons={sortedPokemonData} />
       )}
     </ContentLayout>
   );

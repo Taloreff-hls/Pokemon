@@ -1,15 +1,7 @@
-import GlobalStyle from "./assets/globalStyles/GlobalStyle";
-import Header from "./cmps/Header";
-import PokemonContent from "./cmps/PokemonContent";
+import AppStateManager from "./cmps/AppStateManager";
 
 function App() {
-  return (
-    <>
-      <GlobalStyle />
-      <Header />
-      <PokemonContent />
-    </>
-  );
+  return <AppStateManager />;
 }
 
 export default App;

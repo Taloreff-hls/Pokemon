@@ -10,6 +10,9 @@ import colors from "../assets/constants/colors";
 import typography from "../assets/constants/typography";
 import fonts from "../assets/constants/fonts";
 import { SPACING } from "../assets/constants/spacings";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export const StyledTableContainer = styled(TableContainer)`
   && {
@@ -76,7 +79,7 @@ export const StyledTableCell = styled(TableCell)`
   }
 `;
 
-export const EmptyPokemons = styled.div`
+export const EmptyPokemons = styled.span`
   && {
     display: flex;
     flex-direction: column;
@@ -95,14 +98,10 @@ export const EmptyPokemons = styled.div`
 
 export const StyledTablePagination = styled(TablePagination)`
   && {
-    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 ${SPACING[6]};
 
-    .MuiTablePagination-toolbar {
-      width: 100%;
-    }
     .MuiTablePagination-spacer {
       flex: 0 1 auto;
     }
@@ -155,4 +154,13 @@ export const avatarStyles = {
   padding: 1,
   marginRight: 2,
   bgcolor: colors.neutrals[600],
+};
+
+export const paginationStyles = {
+  rowsPerPageOptions: [10, 25, 100],
+  SelectProps: {
+    IconComponent: KeyboardArrowDownIcon,
+  },
+  backIconButtonProps: { children: <ChevronLeftIcon /> },
+  nextIconButtonProps: { children: <ChevronRightIcon /> },
 };

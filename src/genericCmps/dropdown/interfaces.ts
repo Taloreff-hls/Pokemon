@@ -8,6 +8,6 @@ export interface GenericDropdownProps {
   options: DropdownItem[];
   label: string;
   withSearch?: boolean;
-  onSelect: (item: string) => void;
+  onSelect: (item: DropdownItem) => void;
   placeholder?: string;
 }
