@@ -11,6 +11,7 @@ const GenericDropdown = ({
   withSearch = false,
   onSelect,
   placeholder,
+  menuPosition = "right",
 }: GenericDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -35,7 +36,12 @@ const GenericDropdown = ({
         <KeyboardArrowDownIcon sx={dropdownStyles.arrowIcon} />
       </Box>
       {isOpen && (
-        <Box sx={dropdownStyles.menu}>
+        <Box
+          sx={{
+            ...dropdownStyles.menu,
+            [menuPosition]: dropdownStyles.menuPosition[menuPosition],
+          }}
+        >
           {withSearch && (
             <GenericSearchbar
               value={searchValue}

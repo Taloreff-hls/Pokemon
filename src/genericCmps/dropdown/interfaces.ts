@@ -6,8 +6,9 @@ export interface DropdownItem {
 
 export interface GenericDropdownProps {
   options: DropdownItem[];
-  label: string;
+  label?: string;
   withSearch?: boolean;
   onSelect: (item: DropdownItem) => void;
   placeholder?: string;
+  menuPosition?: "left" | "right";
 }
