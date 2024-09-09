@@ -148,6 +148,12 @@ export const StyledTablePagination = styled(TablePagination)`
   }
 `;
 
+export const StyledPokeball = styled.img`
+  margin-left: ${SPACING[3]};
+  height: ${SPACING[6]};
+  width: ${SPACING[6]};
+`;
+
 export const avatarStyles = {
   width: 50,
   height: 50,

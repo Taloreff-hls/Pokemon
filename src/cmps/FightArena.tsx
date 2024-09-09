@@ -24,6 +24,7 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
   const [isFightClicked, setIsFightClicked] = useState(false);
   const [currentTurn, setCurrentTurn] = useState<string>("user");
   const [battleResult, setBattleResult] = useState<FightResult | null>(null);
+  const [catchAttempts, setCatchAttempts] = useState(3);
 
   useEffect(() => {
     if (isFightClicked && pokemonService.isBattleOver(userHP, opponentHP)) {
@@ -40,19 +41,20 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
       !pokemonService.isBattleOver(userHP, opponentHP)
     ) {
       const timeout = setTimeout(() => {
-        setUserHP((prevUserHP) =>
-          pokemonService.calculateDamage(
-            opponentPokemon,
-            selectedPokemon,
-            prevUserHP
-          )
-        );
+        applyDamage(opponentPokemon, selectedPokemon, userHP, setUserHP);
         setCurrentTurn("user");
       }, 2000);
 
       return () => clearTimeout(timeout);
     }
-  }, [currentTurn, isFightClicked, opponentPokemon, selectedPokemon, userHP]);
+  }, [
+    currentTurn,
+    isFightClicked,
+    opponentPokemon,
+    selectedPokemon,
+    userHP,
+    setUserHP,
+  ]);
 
   const handleFightClick = () => {
     setIsFightClicked(true);
@@ -65,23 +67,55 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
 
   const handleAttack = useCallback(() => {
     if (currentTurn === "user" && opponentPokemon) {
-      setOpponentHP((prevOpponentHP) =>
-        pokemonService.calculateDamage(
-          selectedPokemon,
-          opponentPokemon,
-          prevOpponentHP
-        )
-      );
+      applyDamage(selectedPokemon, opponentPokemon, opponentHP, setOpponentHP);
       setCurrentTurn("opponent");
     }
-  }, [currentTurn, selectedPokemon, opponentPokemon]);
+  }, [
+    currentTurn,
+    selectedPokemon,
+    opponentPokemon,
+    opponentHP,
+    setOpponentHP,
+  ]);
 
   const handleCatch = useCallback(() => {
     if (opponentPokemon) {
-      const isCaught = pokemonService.catchPokemon(opponentPokemon.base.HP);
-      setBattleResult(isCaught ? "won" : "lost");
+      const isCaught = pokemonService.catchPokemon(
+        opponentPokemon.base.HP,
+        opponentPokemon.base.HP
+      );
+      if (isCaught) {
+        setBattleResult("won");
+      } else {
+        setCatchAttempts((prevAttempts) => {
+          const newAttempts = prevAttempts - 1;
+          if (newAttempts === 0) {
+            setBattleResult("lost");
+          } else {
+            alert(
+              `You failed to catch the Pokémon! ${newAttempts} attempts left.`
+            );
+            setCurrentTurn("opponent");
+          }
+          return newAttempts;
+        });
+      }
     }
   }, [opponentPokemon]);
+
+  const applyDamage = (
+    attacker: Pokemon,
+    defender: Pokemon,
+    defenderHP: number,
+    setHP: (hp: number) => void
+  ) => {
+    const newHP = pokemonService.calculateDamage(
+      attacker,
+      defender,
+      defenderHP
+    );
+    setHP(newHP);
+  };
 
   return (
     <>

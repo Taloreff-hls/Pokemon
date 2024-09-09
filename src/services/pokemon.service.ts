@@ -61,9 +61,15 @@ function calculateDamage(
   return newHP > 0 ? newHP : 0;
 }
 
-function catchPokemon(opponentHP: number) {
-  const catchRate = 0.4 + (1 - opponentHP / 100);
-  return Math.random() < catchRate;
+function catchPokemon(opponentHP: number, opponentMaxHP: number) {
+  const baseRate = 0.1;
+  const lowHPRate = 0.7;
+
+  if (opponentHP <= opponentMaxHP * 0.2) {
+    return Math.random() < baseRate + lowHPRate;
+  }
+
+  return Math.random() < baseRate;
 }
 
 function isBattleOver(userHP: number, opponentHP: number) {
@@ -71,5 +77,11 @@ function isBattleOver(userHP: number, opponentHP: number) {
 }
 
 function endBattle(userHP: number, catchAttempts: number) {
-  alert(userHP <= 0 || catchAttempts <= 0 ? "You lost!" : "You won!");
+  if (userHP <= 0) {
+    alert("You lost!");
+  } else if (catchAttempts <= 0) {
+    alert("The Pokémon has fled!");
+  } else {
+    alert("You won!");
+  }
 }

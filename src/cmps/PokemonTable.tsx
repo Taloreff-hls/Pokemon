@@ -14,10 +14,11 @@ import {
   EmptyPokemons,
   avatarStyles,
   paginationStyles,
+  StyledPokeball,
 } from "../styles/StyledTable";
 import PokemonModal from "./PokemonModal";
 import { Pokemon } from "../interfaces/Pokemon";
-
+import pokeball from "../assets/imgs/pokeball-pokemon-svgrepo-com.svg";
 import { Avatar, TableCell } from "@mui/material";
 import emptyPokemons from "../assets/imgs/no_pokemon.png";
 import typography from "../assets/constants/typography";
@@ -90,6 +91,9 @@ const PokemonTable = ({ pokemons }: PokemonTableProps) => {
                         alt={pokemon.name.english}
                       />
                       {pokemon.name.english}
+                      {pokemon.belongsToUser && (
+                        <StyledPokeball src={pokeball} alt="pokeball" />
+                      )}
                     </StyledTableCell>
                     <StyledTableCell
                       sx={{
