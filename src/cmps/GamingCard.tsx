@@ -22,22 +22,33 @@ interface GamingCardProps {
 
 const GamingCard = ({ pokemon, hp, isUser, activeturn }: GamingCardProps) => {
   const [animatedHP, setAnimatedHP] = useState(hp);
+  const [isDamaged, setIsDamaged] = useState(false);
 
   useEffect(() => {
     if (animatedHP > hp) {
+      setIsDamaged(true);
       const interval = setInterval(() => {
         setAnimatedHP((prevHP) => {
           const newHP = Math.max(prevHP - 1, hp);
           return newHP;
         });
-      }, 10);
+      }, 30);
 
-      return () => clearInterval(interval);
+      return () => {
+        clearInterval(interval);
+        setIsDamaged(false);
+      };
+    } else {
+      setIsDamaged(false);
     }
   }, [hp, animatedHP]);
 
   return (
-    <StyledGamingCard $activeturn={activeturn}>
+    <StyledGamingCard
+      $activeturn={activeturn}
+      $isDamaged={isDamaged}
+      $hit={animatedHP}
+    >
       <Typography
         fontWeight={700}
         type="heading-md-lg"

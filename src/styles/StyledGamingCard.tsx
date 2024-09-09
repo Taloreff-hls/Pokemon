@@ -1,8 +1,37 @@
-import styled from "styled-components";
+import { styled, css, keyframes } from "styled-components";
 import { SPACING } from "../assets/constants/spacings";
 import colors from "../assets/constants/colors";
 
-export const StyledGamingCard = styled.div<{ $activeturn: boolean }>`
+const damageAnimation = keyframes`
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const rotateAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+        transform: rotate(10deg);
+
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+`;
+
+export const StyledGamingCard = styled.div<{
+  $activeturn: boolean;
+  $isDamaged: boolean;
+  $hit: number;
+}>`
   && {
     padding: ${SPACING[8]};
     border-radius: ${SPACING[2]};
@@ -12,6 +41,17 @@ export const StyledGamingCard = styled.div<{ $activeturn: boolean }>`
     background-color: ${colors.neutrals.white};
     width: 28%;
     max-width: 400px;
+     animation: ${(props) =>
+       props.$hit === 0
+         ? css`
+             ${rotateAnimation} 0.5s ease-in-out 0s 2
+           `
+         : props.$isDamaged
+           ? css`
+               ${damageAnimation} 0.5s ease-in-out 0s 3
+             `
+           : "none"};
+  }
     border: ${(props) =>
       props.$activeturn ? `2px solid ${colors.green[100]}` : "none"};
   }
