@@ -14,26 +14,26 @@ interface FightArenaProps {
 }
 
 const FightArenaPage = ({ userPokemons, allPokemons }: FightArenaProps) => {
-  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon>(
-    userPokemons[0]
-  );
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
   const [opponentPokemon, setOpponentPokemon] = useState<Pokemon | null>(null);
 
-  useEffect(() => {
-    if (userPokemons.length > 0 && !selectedPokemon) {
-      setSelectedPokemon(userPokemons[0]);
-    }
-  }, [userPokemons, selectedPokemon]);
+  const nonUserPokemons = allPokemons.filter(
+    (pokemon) => !pokemon.belongsToUser
+  );
 
   useEffect(() => {
-    const nonUserPokemons = allPokemons.filter(
-      (pokemon) =>
-        !userPokemons.some((userPokemon) => userPokemon.id === pokemon.id)
-    );
-    const randomOpponent =
-      nonUserPokemons[Math.floor(Math.random() * nonUserPokemons.length)];
-    setOpponentPokemon(randomOpponent);
-  }, [allPokemons, userPokemons]);
+    if (userPokemons.length > 0) {
+      setSelectedPokemon(userPokemons[0]);
+    }
+  }, [userPokemons]);
+
+  useEffect(() => {
+    if (nonUserPokemons.length > 0) {
+      const randomOpponent =
+        nonUserPokemons[Math.floor(Math.random() * nonUserPokemons.length)];
+      setOpponentPokemon(randomOpponent);
+    }
+  }, []);
 
   const handleSelectPokemon = (selectedItem: DropdownItem) => {
     const pokemon = userPokemons.find(
@@ -84,10 +84,12 @@ const FightArenaPage = ({ userPokemons, allPokemons }: FightArenaProps) => {
           withSearch
           menuPosition="left"
         />
-        <FightArena
-          selectedPokemon={selectedPokemon}
-          opponentPokemon={opponentPokemon}
-        />
+        {selectedPokemon && opponentPokemon && (
+          <FightArena
+            selectedPokemon={selectedPokemon}
+            opponentPokemon={opponentPokemon}
+          />
+        )}
       </ContentLayout>
     </LayoutContainer>
   );

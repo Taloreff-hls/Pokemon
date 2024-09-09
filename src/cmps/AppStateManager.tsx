@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import GlobalStyle from "../assets/globalStyles/GlobalStyle";
 import Header from "../cmps/Header";
-import PokemonContent from "../cmps/PokemonContent";
+import PokemonContent from "../pages/PokemonContent";
 import FightArenaPage from "../pages/FightArenaPage";
 import { useEffect, useState } from "react";
 import { Pokemon } from "../interfaces/Pokemon";
@@ -20,7 +20,8 @@ function AppStateManager() {
     setPokemonData(data);
   };
 
-  const userPokemons = pokemonData.filter((pokemon) => pokemon.belongsToUser);
+  const nonNullData = pokemonData.filter((pokemon) => pokemon.base);
+  const userPokemons = nonNullData.filter((pokemon) => pokemon.belongsToUser);
 
   return (
     <Router>
@@ -32,7 +33,7 @@ function AppStateManager() {
           element={
             <PokemonContent
               selectedCtg={selectedCtg}
-              pokemonData={pokemonData}
+              pokemonData={nonNullData}
             />
           }
         />
@@ -41,7 +42,7 @@ function AppStateManager() {
           element={
             <FightArenaPage
               userPokemons={userPokemons}
-              allPokemons={pokemonData}
+              allPokemons={nonNullData}
             />
           }
         />

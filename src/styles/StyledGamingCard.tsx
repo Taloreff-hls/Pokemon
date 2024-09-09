@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { SPACING } from "../assets/constants/spacings";
 import colors from "../assets/constants/colors";
 
-export const StyledGamingCard = styled.div`
+export const StyledGamingCard = styled.div<{ $activeturn: boolean }>`
   && {
     padding: ${SPACING[8]};
     border-radius: ${SPACING[2]};
@@ -12,6 +12,8 @@ export const StyledGamingCard = styled.div`
     background-color: ${colors.neutrals.white};
     width: 28%;
     max-width: 400px;
+    border: ${(props) =>
+      props.$activeturn ? `2px solid ${colors.green[100]}` : "none"};
   }
 `;
 

@@ -42,6 +42,9 @@ const colors = {
   green: {
     100: "#87C877",
   },
+  red: {
+    100: "#D54958",
+  },
 };
 
 export default colors;

@@ -49,7 +49,7 @@ export const PowerLevel = styled.div`
   && {
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: center;
   }
 `;
 

@@ -11,28 +11,44 @@ import Typography from "../styles/Typography";
 import { Pokemon } from "../interfaces/Pokemon";
 import { PowerLevel } from "../styles/StyledPokemonCard";
 import { SPACING } from "../assets/constants/spacings";
+import { useEffect, useState } from "react";
 
 interface GamingCardProps {
-  pokemon: Pokemon | null;
+  pokemon: Pokemon;
+  hp: number;
+  isUser: boolean;
+  activeturn: boolean;
 }
 
-const GamingCard = ({ pokemon }: GamingCardProps) => {
+const GamingCard = ({ pokemon, hp, isUser, activeturn }: GamingCardProps) => {
+  const [animatedHP, setAnimatedHP] = useState(hp);
+
+  useEffect(() => {
+    if (animatedHP > hp) {
+      const interval = setInterval(() => {
+        setAnimatedHP((prevHP) => {
+          const newHP = Math.max(prevHP - 1, hp);
+          return newHP;
+        });
+      }, 10);
+
+      return () => clearInterval(interval);
+    }
+  }, [hp, animatedHP]);
+
   return (
-    <StyledGamingCard>
+    <StyledGamingCard $activeturn={activeturn}>
       <Typography
         fontWeight={700}
         type="heading-md-lg"
         color={colors.neutrals[400]}
         aligntext="center"
       >
-        You
+        {isUser ? "You" : "Opponent"}
       </Typography>
       <AvatarContainer>
         <ImageContainer>
-          <PokemonImage
-            src={pokemon?.image.hires}
-            alt={pokemon?.name.english}
-          />
+          <PokemonImage src={pokemon.image.hires} alt={pokemon.name.english} />
         </ImageContainer>
         <PowerLevelContainer>
           <PowerLevel>
@@ -41,7 +57,7 @@ const GamingCard = ({ pokemon }: GamingCardProps) => {
               fontWeight={700}
               color={colors.neutrals[500]}
             >
-              {pokemon?.base.Attack ?? 0}
+              {pokemon.base?.Attack ?? 0}
             </Typography>
             <Typography
               type="x-small"
@@ -59,16 +75,16 @@ const GamingCard = ({ pokemon }: GamingCardProps) => {
         type="subheading-md"
         color={colors.neutrals[200]}
         aligntext="center"
-      >{`#${pokemon?.id.toString().padStart(4, "0")}`}</Typography>
+      >{`#${pokemon.id.toString().padStart(4, "0")}`}</Typography>
       <Typography
         fontWeight={400}
         type="heading-lg"
         color={colors.neutrals[500]}
         aligntext="center"
       >
-        {pokemon?.name.english}
+        {pokemon.name.english}
       </Typography>
-      <StyledProgress value={70} max={100} />
+      <StyledProgress value={animatedHP} max={pokemon.base?.HP || 100} />
     </StyledGamingCard>
   );
 };
