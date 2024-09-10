@@ -57,6 +57,10 @@ const GamingCard = ({
     prevHpRef.current = hp;
   }, [activeTurn]);
 
+  useEffect(() => {
+    setAnimatedHP(pokemon.base.HP);
+  }, [pokemon]);
+
   return (
     <StyledGamingCard
       $activeTurn={activeTurn}

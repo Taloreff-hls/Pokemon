@@ -95,7 +95,7 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
   const handleCatch = useCallback(() => {
     if (opponentPokemon) {
       const isCaught = pokemonService.catchPokemon(
-        opponentPokemon.base.HP,
+        opponentHP,
         opponentPokemon.base.HP
       );
       if (isCaught) {
@@ -115,7 +115,7 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
         });
       }
     }
-  }, [opponentPokemon]);
+  }, [opponentPokemon, opponentHP]);
 
   const applyDamage = (
     attacker: Pokemon,

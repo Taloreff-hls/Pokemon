@@ -64,12 +64,13 @@ function calculateDamage(
 function catchPokemon(opponentHP: number, opponentMaxHP: number) {
   const baseRate = 0.1;
   const lowHPRate = 0.7;
+  const random = Math.random();
 
   if (opponentHP <= opponentMaxHP * 0.2) {
-    return Math.random() < baseRate + lowHPRate;
+    return random < baseRate + lowHPRate;
   }
 
-  return Math.random() < baseRate;
+  return random < baseRate;
 }
 
 function isBattleOver(userHP: number, opponentHP: number) {
