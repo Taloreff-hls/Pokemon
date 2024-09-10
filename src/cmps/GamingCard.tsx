@@ -1,53 +1,67 @@
-import colors from "../assets/constants/colors";
+import { useEffect, useRef, useState } from "react";
 import {
   StyledGamingCard,
-  ImageContainer,
   AvatarContainer,
-  StyledProgress,
+  ImageContainer,
   PowerLevelContainer,
   PokemonImage,
+  StyledProgress,
 } from "../styles/StyledGamingCard";
 import Typography from "../styles/Typography";
 import { Pokemon } from "../interfaces/Pokemon";
+import colors from "../assets/constants/colors";
 import { PowerLevel } from "../styles/StyledPokemonCard";
 import { SPACING } from "../assets/constants/spacings";
-import { useEffect, useState } from "react";
 
 interface GamingCardProps {
   pokemon: Pokemon;
   hp: number;
   isUser: boolean;
-  activeturn: boolean;
+  activeTurn: boolean;
+  hit: number;
+  isFightClicked: boolean;
 }
 
-const GamingCard = ({ pokemon, hp, isUser, activeturn }: GamingCardProps) => {
+const GamingCard = ({
+  pokemon,
+  hp,
+  isUser,
+  activeTurn,
+  hit,
+  isFightClicked,
+}: GamingCardProps) => {
   const [animatedHP, setAnimatedHP] = useState(hp);
-  const [isDamaged, setIsDamaged] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const prevHpRef = useRef(hp);
 
   useEffect(() => {
-    if (animatedHP > hp) {
-      setIsDamaged(true);
+    if (hit > 0) {
+      setIsAnimating(true);
       const interval = setInterval(() => {
-        setAnimatedHP((prevHP) => {
-          const newHP = Math.max(prevHP - 1, hp);
+        setAnimatedHP((prevAnimatedHP) => {
+          const newHP = Math.max(prevAnimatedHP - 1, hp);
+          if (newHP === hp) {
+            clearInterval(interval);
+            setIsAnimating(false);
+          }
           return newHP;
         });
       }, 30);
 
-      return () => {
-        clearInterval(interval);
-        setIsDamaged(false);
-      };
-    } else {
-      setIsDamaged(false);
+      return () => clearInterval(interval);
+    } else if (hit === 0 && activeTurn && isFightClicked) {
+      setIsAnimating(true);
+      setTimeout(() => setIsAnimating(false), 1000);
     }
-  }, [hp, animatedHP]);
+
+    prevHpRef.current = hp;
+  }, [activeTurn]);
 
   return (
     <StyledGamingCard
-      $activeturn={activeturn}
-      $isDamaged={isDamaged}
-      $hit={animatedHP}
+      $activeTurn={activeTurn}
+      $isAnimating={isAnimating}
+      $hit={hit}
     >
       <Typography
         fontWeight={700}
@@ -95,7 +109,7 @@ const GamingCard = ({ pokemon, hp, isUser, activeturn }: GamingCardProps) => {
       >
         {pokemon.name.english}
       </Typography>
-      <StyledProgress value={animatedHP} max={pokemon.base?.HP || 100} />
+      <StyledProgress value={animatedHP} max={pokemon.base.HP || 100} />
     </StyledGamingCard>
   );
 };

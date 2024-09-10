@@ -28,8 +28,8 @@ const rotateAnimation = keyframes`
 `;
 
 export const StyledGamingCard = styled.div<{
-  $activeturn: boolean;
-  $isDamaged: boolean;
+  $activeTurn: boolean;
+  $isAnimating: boolean;
   $hit: number;
 }>`
   && {
@@ -41,19 +41,18 @@ export const StyledGamingCard = styled.div<{
     background-color: ${colors.neutrals.white};
     width: 28%;
     max-width: 400px;
-     animation: ${(props) =>
-       props.$hit === 0
-         ? css`
-             ${rotateAnimation} 0.5s ease-in-out 0s 2
-           `
-         : props.$isDamaged
-           ? css`
-               ${damageAnimation} 0.5s ease-in-out 0s 3
-             `
-           : "none"};
-  }
+    animation: ${(props) =>
+      props.$isAnimating
+        ? props.$hit === 0
+          ? css`
+              ${rotateAnimation} 0.5s ease-in-out 0s 2
+            `
+          : css`
+              ${damageAnimation} 0.5s ease-in-out 0s 3
+            `
+        : "none"};
     border: ${(props) =>
-      props.$activeturn ? `2px solid ${colors.green[100]}` : "none"};
+      props.$activeTurn ? `2px solid ${colors.green[100]}` : "none"};
   }
 `;
 

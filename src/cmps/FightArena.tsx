@@ -19,12 +19,14 @@ interface FightArenaProps {
 const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
   const [userHP, setUserHP] = useState<number>(selectedPokemon.base.HP);
   const [opponentHP, setOpponentHP] = useState<number>(
-    opponentPokemon?.base?.HP || 0
+    opponentPokemon?.base.HP || 0
   );
   const [isFightClicked, setIsFightClicked] = useState(false);
   const [currentTurn, setCurrentTurn] = useState<string>("user");
   const [battleResult, setBattleResult] = useState<FightResult | null>(null);
   const [catchAttempts, setCatchAttempts] = useState(3);
+  const [userHit, setUserHit] = useState(0);
+  const [opponentHit, setOpponentHit] = useState(0);
 
   useEffect(() => {
     if (isFightClicked && pokemonService.isBattleOver(userHP, opponentHP)) {
@@ -41,7 +43,13 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
       !pokemonService.isBattleOver(userHP, opponentHP)
     ) {
       const timeout = setTimeout(() => {
-        applyDamage(opponentPokemon, selectedPokemon, userHP, setUserHP);
+        applyDamage(
+          opponentPokemon,
+          selectedPokemon,
+          userHP,
+          setUserHP,
+          setUserHit
+        );
         setCurrentTurn("user");
       }, 2000);
 
@@ -67,7 +75,13 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
 
   const handleAttack = useCallback(() => {
     if (currentTurn === "user" && opponentPokemon) {
-      applyDamage(selectedPokemon, opponentPokemon, opponentHP, setOpponentHP);
+      applyDamage(
+        selectedPokemon,
+        opponentPokemon,
+        opponentHP,
+        setOpponentHP,
+        setOpponentHit
+      );
       setCurrentTurn("opponent");
     }
   }, [
@@ -107,14 +121,17 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
     attacker: Pokemon,
     defender: Pokemon,
     defenderHP: number,
-    setHP: (hp: number) => void
+    setHP: (hp: number) => void,
+    setHit: (hit: number) => void
   ) => {
     const newHP = pokemonService.calculateDamage(
       attacker,
       defender,
       defenderHP
     );
+    const hit = defenderHP - newHP;
     setHP(newHP);
+    setHit(hit);
   };
 
   return (
@@ -124,7 +141,9 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
           pokemon={selectedPokemon}
           hp={userHP}
           isUser={true}
-          activeturn={currentTurn === "user"}
+          activeTurn={currentTurn === "user"}
+          hit={userHit}
+          isFightClicked={isFightClicked}
         />
         {!isFightClicked ? (
           <ArenaButton
@@ -167,7 +186,9 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
             pokemon={opponentPokemon}
             hp={opponentHP}
             isUser={false}
-            activeturn={currentTurn === "opponent"}
+            activeTurn={currentTurn === "opponent"}
+            hit={opponentHit}
+            isFightClicked={isFightClicked}
           />
         )}
       </StyledFightArena>
