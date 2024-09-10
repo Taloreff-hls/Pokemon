@@ -1,1 +1,1 @@
-export type FightResult = "won" | "lost";
+export type FightResult = "won" | "lost" | "caught";

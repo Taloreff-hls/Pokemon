@@ -4,6 +4,7 @@ import GamingCard from "./GamingCard";
 import ArenaButton from "../genericCmps/arenaBtn/ArenaButton";
 import { Pokemon } from "../interfaces/Pokemon";
 import FightResultModal from "./FightResultModal";
+import CatchResultModal from "./CatchResultModal";
 import {
   StyledFightArena,
   StyledBtnsContainer,
@@ -27,16 +28,32 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
   const [catchAttempts, setCatchAttempts] = useState(3);
   const [userHit, setUserHit] = useState(0);
   const [opponentHit, setOpponentHit] = useState(0);
+  const [showCatchModal, setShowCatchModal] = useState(false);
+  const [catchResult, setCatchResult] = useState<boolean | null>(null);
+  const [gamePaused, setGamePaused] = useState(false);
 
   useEffect(() => {
-    if (isFightClicked && pokemonService.isBattleOver(userHP, opponentHP)) {
-      const result = userHP > 0 ? "won" : "lost";
-      setBattleResult(result);
+    if (showCatchModal) {
+      setGamePaused(true);
+    } else {
+      setGamePaused(false);
     }
-  }, [userHP, opponentHP, isFightClicked]);
+  }, [showCatchModal]);
 
   useEffect(() => {
     if (
+      !gamePaused &&
+      isFightClicked &&
+      pokemonService.isBattleOver(userHP, opponentHP)
+    ) {
+      const result = userHP > 0 ? "won" : "lost";
+      setBattleResult(result);
+    }
+  }, [userHP, opponentHP, isFightClicked, gamePaused]);
+
+  useEffect(() => {
+    if (
+      !gamePaused &&
       currentTurn === "opponent" &&
       isFightClicked &&
       opponentPokemon &&
@@ -61,7 +78,9 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
     opponentPokemon,
     selectedPokemon,
     userHP,
+    opponentHP,
     setUserHP,
+    gamePaused,
   ]);
 
   const handleFightClick = () => {
@@ -74,7 +93,7 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
   };
 
   const handleAttack = useCallback(() => {
-    if (currentTurn === "user" && opponentPokemon) {
+    if (!gamePaused && currentTurn === "user" && opponentPokemon) {
       applyDamage(
         selectedPokemon,
         opponentPokemon,
@@ -90,32 +109,37 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
     opponentPokemon,
     opponentHP,
     setOpponentHP,
+    gamePaused,
   ]);
 
   const handleCatch = useCallback(() => {
-    if (opponentPokemon) {
-      const isCaught = pokemonService.catchPokemon(
-        opponentHP,
-        opponentPokemon.base.HP
-      );
-      if (isCaught) {
-        setBattleResult("won");
-      } else {
-        setCatchAttempts((prevAttempts) => {
-          const newAttempts = prevAttempts - 1;
-          if (newAttempts === 0) {
-            setBattleResult("lost");
-          } else {
-            alert(
-              `You failed to catch the Pokémon! ${newAttempts} attempts left.`
-            );
-            setCurrentTurn("opponent");
-          }
-          return newAttempts;
-        });
-      }
+    if (opponentPokemon && catchAttempts > 0) {
+      setShowCatchModal(true);
+      setCatchResult(null);
+
+      setTimeout(() => {
+        const isCaught = pokemonService.catchPokemon(
+          opponentHP,
+          opponentPokemon.base.HP
+        );
+        setCatchResult(isCaught);
+
+        if (!isCaught) {
+          setCatchAttempts((prevAttempts) => {
+            const newAttempts = prevAttempts - 1;
+            if (newAttempts === 0) {
+              setBattleResult("lost");
+            } else {
+              setCurrentTurn("opponent");
+            }
+            return newAttempts;
+          });
+        } else {
+          setBattleResult("caught");
+        }
+      }, 3000);
     }
-  }, [opponentPokemon, opponentHP]);
+  }, [opponentPokemon, opponentHP, catchAttempts]);
 
   const applyDamage = (
     attacker: Pokemon,
@@ -132,6 +156,13 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
     const hit = defenderHP - newHP;
     setHP(newHP);
     setHit(hit);
+  };
+
+  const handleCloseCatchModal = () => {
+    setShowCatchModal(false);
+    if (battleResult === null) {
+      setCatchResult(null);
+    }
   };
 
   return (
@@ -196,6 +227,13 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
         <FightResultModal
           result={battleResult}
           onClose={() => setBattleResult(null)}
+        />
+      )}
+      {showCatchModal && opponentPokemon && (
+        <CatchResultModal
+          isCaught={catchResult === true}
+          pokemonName={opponentPokemon.name.english}
+          onClose={handleCloseCatchModal}
         />
       )}
     </>
