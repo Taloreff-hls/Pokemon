@@ -1,64 +1,57 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import { useEffect, useState } from "react";
 import {
-  InnerContainer,
+  Ability,
+  DetailsContainer,
+  ImageContainer,
   ModalContainer,
   ModalOverlay,
+  PokemonDetail,
+  PokemonImage,
+  PokemonStat,
+  PokemonStats,
+  RotatingPokeball,
+  StatCategory,
 } from "../styles/StyledPokemonModal";
-import { ResultText } from "../styles/StyledFightResultModal";
-import colors from "../assets/constants/colors";
 import pokeball from "../assets/imgs/pokeball-pokemon-svgrepo-com.svg";
 import { SPACING } from "../assets/constants/spacings";
-
-const rotateAnimation = keyframes`
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(10deg); }
-  100% { transform: rotate(0deg); }
-`;
-
-const RotatingPokeball = styled.img`
-  width: 100px;
-  height: 100px;
-  box-shadow: 0 0 ${SPACING[9]} ${SPACING[7]} white;
-  border-radius: 100%;
-  animation: ${rotateAnimation} 0.25s ease-in-out infinite;
-`;
+import { Pokemon } from "../interfaces/Pokemon";
+import Typography from "../styles/Typography";
+import colors from "../assets/constants/colors";
+import GenericButton from "../genericCmps/button/GenericButton";
+import { Link } from "react-router-dom";
+import { ResultInnerContainer } from "../styles/StyledFightResultModal";
 
 interface CatchResultModalProps {
-  isCaught: boolean | null; // Accept null initially
-  pokemonName: string;
+  isCaught: boolean | null;
+  pokemon: Pokemon;
   onClose: () => void;
 }
 
-const CatchResultModal: React.FC<CatchResultModalProps> = ({
+const CatchResultModal = ({
   isCaught,
-  pokemonName,
+  pokemon,
   onClose,
-}) => {
-  const [hasResult, setHasResult] = useState(false); // Track if the result is ready
+}: CatchResultModalProps) => {
+  const [hasResult, setHasResult] = useState(false);
 
-  // Automatically close the modal if the catch fails after the result is ready
   useEffect(() => {
-    if (isCaught === false && hasResult) {
+    if (!isCaught && hasResult) {
       const timer = setTimeout(() => {
         onClose();
-      }, 2000); // Wait 2 seconds before closing the modal
+      }, 2000);
 
       return () => clearTimeout(timer);
     }
   }, [isCaught, onClose, hasResult]);
 
-  // Set result ready flag after 3 seconds
   useEffect(() => {
     const resultTimer = setTimeout(() => {
-      setHasResult(true); // Result is now ready
+      setHasResult(true);
     }, 3000);
 
     return () => clearTimeout(resultTimer);
   }, []);
 
-  // Show Pokéball animation while the result is being processed
   if (!hasResult) {
     return (
       <ModalOverlay>
@@ -67,32 +60,60 @@ const CatchResultModal: React.FC<CatchResultModalProps> = ({
     );
   }
 
-  // Show congratulatory message when the Pokémon is caught
   if (isCaught) {
     return (
       <ModalOverlay>
         <ModalContainer>
-          <InnerContainer>
-            <ResultText>
-              Congratulations! You just caught {pokemonName}!
-            </ResultText>
-            <Link
-              to="/"
-              style={{
-                color: colors.primary[300],
-                textDecoration: "none",
-                fontSize: "1.2rem",
-              }}
+          <ResultInnerContainer>
+            <Typography
+              color={colors.primary[500]}
+              fontWeight={700}
+              type="subheading"
             >
-              Back to Home
+              Congratulations! You just caught {pokemon.name.english}!
+            </Typography>
+            <ImageContainer>
+              <PokemonImage
+                src={pokemon.image.hires}
+                alt={pokemon.name.english}
+              />
+            </ImageContainer>
+            <DetailsContainer>
+              <PokemonDetail>{pokemon.description}</PokemonDetail>
+              <PokemonStats>
+                <PokemonStat>
+                  <StatCategory>Height</StatCategory>
+                  <Ability>{pokemon.profile.height}</Ability>
+                </PokemonStat>
+                <PokemonStat>
+                  <StatCategory>Weight</StatCategory>
+                  <Ability>{pokemon.profile.weight}</Ability>
+                </PokemonStat>
+                <PokemonStat>
+                  <StatCategory>Category</StatCategory>
+                  <Ability>{pokemon.type[0]}</Ability>
+                </PokemonStat>
+                <PokemonStat>
+                  <StatCategory>Abilities</StatCategory>
+                  <Ability>{pokemon.profile.ability[0][0]}</Ability>
+                </PokemonStat>
+              </PokemonStats>
+            </DetailsContainer>
+            <Link to="/">
+              <GenericButton
+                type="primary"
+                size="small"
+                label="Back to home"
+                fontSize="1.4rem"
+                fontWeight="400"
+                margin={`${SPACING[4]} 0 0 auto`}
+              />
             </Link>
-          </InnerContainer>
+          </ResultInnerContainer>
         </ModalContainer>
       </ModalOverlay>
     );
   }
-
-  return null; // If the result is false, close the modal after 2 seconds
 };
 
 export default CatchResultModal;

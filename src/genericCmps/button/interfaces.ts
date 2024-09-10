@@ -12,7 +12,8 @@ export interface GenericButtonProps {
   label: string;
   fontSize?: string;
   fontWeight?: string;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
   selected?: boolean;
+  margin?: string;
 }

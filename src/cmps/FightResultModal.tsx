@@ -1,30 +1,94 @@
-import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
+import { SPACING } from "../assets/constants/spacings";
+import colors from "../assets/constants/colors";
+import Typography from "../styles/Typography";
+import GenericButton from "../genericCmps/button/GenericButton";
+import { FightResult } from "../types";
+import { Pokemon } from "../interfaces/Pokemon";
 import {
-  CloseButton,
-  InnerContainer,
   ModalContainer,
   ModalOverlay,
+  PokemonImage,
 } from "../styles/StyledPokemonModal";
-import { ResultText } from "../styles/StyledFightResultModal";
-import { FightResult } from "../types";
+import {
+  PokemonContainer,
+  ResultInnerContainer,
+} from "../styles/StyledFightResultModal";
 
 interface FightResultModalProps {
   result: FightResult;
+  playerPokemon: Pokemon;
+  opponentPokemon: Pokemon | null;
   onClose: () => void;
 }
 
-const FightResultModal = ({ result, onClose }: FightResultModalProps) => {
+const FightResultModal = ({
+  result,
+  playerPokemon,
+  opponentPokemon,
+  onClose,
+}: FightResultModalProps) => {
+  let resultText = "";
+  let detailText = "";
+  let pokemonWinner: Pokemon | null = null;
+
+  switch (result) {
+    case "won":
+      resultText = "You Won!";
+      detailText = `Congratulations! Your ${playerPokemon.name.english} defeated ${opponentPokemon?.name.english}!`;
+      pokemonWinner = playerPokemon;
+      break;
+    case "lost":
+      resultText = "You Lost!";
+      detailText = `Oh no! Your ${playerPokemon.name.english} was defeated by ${opponentPokemon?.name.english}.`;
+      pokemonWinner = opponentPokemon;
+      break;
+    case "uncaught":
+      resultText = `${opponentPokemon?.name.english} has fled!`;
+      detailText = `${opponentPokemon?.name.english} has fled after your last catch attempt.`;
+      break;
+    default:
+  }
+
   return (
     <ModalOverlay>
       <ModalContainer>
-        <InnerContainer>
-          <CloseButton onClick={onClose}>
-            <CloseIcon fontSize="large" />
-          </CloseButton>
-          <ResultText>{result === "won" ? "You Won!" : "You Lost!"}</ResultText>
-          <Link to={"/"}>Back to Home</Link>
-        </InnerContainer>
+        <ResultInnerContainer>
+          <Typography
+            color={colors.primary[500]}
+            fontWeight={700}
+            type="subheading"
+          >
+            {resultText}
+          </Typography>
+
+          <PokemonContainer>
+            <PokemonImage
+              src={pokemonWinner?.image.hires}
+              alt={pokemonWinner?.name.english}
+            />
+          </PokemonContainer>
+
+          <Typography
+            type="body"
+            color={colors.greys[700]}
+            margin={`0 0 ${SPACING[4]} 0`}
+          >
+            {detailText}
+          </Typography>
+
+          <Link to="/">
+            <GenericButton
+              type="primary"
+              size="small"
+              label="Back to Home"
+              fontSize="1.4rem"
+              fontWeight="400"
+              margin={`${SPACING[4]} 0 0`}
+              onClick={onClose}
+            />
+          </Link>
+        </ResultInnerContainer>
       </ModalContainer>
     </ModalOverlay>
   );

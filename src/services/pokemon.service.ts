@@ -8,6 +8,9 @@ export const pokemonService = {
   catchPokemon,
   isBattleOver,
   endBattle,
+  applyDamage,
+  determineFirstTurn,
+  handleOpponentTurn,
 };
 
 function sort(pokemons: Pokemon[], selectedOption: DropdownItem): Pokemon[] {
@@ -85,4 +88,25 @@ function endBattle(userHP: number, catchAttempts: number) {
   } else {
     alert("You won!");
   }
+}
+
+function applyDamage(attacker: Pokemon, defender: Pokemon, defenderHP: number) {
+  const newHP = calculateDamage(attacker, defender, defenderHP);
+  const hit = defenderHP - newHP;
+  return { newHP, hit };
+}
+
+function determineFirstTurn(
+  selectedPokemon: Pokemon,
+  opponentPokemon: Pokemon | null
+) {
+  return fightTurn(selectedPokemon, opponentPokemon);
+}
+
+function handleOpponentTurn(
+  opponentPokemon: Pokemon,
+  selectedPokemon: Pokemon,
+  userHP: number
+) {
+  return applyDamage(opponentPokemon, selectedPokemon, userHP);
 }
