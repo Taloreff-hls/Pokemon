@@ -51,7 +51,10 @@ const PokemonContent = ({ selectedCtg, pokemonData }: PokemonContentProps) => {
         />
 
         {viewMode === "list" ? (
-          <PokemonTable pokemons={sortedPokemonData} />
+          <PokemonTable
+            pokemons={sortedPokemonData}
+            selectedCtg={selectedCtg}
+          />
         ) : (
           <PokemonGrid pokemons={sortedPokemonData} />
         )}

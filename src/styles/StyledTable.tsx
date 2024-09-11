@@ -35,6 +35,7 @@ export const StyledTableHead = styled(TableHead)`
 export const StyledTableHeadCell = styled(TableCell)`
   && {
     background-color: ${colors.primary[50]};
+    color: ${colors.greys[600]};
     ${typography.body};
     font-family: ${fonts.mulish};
     font-weight: 700;
@@ -69,7 +70,7 @@ export const StyledTableCell = styled(TableCell)`
     &:nth-child(5) {
       padding-right: ${SPACING[6]};
     }
-    height: 72px;
+    height: 69px;
     padding: ${SPACING[6]} ${SPACING[9]} ${SPACING[6]} 0;
     padding: 1px ${SPACING[9]} 1px 0; // Set vertical padding to 0 to maintain the 72px height
     ${typography.body};
@@ -155,9 +156,9 @@ export const StyledPokeball = styled.img`
 `;
 
 export const avatarStyles = {
-  width: 50,
-  height: 50,
-  padding: 1,
+  width: 44,
+  height: 44,
+  padding: 0.8,
   marginRight: 2,
   bgcolor: colors.neutrals[600],
 };

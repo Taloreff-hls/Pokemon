@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableRow from "@mui/material/TableRow";
@@ -29,12 +29,17 @@ import { NO_VALUE } from "../assets/constants/placeholders";
 
 interface PokemonTableProps {
   pokemons: Pokemon[];
+  selectedCtg: number;
 }
 
-const PokemonTable = ({ pokemons }: PokemonTableProps) => {
+const PokemonTable = ({ pokemons, selectedCtg }: PokemonTableProps) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+
+  useEffect(() => {
+    setPage(0);
+  }, [selectedCtg]);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -91,7 +96,7 @@ const PokemonTable = ({ pokemons }: PokemonTableProps) => {
                         alt={pokemon.name.english}
                       />
                       {pokemon.name.english}
-                      {pokemon.belongsToUser && (
+                      {selectedCtg === 0 && pokemon.belongsToUser && (
                         <StyledPokeball src={pokeball} alt="pokeball" />
                       )}
                     </StyledTableCell>

@@ -28,7 +28,8 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   background-color: white;
   border-radius: ${SPACING[1]};
-  width: 22%;
+  width: 33%;
+  min-height: 50%;
   box-shadow: 0px ${SPACING[1]} 6px ${colors.greys[50]};
   position: relative;
   animation: ${fadeIn} 0.3s ease-out;

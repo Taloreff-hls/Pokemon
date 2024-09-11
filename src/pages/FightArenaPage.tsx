@@ -65,6 +65,7 @@ const FightArenaPage = ({ userPokemons, allPokemons }: FightArenaProps) => {
           type="heading-xxxl"
           color={colors.neutrals[400]}
           aligntext="center"
+          margin={`${SPACING[8]} 0 0 0`}
         >
           Fighting arena
         </Typography>

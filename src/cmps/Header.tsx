@@ -48,7 +48,7 @@ const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
           type="primary"
           size="large"
           label="Start a Fight"
-          fontSize="1.6rem"
+          fontSize="1.4rem"
           fontWeight="400"
           onClick={() => {}}
         />

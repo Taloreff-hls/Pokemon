@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import PokemonCardComponent from "./PokemonCard";
 import { Pokemon } from "../interfaces/Pokemon";
-import { CardGrid } from "../styles/StyledPokemonCard";
+import { CardGrid, EmptyPokemonsContainer } from "../styles/StyledPokemonCard";
 import PokemonModal from "./PokemonModal";
+import { EmptyPokemons } from "../styles/StyledTable";
+import emptyPokemons from "../assets/imgs/no_pokemon.png";
 
 interface PokemonGridProps {
   pokemons: Pokemon[];
@@ -58,13 +60,22 @@ const PokemonGrid = ({ pokemons }: PokemonGridProps) => {
   return (
     <>
       <CardGrid spacing={2}>
-        {visiblePokemons.map((pokemon) => (
-          <PokemonCardComponent
-            key={pokemon.id}
-            pokemon={pokemon}
-            onClick={() => handleCardClick(pokemon)}
-          />
-        ))}
+        {visiblePokemons.length > 0 ? (
+          visiblePokemons.map((pokemon) => (
+            <PokemonCardComponent
+              key={pokemon.id}
+              pokemon={pokemon}
+              onClick={() => handleCardClick(pokemon)}
+            />
+          ))
+        ) : (
+          <EmptyPokemonsContainer>
+            <EmptyPokemons>
+              <img src={emptyPokemons} alt="no pokemons" />
+              No Pokemons found.
+            </EmptyPokemons>
+          </EmptyPokemonsContainer>
+        )}
         <div ref={observerRef} style={{ height: "20px" }} />
       </CardGrid>
 

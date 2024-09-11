@@ -30,22 +30,23 @@ const FightResultModal = ({
 }: FightResultModalProps) => {
   let resultText = "";
   let detailText = "";
-  let pokemonWinner: Pokemon | null = null;
+  let resultPokemon: Pokemon | null = null;
 
   switch (result) {
     case "won":
       resultText = "You Won!";
       detailText = `Congratulations! Your ${playerPokemon.name.english} defeated ${opponentPokemon?.name.english}!`;
-      pokemonWinner = playerPokemon;
+      resultPokemon = playerPokemon;
       break;
     case "lost":
       resultText = "You Lost!";
       detailText = `Oh no! Your ${playerPokemon.name.english} was defeated by ${opponentPokemon?.name.english}.`;
-      pokemonWinner = opponentPokemon;
+      resultPokemon = opponentPokemon;
       break;
     case "uncaught":
       resultText = `${opponentPokemon?.name.english} has fled!`;
       detailText = `${opponentPokemon?.name.english} has fled after your last catch attempt.`;
+      resultPokemon = opponentPokemon;
       break;
     default:
   }
@@ -64,8 +65,8 @@ const FightResultModal = ({
 
           <PokemonContainer>
             <PokemonImage
-              src={pokemonWinner?.image.hires}
-              alt={pokemonWinner?.name.english}
+              src={resultPokemon?.image.hires}
+              alt={resultPokemon?.name.english}
             />
           </PokemonContainer>
 

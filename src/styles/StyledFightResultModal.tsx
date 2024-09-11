@@ -10,6 +10,8 @@ export const ResultText = styled.p`
 export const ResultInnerContainer = styled.div`
   padding: ${SPACING[5]} ${SPACING[7]};
   display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
   flex-direction: column;
   align-items: center;
 `;

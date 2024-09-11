@@ -94,7 +94,7 @@ const GamingCard = ({
               color={colors.neutrals[500]}
               margin={`0 ${SPACING[1]} 0 0`}
             >
-              px
+              pwr
             </Typography>
           </PowerLevel>
         </PowerLevelContainer>

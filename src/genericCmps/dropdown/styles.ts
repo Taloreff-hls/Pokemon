@@ -38,8 +38,8 @@ export const dropdownStyles = {
     zIndex: 10,
   },
   menuPosition: {
-    right: SPACING[1],
-    left: SPACING[1],
+    right: 0,
+    left: 0,
   },
   list: {
     maxHeight: "264px",
@@ -55,7 +55,7 @@ export const dropdownStyles = {
     "&:hover": {
       backgroundColor: colors.neutrals[100],
     },
-    minWidth: "206px",
+    width: "190px",
   },
   leftItems: {
     display: "flex",
