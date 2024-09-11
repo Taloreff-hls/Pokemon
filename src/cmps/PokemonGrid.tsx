@@ -72,7 +72,7 @@ const PokemonGrid = ({ pokemons }: PokemonGridProps) => {
           <EmptyPokemonsContainer>
             <EmptyPokemons>
               <img src={emptyPokemons} alt="no pokemons" />
-              No Pokemons found.
+              No Pokemons were found.
             </EmptyPokemons>
           </EmptyPokemonsContainer>
         )}

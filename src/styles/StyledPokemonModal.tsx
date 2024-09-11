@@ -29,14 +29,14 @@ export const ModalContainer = styled.div`
   background-color: white;
   border-radius: ${SPACING[1]};
   width: 33%;
-  min-height: 50%;
+  min-height: 42%;
   box-shadow: 0px ${SPACING[1]} 6px ${colors.greys[50]};
   position: relative;
   animation: ${fadeIn} 0.3s ease-out;
 `;
 
 export const InnerContainer = styled.div`
-  padding: ${SPACING[5]} ${SPACING[7]};
+  padding: ${SPACING[5]} ${SPACING[7]} ${SPACING[6]};
 `;
 
 export const CloseButton = styled.button`

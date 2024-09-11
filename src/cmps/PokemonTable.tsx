@@ -127,7 +127,7 @@ const PokemonTable = ({ pokemons, selectedCtg }: PokemonTableProps) => {
                 >
                   <EmptyPokemons>
                     <img src={emptyPokemons} alt="no pokemons" />
-                    No Pokemons found.
+                    No Pokemons were found.
                   </EmptyPokemons>
                 </TableCell>
               </StyledTableRow>

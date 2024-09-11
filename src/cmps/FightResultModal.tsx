@@ -30,17 +30,20 @@ const FightResultModal = ({
 }: FightResultModalProps) => {
   let resultText = "";
   let detailText = "";
+  let titleDetailText = "";
   let resultPokemon: Pokemon | null = null;
 
   switch (result) {
     case "won":
       resultText = "You Won!";
-      detailText = `Congratulations! Your ${playerPokemon.name.english} defeated ${opponentPokemon?.name.english}!`;
+      titleDetailText = "Congratulations!";
+      detailText = `Your ${playerPokemon.name.english} defeated ${opponentPokemon?.name.english}!`;
       resultPokemon = playerPokemon;
       break;
     case "lost":
       resultText = "You Lost!";
-      detailText = `Oh no! Your ${playerPokemon.name.english} was defeated by ${opponentPokemon?.name.english}.`;
+      titleDetailText = "Oh no!";
+      detailText = `Your ${playerPokemon.name.english} was defeated by ${opponentPokemon?.name.english}.`;
       resultPokemon = opponentPokemon;
       break;
     case "uncaught":
@@ -58,7 +61,7 @@ const FightResultModal = ({
           <Typography
             color={colors.primary[500]}
             fontWeight={700}
-            type="subheading"
+            type="heading-md-lg"
           >
             {resultText}
           </Typography>
@@ -69,7 +72,14 @@ const FightResultModal = ({
               alt={resultPokemon?.name.english}
             />
           </PokemonContainer>
-
+          <Typography
+            type="heading-md"
+            color={colors.greys[700]}
+            margin={`0 0 ${SPACING[4]} 0`}
+            fontWeight={600}
+          >
+            {titleDetailText}
+          </Typography>
           <Typography
             type="body"
             color={colors.greys[700]}

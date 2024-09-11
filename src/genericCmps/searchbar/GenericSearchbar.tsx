@@ -10,6 +10,7 @@ const GenericSearchbar = ({
   value = "",
   onChange,
   disabled = false,
+  width,
 }: GenericSearchbarProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -26,6 +27,7 @@ const GenericSearchbar = ({
           ...searchbarStyles.base,
           ...(value && !isFocused ? searchbarStyles.filled : {}),
           ...(disabled && searchbarStyles.disabled),
+          ...(width && { width }),
         }}
         placeholder={placeholder}
         value={value}

@@ -31,6 +31,7 @@ const ActionBar = ({
           placeholder="Search Pokemon"
           value={searchValue}
           onChange={handleSearch}
+          width={293}
         />
         <TabContainer setViewMode={setViewMode} />
       </ControlsContainer>

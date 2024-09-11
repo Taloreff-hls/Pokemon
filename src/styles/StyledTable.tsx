@@ -77,6 +77,10 @@ export const StyledTableCell = styled(TableCell)`
     color: ${colors.neutrals[300]};
     font-family: ${fonts.mulish};
     font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
   }
 `;
 

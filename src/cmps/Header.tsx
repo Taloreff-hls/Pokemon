@@ -46,7 +46,7 @@ const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
       <Link to="/fight-arena">
         <GenericButton
           type="primary"
-          size="large"
+          size="medium"
           label="Start a Fight"
           fontSize="1.4rem"
           fontWeight="400"

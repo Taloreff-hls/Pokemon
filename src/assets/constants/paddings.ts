@@ -5,12 +5,12 @@ const paddings = {
   medium: `${SPACING[4]} ${SPACING[6]}`,
   large: `${SPACING[5]} ${SPACING[6]}`,
   button: {
-    small: `${SPACING[3]} ${SPACING[6]}`,
+    small: `5px ${SPACING[6]}`,
     medium: `${SPACING[4]} ${SPACING[6]}`,
     large: `${SPACING[5]} ${SPACING[6]}`,
   },
   dropdown: {
-    small: SPACING[2],
+    small: ` 9px ${SPACING[2]}`,
     medium: `${SPACING[2]} ${SPACING[5]}`,
   },
   input: {

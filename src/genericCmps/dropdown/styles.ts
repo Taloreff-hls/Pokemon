@@ -36,14 +36,18 @@ export const dropdownStyles = {
     borderRadius: `${SPACING[1]}`,
     boxShadow: `0px ${SPACING[1]} ${SPACING[1]} 0px ${colors.greys[50]}`,
     zIndex: 10,
+    maxHeight: "264px",
   },
   menuPosition: {
     right: 0,
     left: 0,
   },
   list: {
-    maxHeight: "264px",
+    maxHeight: "210px",
     overflowY: "auto",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
   item: {
     fontFamily: fonts.mulish,

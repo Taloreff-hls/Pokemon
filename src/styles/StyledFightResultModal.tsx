@@ -8,9 +8,9 @@ export const ResultText = styled.p`
 `;
 
 export const ResultInnerContainer = styled.div`
-  padding: ${SPACING[5]} ${SPACING[7]};
+  padding: ${SPACING[7]} ${SPACING[7]} ${SPACING[5]};
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-grow: 1;
   flex-direction: column;
   align-items: center;
