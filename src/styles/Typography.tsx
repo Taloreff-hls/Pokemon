@@ -2,11 +2,12 @@ import styled from "styled-components";
 import fonts from "../assets/constants/fonts";
 import typography from "../assets/constants/typography";
 import colors from "../assets/constants/colors";
+import { TypographyType } from "../enums/TypographyEnum";
 
 interface TypographyProps {
   fontWeight?: number;
   margin?: string;
-  type?: keyof typeof typography;
+  type?: TypographyType;
   color?: string;
   aligntext?: string;
 }

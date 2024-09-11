@@ -3,26 +3,22 @@ import { SPACING } from "../assets/constants/spacings";
 import colors from "../assets/constants/colors";
 
 export const StyledGamingCard = styled.div`
-  && {
-    padding: ${SPACING[8]};
-    border-radius: ${SPACING[2]};
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: ${colors.neutrals.white};
-    width: 28%;
-    max-width: 400px;
-  }
+  padding: ${SPACING[8]};
+  border-radius: ${SPACING[2]};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: ${colors.neutrals.white};
+  width: 28%;
+  max-width: 400px;
 `;
 
 export const AvatarContainer = styled.div`
-  && {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    padding: ${SPACING[7]};
-    padding-bottom: ${SPACING[2]};
-  }
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: ${SPACING[7]};
+  padding-bottom: ${SPACING[2]};
 `;
 
 export const InnerContainer = styled.div`
@@ -41,11 +37,9 @@ export const ImageContainer = styled.div`
 `;
 
 export const PowerLevelContainer = styled.div`
-  && {
-    position: absolute;
-    top: ${SPACING[8]};
-    right: 28px;
-  }
+  position: absolute;
+  top: ${SPACING[8]};
+  right: 28px;
 `;
 
 export const PokemonImage = styled.img`

@@ -1,33 +1,43 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useQuery } from "react-query";
 import Typography from "../styles/Typography";
 import ActionBar from "./ActionBar";
 import PokemonTable from "./PokemonTable";
 import PokemonGrid from "./PokemonGrid";
 import { Pokemon } from "../interfaces/Pokemon";
-import { ViewMode } from "../interfaces/ViewMode";
+import { ViewModeEnum } from "../enums/ViewModeEnum";
 import colors from "../assets/constants/colors";
 import { SORTING_OPTIONS } from "../assets/constants/sortingOptions";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
 import { pokemonService } from "../services/pokemon.service";
 import { LayoutContainer, ContentLayout } from "../styles/LayoutContainer";
+import { TypographyType } from "../enums/TypographyEnum";
 
 interface PokemonContentProps {
   selectedCtg: number;
-  pokemonData: Pokemon[];
 }
 
-const PokemonContent = ({ selectedCtg, pokemonData }: PokemonContentProps) => {
-  const [viewMode, setViewMode] = useState<ViewMode["mode"]>("list");
+const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
+  const [viewMode, setViewMode] = useState<ViewModeEnum>(ViewModeEnum.List);
   const [searchValue, setSearchValue] = useState("");
   const [sortOption, setSortOption] = useState<DropdownItem>(
     SORTING_OPTIONS[0]
   );
 
-  const filteredPokemonData = pokemonData
-    .filter((pokemon) =>
-      pokemon.name.english.toLowerCase().includes(searchValue.toLowerCase())
-    )
-    .filter((pokemon) => (selectedCtg === 1 ? pokemon.belongsToUser : true));
+  const { data: pokemonData = [] } = useQuery(
+    "pokemonData",
+    pokemonService.getPokemons
+  );
+
+  const filteredPokemonData = useMemo(() => {
+    return pokemonData
+      .filter((pokemon: Pokemon) =>
+        pokemon.name.english.toLowerCase().includes(searchValue.toLowerCase())
+      )
+      .filter((pokemon: Pokemon) =>
+        selectedCtg === 1 ? pokemon.belongsToUser : true
+      );
+  }, [pokemonData, searchValue, selectedCtg]);
 
   const sortedPokemonData = pokemonService.sort(
     filteredPokemonData,
@@ -39,7 +49,7 @@ const PokemonContent = ({ selectedCtg, pokemonData }: PokemonContentProps) => {
       <ContentLayout>
         <Typography
           fontWeight={500}
-          type="heading-lg"
+          type={TypographyType.HeadingLg}
           color={colors.greys[300]}
         >
           All Pokemons
@@ -49,8 +59,7 @@ const PokemonContent = ({ selectedCtg, pokemonData }: PokemonContentProps) => {
           setSearchValue={setSearchValue}
           setSortOption={setSortOption}
         />
-
-        {viewMode === "list" ? (
+        {viewMode === ViewModeEnum.List ? (
           <PokemonTable pokemons={sortedPokemonData} />
         ) : (
           <PokemonGrid pokemons={sortedPokemonData} />

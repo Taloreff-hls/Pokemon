@@ -4,11 +4,11 @@ import TabContainer from "./TabContainer";
 import GenericDropdown from "../genericCmps/dropdown/GenericDropdown";
 import { SORTING_OPTIONS } from "../assets/constants/sortingOptions";
 import { useState } from "react";
-import { ViewMode } from "../interfaces/ViewMode";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
+import { ViewModeEnum } from "../enums/ViewModeEnum";
 
 interface ActionBarProps {
-  setViewMode: (mode: ViewMode["mode"]) => void;
+  setViewMode: (mode: ViewModeEnum) => void;
   setSearchValue: (value: string) => void;
   setSortOption: (value: DropdownItem) => void;
 }

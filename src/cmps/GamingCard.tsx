@@ -11,9 +11,10 @@ import Typography from "../styles/Typography";
 import { Pokemon } from "../interfaces/Pokemon";
 import { PowerLevel } from "../styles/StyledPokemonCard";
 import { SPACING } from "../assets/constants/spacings";
+import { TypographyType } from "../enums/TypographyEnum";
 
 interface GamingCardProps {
-  pokemon: Pokemon | null;
+  pokemon: Pokemon;
 }
 
 const GamingCard = ({ pokemon }: GamingCardProps) => {
@@ -21,7 +22,7 @@ const GamingCard = ({ pokemon }: GamingCardProps) => {
     <StyledGamingCard>
       <Typography
         fontWeight={700}
-        type="heading-md-lg"
+        type={TypographyType.HeadingMdLg}
         color={colors.neutrals[400]}
         aligntext="center"
       >
@@ -37,14 +38,14 @@ const GamingCard = ({ pokemon }: GamingCardProps) => {
         <PowerLevelContainer>
           <PowerLevel>
             <Typography
-              type="caption"
+              type={TypographyType.Caption}
               fontWeight={700}
               color={colors.neutrals[500]}
             >
               {pokemon?.base.Attack ?? 0}
             </Typography>
             <Typography
-              type="x-small"
+              type={TypographyType.XSmall}
               fontWeight={400}
               color={colors.neutrals[500]}
               margin={`0 ${SPACING[1]} 0 0`}
@@ -56,13 +57,13 @@ const GamingCard = ({ pokemon }: GamingCardProps) => {
       </AvatarContainer>
       <Typography
         fontWeight={400}
-        type="subheading-md"
+        type={TypographyType.SubheadingMd}
         color={colors.neutrals[200]}
         aligntext="center"
       >{`#${pokemon?.id.toString().padStart(4, "0")}`}</Typography>
       <Typography
         fontWeight={400}
-        type="heading-lg"
+        type={TypographyType.HeadingLg}
         color={colors.neutrals[500]}
         aligntext="center"
       >
