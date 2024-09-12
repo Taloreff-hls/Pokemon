@@ -48,7 +48,7 @@ const GamingCard = ({ pokemon }: GamingCardProps) => {
               type={TypographyType.XSmall}
               fontWeight={400}
               color={colors.neutrals[500]}
-              margin={`0 ${SPACING[1]} 0 0`}
+              marginRight={SPACING[1]}
             >
               px
             </Typography>

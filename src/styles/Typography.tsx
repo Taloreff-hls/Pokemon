@@ -7,6 +7,7 @@ import { TypographyType } from "../enums/TypographyEnum";
 interface TypographyProps {
   fontWeight?: number;
   margin?: string;
+  marginRight?: string;
   type?: TypographyType;
   color?: string;
   aligntext?: string;
@@ -21,6 +22,7 @@ const Typography = styled.p<TypographyProps>`
     props.type ? typography[props.type].lineHeight : "22px"};
   color: ${(props) => props.color || colors.neutrals.white};
   margin: ${(props) => props.margin || "0"};
+  margin-right: ${(props) => props.marginRight || "0"};
   text-align: ${(props) => props.aligntext || "left"};
 `;
 

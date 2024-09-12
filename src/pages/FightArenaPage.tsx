@@ -90,7 +90,7 @@ const FightArenaPage = () => {
       type={TypographyType.Medium}
       color={colors.neutrals[500]}
       aligntext="center"
-      margin={`0 0 -${SPACING[6]} 0`}
+      marginRight={SPACING[6]}
     >
       Press fight button until your or your enemy's power ends
     </Typography>
