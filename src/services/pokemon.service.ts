@@ -66,7 +66,7 @@ function calculateDamage(
 
 function catchPokemon(opponentHP: number, opponentMaxHP: number) {
   const baseRate = 0.1;
-  const lowHPRate = 0.7;
+  const lowHPRate = 0.4;
   const random = Math.random();
 
   if (opponentHP <= opponentMaxHP * 0.2) {
