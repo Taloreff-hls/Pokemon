@@ -91,7 +91,7 @@ const FightResultModal = ({
           <Link to="/">
             <GenericButton
               type="primary"
-              size="small"
+              size="medium"
               label="Back to Home"
               fontSize="1.4rem"
               fontWeight="400"

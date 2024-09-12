@@ -102,7 +102,7 @@ const CatchResultModal = ({
             <Link to="/">
               <GenericButton
                 type="primary"
-                size="small"
+                size="medium"
                 label="Back to home"
                 fontSize="1.4rem"
                 fontWeight="400"
