@@ -26,6 +26,11 @@ export const useBattleState = ({
   const [catchResult, setCatchResult] = useState<boolean | null>(null);
   const [gamePaused, setGamePaused] = useState(false);
 
+  useEffect(() => {
+    setUserHP(selectedPokemon.base.HP);
+    setUserHit(0);
+  }, [selectedPokemon]);
+
   return {
     userHP,
     setUserHP,

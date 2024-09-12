@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import GamingCard from "./GamingCard";
 import ArenaButton from "../genericCmps/arenaBtn/ArenaButton";
 import FightResultModal from "./FightResultModal";
@@ -37,6 +37,11 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
     setBattleResult,
     setShowCatchModal,
   } = battleState;
+
+  useEffect(() => {
+    battleState.setUserHP(selectedPokemon.base.HP);
+    battleState.setUserHit(0);
+  }, [selectedPokemon]);
 
   const handleCloseCatchModal = () => {
     setShowCatchModal(false);
