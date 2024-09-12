@@ -22,6 +22,9 @@ export const dropdownStyles = {
     ...typography.body,
     fontFamily: fonts.roboto,
     color: colors.greys[300],
+    "&:hover": {
+      borderColor: colors.neutrals[300],
+    },
   },
   arrowIcon: {
     marginLeft: SPACING[1],
