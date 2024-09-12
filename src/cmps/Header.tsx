@@ -5,6 +5,7 @@ import {
   NavigationBtnsContainer,
 } from "../styles/HeaderStyle";
 
+import { Link } from "react-router-dom";
 import logo from "../assets/imgs/logo.png";
 import GenericButton from "../genericCmps/button/GenericButton";
 
@@ -17,7 +18,9 @@ const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
   return (
     <HeaderContainer>
       <HeaderNavigationContainer>
-        <Logo src={logo} alt="pokemon" />
+        <Link to="/">
+          <Logo src={logo} alt="pokemon" />
+        </Link>
         <NavigationBtnsContainer>
           <GenericButton
             type="tertiary"
@@ -39,14 +42,17 @@ const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
           />
         </NavigationBtnsContainer>
       </HeaderNavigationContainer>
-      <GenericButton
-        type="primary"
-        size="large"
-        label="Start a Fight"
-        fontSize="1.6rem"
-        fontWeight="400"
-        onClick={() => {}}
-      />
+
+      <Link to="/fight-arena">
+        <GenericButton
+          type="primary"
+          size="large"
+          label="Start a Fight"
+          fontSize="1.6rem"
+          fontWeight="400"
+          onClick={() => {}}
+        />
+      </Link>
     </HeaderContainer>
   );
 };

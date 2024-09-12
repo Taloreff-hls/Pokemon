@@ -1,43 +1,43 @@
-import { useEffect, useState } from "react";
-import { ContentLayout } from "../styles/ContentLayout";
+import { useState, useMemo } from "react";
+import { useQuery } from "react-query";
 import Typography from "../styles/Typography";
 import ActionBar from "./ActionBar";
 import PokemonTable from "./PokemonTable";
 import PokemonGrid from "./PokemonGrid";
 import { Pokemon } from "../interfaces/Pokemon";
-import { ViewMode } from "../interfaces/ViewMode";
+import { ViewModeEnum } from "../enums/ViewModeEnum";
 import colors from "../assets/constants/colors";
 import { SORTING_OPTIONS } from "../assets/constants/sortingOptions";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
 import { pokemonService } from "../services/pokemon.service";
+import { LayoutContainer, ContentLayout } from "../styles/LayoutContainer";
+import { TypographyType } from "../enums/TypographyEnum";
 
 interface PokemonContentProps {
   selectedCtg: number;
 }
 
 const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
-  const [viewMode, setViewMode] = useState<ViewMode["mode"]>("list");
-  const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
+  const [viewMode, setViewMode] = useState<ViewModeEnum>(ViewModeEnum.List);
   const [searchValue, setSearchValue] = useState("");
   const [sortOption, setSortOption] = useState<DropdownItem>(
     SORTING_OPTIONS[0]
   );
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { data: pokemonData = [] } = useQuery(
+    "pokemonData",
+    pokemonService.getPokemons
+  );
 
-  const fetchData = async () => {
-    const response = await fetch("/src/data/pokemon.json");
-    const data = await response.json();
-    setPokemonData(data);
-  };
-
-  const filteredPokemonData = pokemonData
-    .filter((pokemon) =>
-      pokemon.name.english.toLowerCase().includes(searchValue.toLowerCase())
-    )
-    .filter((pokemon) => (selectedCtg === 1 ? pokemon.belongsToUser : true));
+  const filteredPokemonData = useMemo(() => {
+    return pokemonData
+      .filter((pokemon: Pokemon) =>
+        pokemon.name.english.toLowerCase().includes(searchValue.toLowerCase())
+      )
+      .filter((pokemon: Pokemon) =>
+        selectedCtg === 1 ? pokemon.belongsToUser : true
+      );
+  }, [pokemonData, searchValue, selectedCtg]);
 
   const sortedPokemonData = pokemonService.sort(
     filteredPokemonData,
@@ -45,22 +45,27 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
   );
 
   return (
-    <ContentLayout>
-      <Typography fontWeight={500} type="heading-lg" color={colors.greys[300]}>
-        All Pokemons
-      </Typography>
-      <ActionBar
-        setViewMode={setViewMode}
-        setSearchValue={setSearchValue}
-        setSortOption={setSortOption}
-      />
-
-      {viewMode === "list" ? (
-        <PokemonTable pokemons={sortedPokemonData} />
-      ) : (
-        <PokemonGrid pokemons={sortedPokemonData} />
-      )}
-    </ContentLayout>
+    <LayoutContainer>
+      <ContentLayout>
+        <Typography
+          fontWeight={500}
+          type={TypographyType.HeadingLg}
+          color={colors.greys[300]}
+        >
+          All Pokemons
+        </Typography>
+        <ActionBar
+          setViewMode={setViewMode}
+          setSearchValue={setSearchValue}
+          setSortOption={setSortOption}
+        />
+        {viewMode === ViewModeEnum.List ? (
+          <PokemonTable pokemons={sortedPokemonData} />
+        ) : (
+          <PokemonGrid pokemons={sortedPokemonData} />
+        )}
+      </ContentLayout>
+    </LayoutContainer>
   );
 };
 

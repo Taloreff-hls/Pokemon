@@ -1,18 +1,31 @@
-import { useState } from "react";
-import Header from "./Header";
-import PokemonContent from "./PokemonContent";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import GlobalStyle from "../assets/globalStyles/GlobalStyle";
+import Header from "../cmps/Header";
+import PokemonContent from "../cmps/PokemonContent";
+import FightArenaPage from "../pages/FightArenaPage";
+import { useState } from "react";
 
-const AppStateManager = () => {
+const queryClient = new QueryClient();
+
+function AppStateManager() {
   const [selectedCtg, setSelectedCtg] = useState(0);
 
   return (
-    <>
-      <GlobalStyle />
-      <Header setSelectedCtg={setSelectedCtg} selectedCtg={selectedCtg} />
-      <PokemonContent selectedCtg={selectedCtg} />
-    </>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <GlobalStyle />
+        <Header setSelectedCtg={setSelectedCtg} selectedCtg={selectedCtg} />
+        <Routes>
+          <Route
+            path="/"
+            element={<PokemonContent selectedCtg={selectedCtg} />}
+          />
+          <Route path="/fight-arena" element={<FightArenaPage />} />
+        </Routes>
+      </Router>
+    </QueryClientProvider>
   );
-};
+}
 
 export default AppStateManager;

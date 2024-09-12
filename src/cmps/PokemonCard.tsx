@@ -10,6 +10,7 @@ import {
 import strength from "../assets/imgs/strength.png";
 import colors from "../assets/constants/colors";
 import { SPACING } from "../assets/constants/spacings";
+import { TypographyType } from "../enums/TypographyEnum";
 
 interface PokemonCardProps {
   pokemon: Pokemon;
@@ -23,14 +24,14 @@ const PokemonCardComponent = ({ pokemon, onClick }: PokemonCardProps) => {
         <PowerLevelContainer>
           <PowerLevel>
             <Typography
-              type="caption"
+              type={TypographyType.Caption}
               fontWeight={700}
               color={colors.neutrals[500]}
             >
               {pokemon.base?.Attack ?? 0}
             </Typography>
             <Typography
-              type="x-small"
+              type={TypographyType.XSmall}
               fontWeight={400}
               color={colors.neutrals[500]}
               margin={`0 ${SPACING[1]} 0 0`}
@@ -44,13 +45,16 @@ const PokemonCardComponent = ({ pokemon, onClick }: PokemonCardProps) => {
       </AvatarContainer>
       <div>
         <Typography
-          type="subheading-md"
+          type={TypographyType.SubheadingMd}
           color={colors.neutrals[200]}
           margin={`0 0 ${SPACING[4]} 0`}
         >
           {`#${pokemon.id.toString().padStart(4, "0")}`}
         </Typography>
-        <Typography type="heading-md-lg" color={colors.neutrals[500]}>
+        <Typography
+          type={TypographyType.HeadingMdLg}
+          color={colors.neutrals[500]}
+        >
           {pokemon.name.english}
         </Typography>
       </div>

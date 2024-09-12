@@ -6,7 +6,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: ${SPACING[5]} ${SPACING[9]};
+  padding: ${SPACING[2]} ${SPACING[9]};
 `;
 
 export const HeaderNavigationContainer = styled.div`

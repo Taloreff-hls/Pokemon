@@ -1,57 +1,71 @@
+import { TypographyType } from "../../enums/TypographyEnum";
+
 const typography = {
-  "heading-md": {
+  [TypographyType.HeadingMd]: {
     fontSize: "1.8rem",
     lineHeight: "2.0rem",
   },
-  "heading-md-lg": {
+  [TypographyType.HeadingMdLg]: {
     fontSize: "2.4rem",
     lineHeight: "2.6rem",
   },
-  "heading-lg": {
+  [TypographyType.HeadingLg]: {
     fontSize: "2.4rem",
     lineHeight: "3.4rem",
   },
-  "heading-xl": {
+  [TypographyType.HeadingXl]: {
     fontSize: "2.8rem",
     lineHeight: "3.7rem",
   },
-  "heading-xxl": {
+  [TypographyType.HeadingXxl]: {
     fontSize: "3.2rem",
     lineHeight: "4.0rem",
   },
-  subheading: {
+  [TypographyType.HeadingXxxl]: {
+    fontSize: "4rem",
+    lineHeight: "4.3rem",
+  },
+  [TypographyType.HeadingXxxxl]: {
+    fontSize: "4.8rem",
+    lineHeight: "5.2rem",
+  },
+  [TypographyType.Subheading]: {
     fontSize: "1.6rem",
     lineHeight: "2.4rem",
   },
-  "subheading-md": {
+  [TypographyType.SubheadingMd]: {
     fontSize: "1.6rem",
     lineHeight: "2.6rem",
   },
-  "subheading-lg": {
+  [TypographyType.SubheadingLg]: {
     fontSize: "1.8rem",
     lineHeight: "2.7rem",
   },
-  body: {
+  [TypographyType.SubheadingXl]: {
+    fontSize: "4rem",
+    lineHeight: "5.2rem",
+  },
+  [TypographyType.Body]: {
     fontSize: "1.4rem",
     lineHeight: "2.2rem",
   },
-  "body-sm": {
+  [TypographyType.BodySm]: {
     fontSize: "1.4rem",
     lineHeight: "1.8rem",
   },
-  caption: {
+  [TypographyType.Caption]: {
     fontSize: "1.2rem",
     lineHeight: "1.9rem",
   },
-  small: {
+  [TypographyType.Small]: {
     fontSize: "1.2rem",
     lineHeight: "1.4rem",
   },
-  medium: {
+  [TypographyType.Medium]: {
     fontSize: "1.8rem",
     lineHeight: "2.2rem",
   },
-  "x-small": {
+  [TypographyType.XSmall]: {
     fontSize: "1.1rem",
     lineHeight: "1.6rem",
   },

@@ -3,16 +3,16 @@ import CalendarViewMonthIcon from "@mui/icons-material/CalendarViewMonth";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { useState } from "react";
 import { StyledTabContainer } from "../styles/StyledTabContainer";
-import { ViewMode } from "../interfaces/ViewMode";
+import { ViewModeEnum } from "../enums/ViewModeEnum";
 
 interface TabContainerProps {
-  setViewMode: (mode: ViewMode["mode"]) => void;
+  setViewMode: (mode: ViewModeEnum) => void;
 }
 
 const TabContainer = ({ setViewMode }: TabContainerProps) => {
   const [selectedTab, setSelectedTab] = useState(0);
 
-  const handleTabClick = (tabIndex: number, mode: ViewMode["mode"]) => {
+  const handleTabClick = (tabIndex: number, mode: ViewModeEnum) => {
     setSelectedTab(tabIndex);
     setViewMode(mode);
   };
@@ -22,13 +22,13 @@ const TabContainer = ({ setViewMode }: TabContainerProps) => {
       <GenericTab
         icon={FormatListBulletedIcon}
         label="List"
-        onClick={() => handleTabClick(0, "list")}
+        onClick={() => handleTabClick(0, ViewModeEnum.List)}
         isSelected={selectedTab === 0}
       />
       <GenericTab
         icon={CalendarViewMonthIcon}
         label="Card"
-        onClick={() => handleTabClick(1, "card")}
+        onClick={() => handleTabClick(1, ViewModeEnum.Card)}
         isSelected={selectedTab === 1}
       />
     </StyledTabContainer>

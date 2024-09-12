@@ -1,8 +1,10 @@
+import axios from "axios";
 import { Pokemon } from "../interfaces/Pokemon";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
 
 export const pokemonService = {
   sort,
+  getPokemons,
 };
 
 function sort(pokemons: Pokemon[], selectedOption: DropdownItem): Pokemon[] {
@@ -31,4 +33,9 @@ function sort(pokemons: Pokemon[], selectedOption: DropdownItem): Pokemon[] {
     default:
       return pokemons;
   }
+}
+
+async function getPokemons() {
+  const { data } = await axios.get("/src/data/pokemon.json");
+  return data;
 }
