@@ -12,4 +12,15 @@ export const StyledFightArena = styled.section`
   border-radius: ${SPACING[2]};
   padding: 110px ${SPACING[13]};
   flex-grow: 1;
+
+  @media (min-height: 650px) {
+    height: 350px;
+  }
+`;
+
+export const StyledBtnsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: ${SPACING[8]};
 `;
