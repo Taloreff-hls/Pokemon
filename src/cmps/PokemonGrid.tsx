@@ -60,23 +60,19 @@ const PokemonGrid = ({ pokemons }: PokemonGridProps) => {
   return (
     <>
       <CardGrid spacing={2}>
-        {visiblePokemons.length > 0 ? (
-          visiblePokemons.map((pokemon) => (
+        <EmptyState
+          isEmpty={visiblePokemons.length === 0}
+          emptyMessage="No Pokemons were found."
+        >
+          {visiblePokemons.map((pokemon) => (
             <PokemonCardComponent
               key={pokemon.id}
               pokemon={pokemon}
               onClick={() => handleCardClick(pokemon)}
             />
-          ))
-        ) : (
-          <EmptyPokemonsContainer>
-            <EmptyPokemons>
-              <img src={emptyPokemons} alt="no pokemons" />
-              No Pokemons were found.
-            </EmptyPokemons>
-          </EmptyPokemonsContainer>
-        )}
-        <div ref={observerRef} style={{ height: "20px" }} />
+          ))}
+          <div ref={observerRef} style={{ height: "20px" }} />
+        </EmptyState>
       </CardGrid>
 
       {selectedPokemon && (
@@ -90,3 +86,26 @@ const PokemonGrid = ({ pokemons }: PokemonGridProps) => {
 };
 
 export default PokemonGrid;
+
+const EmptyState = ({
+  children,
+  isEmpty,
+  emptyMessage = "No data found.",
+}: {
+  children: React.ReactNode;
+  isEmpty: boolean;
+  emptyMessage?: string;
+}) => {
+  if (isEmpty) {
+    return (
+      <EmptyPokemonsContainer>
+        <EmptyPokemons>
+          <img src={emptyPokemons} alt="no pokemons" />
+          {emptyMessage}
+        </EmptyPokemons>
+      </EmptyPokemonsContainer>
+    );
+  }
+
+  return <>{children}</>;
+};

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   StyledGamingCard,
   AvatarContainer,
@@ -34,6 +34,10 @@ const GamingCard = ({
   const [animatedHP, setAnimatedHP] = useState(hp);
   const [isAnimating, setIsAnimating] = useState(false);
   const prevHpRef = useRef(hp);
+
+  const formattedPokemonId = useMemo(() => {
+    return `#${pokemon.id.toString().padStart(4, "0")}`;
+  }, [pokemon.id]);
 
   useEffect(() => {
     if (hit > 0) {
@@ -105,7 +109,9 @@ const GamingCard = ({
         type={TypographyType.SubheadingMd}
         color={colors.neutrals[200]}
         aligntext="center"
-      >{`#${pokemon.id.toString().padStart(4, "0")}`}</Typography>
+      >
+        {formattedPokemonId}
+      </Typography>
       <Typography
         fontWeight={400}
         type={TypographyType.HeadingLg}

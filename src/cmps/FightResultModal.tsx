@@ -3,7 +3,6 @@ import { SPACING } from "../assets/constants/spacings";
 import colors from "../assets/constants/colors";
 import Typography from "../styles/Typography";
 import GenericButton from "../genericCmps/button/GenericButton";
-import { FightResult } from "../types";
 import { Pokemon } from "../interfaces/Pokemon";
 import {
   ModalContainer,
@@ -15,9 +14,12 @@ import {
   ResultInnerContainer,
 } from "../styles/StyledFightResultModal";
 import { TypographyType } from "../enums/TypographyEnum";
+import { useFightResult } from "../hooks/fightResultHooks";
+import { FightResultEnum } from "../enums/FightResultEnum";
+import { ButtonSizeEnum, ButtonTypeEnum } from "../enums/ButtonEnum";
 
 interface FightResultModalProps {
-  result: FightResult;
+  result: FightResultEnum;
   playerPokemon: Pokemon;
   opponentPokemon: Pokemon | null;
   onClose: () => void;
@@ -29,31 +31,8 @@ const FightResultModal = ({
   opponentPokemon,
   onClose,
 }: FightResultModalProps) => {
-  let resultText = "";
-  let detailText = "";
-  let titleDetailText = "";
-  let resultPokemon: Pokemon | null = null;
-
-  switch (result) {
-    case "won":
-      resultText = "You Won!";
-      titleDetailText = "Congratulations!";
-      detailText = `Your ${playerPokemon.name.english} defeated ${opponentPokemon?.name.english}!`;
-      resultPokemon = playerPokemon;
-      break;
-    case "lost":
-      resultText = "You Lost!";
-      titleDetailText = "Oh no!";
-      detailText = `Your ${playerPokemon.name.english} was defeated by ${opponentPokemon?.name.english}.`;
-      resultPokemon = opponentPokemon;
-      break;
-    case "uncaught":
-      resultText = `${opponentPokemon?.name.english} has fled!`;
-      detailText = `${opponentPokemon?.name.english} has fled after your last catch attempt.`;
-      resultPokemon = opponentPokemon;
-      break;
-    default:
-  }
+  const { resultText, titleDetailText, detailText, resultPokemon } =
+    useFightResult(result, playerPokemon, opponentPokemon);
 
   return (
     <ModalOverlay>
@@ -76,7 +55,7 @@ const FightResultModal = ({
           <Typography
             type={TypographyType.HeadingMd}
             color={colors.greys[700]}
-            margin={`0 0 ${SPACING[4]} 0`}
+            marginBottom={SPACING[4]}
             fontWeight={600}
           >
             {titleDetailText}
@@ -84,19 +63,19 @@ const FightResultModal = ({
           <Typography
             type={TypographyType.Body}
             color={colors.greys[700]}
-            margin={`0 0 ${SPACING[4]} 0`}
+            marginBottom={SPACING[4]}
           >
             {detailText}
           </Typography>
 
           <Link to="/">
             <GenericButton
-              type="primary"
-              size="medium"
+              type={ButtonTypeEnum.Primary}
+              size={ButtonSizeEnum.Medium}
               label="Back to Home"
               fontSize="1.4rem"
               fontWeight="400"
-              margin={`${SPACING[4]} 0 0`}
+              marginTop={SPACING[4]}
               onClick={onClose}
             />
           </Link>

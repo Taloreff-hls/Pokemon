@@ -26,7 +26,7 @@ export const useBattleState = ({
   const [userHit, setUserHit] = useState(0);
   const [opponentHit, setOpponentHit] = useState(0);
   const [showCatchModal, setShowCatchModal] = useState(false);
-  const [catchResult, setCatchResult] = useState<boolean | null>(null);
+  const [catchResult, setCatchResult] = useState<boolean>(false);
   const [gamePaused, setGamePaused] = useState(false);
 
   useEffect(() => {
@@ -163,7 +163,7 @@ export const useBattleLogic = (
   const handleCatch = useCallback(() => {
     if (opponentPokemon && catchAttempts > 0) {
       setShowCatchModal(true);
-      setCatchResult(null);
+      setCatchResult(false);
 
       setTimeout(() => {
         const isCaught = pokemonService.catchPokemon(

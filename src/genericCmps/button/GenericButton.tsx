@@ -12,6 +12,7 @@ const GenericButton = ({
   disabled = false,
   selected = false,
   margin,
+  marginTop,
 }: GenericButtonProps) => {
   return (
     <Button
@@ -24,6 +25,7 @@ const GenericButton = ({
         ...(selected && buttonStyles.types[type]["&:hover"]),
         ...(disabled && buttonStyles.types[type].disabled),
         ...(margin && { margin }),
+        ...(marginTop && { marginTop }),
       }}
       onClick={onClick}
       disabled={disabled}

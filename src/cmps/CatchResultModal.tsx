@@ -25,9 +25,10 @@ import {
   TIMEOUT_MEDIUM_DURATION,
   TIMEOUT_LONG_DURATION,
 } from "../assets/constants/timeouts";
+import { ButtonSizeEnum, ButtonTypeEnum } from "../enums/ButtonEnum";
 
 interface CatchResultModalProps {
-  isCaught: boolean | null;
+  isCaught: boolean;
   pokemon: Pokemon;
   onClose: () => void;
 }
@@ -65,6 +66,13 @@ const CatchResultModal = ({
     );
   }
 
+  const stats = [
+    { category: "Height", value: pokemon.profile.height },
+    { category: "Weight", value: pokemon.profile.weight },
+    { category: "Category", value: pokemon.type.join(", ") },
+    { category: "Abilities", value: pokemon.profile.ability[0][0] },
+  ];
+
   if (isCaught) {
     return (
       <ModalOverlay>
@@ -86,32 +94,22 @@ const CatchResultModal = ({
             <DetailsContainer>
               <PokemonDetail>{pokemon.description}</PokemonDetail>
               <PokemonStats>
-                <PokemonStat>
-                  <StatCategory>Height</StatCategory>
-                  <Ability>{pokemon.profile.height}</Ability>
-                </PokemonStat>
-                <PokemonStat>
-                  <StatCategory>Weight</StatCategory>
-                  <Ability>{pokemon.profile.weight}</Ability>
-                </PokemonStat>
-                <PokemonStat>
-                  <StatCategory>Category</StatCategory>
-                  <Ability>{pokemon.type[0]}</Ability>
-                </PokemonStat>
-                <PokemonStat>
-                  <StatCategory>Abilities</StatCategory>
-                  <Ability>{pokemon.profile.ability[0][0]}</Ability>
-                </PokemonStat>
+                {stats.map((stat) => (
+                  <PokemonStat key={stat.category}>
+                    <StatCategory>{stat.category}</StatCategory>
+                    <Ability>{stat.value}</Ability>
+                  </PokemonStat>
+                ))}
               </PokemonStats>
             </DetailsContainer>
             <Link to="/">
               <GenericButton
-                type="primary"
-                size="medium"
+                type={ButtonTypeEnum.Primary}
+                size={ButtonSizeEnum.Medium}
                 label="Back to home"
                 fontSize="1.4rem"
                 fontWeight="400"
-                margin={`${SPACING[4]} 0 0 auto`}
+                marginTop={SPACING[4]}
               />
             </Link>
           </ResultInnerContainer>
