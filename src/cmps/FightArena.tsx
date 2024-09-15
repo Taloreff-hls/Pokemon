@@ -88,7 +88,7 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
               background={colors.primary[50]}
               fontWeight={500}
               type={TypographyType.SubheadingXl}
-              color={colors.neutrals[200]}
+              color={colors.neutrals.white}
               width="237px"
               height="90px"
               onClick={handleCatch}
