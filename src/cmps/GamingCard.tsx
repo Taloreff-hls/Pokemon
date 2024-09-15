@@ -13,7 +13,7 @@ import colors from "../assets/constants/colors";
 import { PowerLevel } from "../styles/StyledPokemonCard";
 import { SPACING } from "../assets/constants/spacings";
 import { TypographyType } from "../enums/TypographyEnum";
-
+import { TIMEOUT_SHORT_DURATION } from "../assets/constants/timeouts";
 interface GamingCardProps {
   pokemon: Pokemon;
   hp: number;
@@ -52,7 +52,7 @@ const GamingCard = ({
       return () => clearInterval(interval);
     } else if (hit === 0 && activeTurn && isFightClicked) {
       setIsAnimating(true);
-      setTimeout(() => setIsAnimating(false), 1000);
+      setTimeout(() => setIsAnimating(false), TIMEOUT_SHORT_DURATION);
     }
 
     prevHpRef.current = hp;

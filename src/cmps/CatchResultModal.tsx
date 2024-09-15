@@ -21,6 +21,10 @@ import GenericButton from "../genericCmps/button/GenericButton";
 import { Link } from "react-router-dom";
 import { ResultInnerContainer } from "../styles/StyledFightResultModal";
 import { TypographyType } from "../enums/TypographyEnum";
+import {
+  TIMEOUT_MEDIUM_DURATION,
+  TIMEOUT_LONG_DURATION,
+} from "../assets/constants/timeouts";
 
 interface CatchResultModalProps {
   isCaught: boolean | null;
@@ -39,7 +43,7 @@ const CatchResultModal = ({
     if (!isCaught && hasResult) {
       const timer = setTimeout(() => {
         onClose();
-      }, 2000);
+      }, TIMEOUT_MEDIUM_DURATION);
 
       return () => clearTimeout(timer);
     }
@@ -48,7 +52,7 @@ const CatchResultModal = ({
   useEffect(() => {
     const resultTimer = setTimeout(() => {
       setHasResult(true);
-    }, 3000);
+    }, TIMEOUT_LONG_DURATION);
 
     return () => clearTimeout(resultTimer);
   }, []);

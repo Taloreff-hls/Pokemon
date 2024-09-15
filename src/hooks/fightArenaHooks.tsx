@@ -2,7 +2,10 @@ import { useState, useEffect, useCallback } from "react";
 import { pokemonService } from "../services/pokemon.service";
 import { Pokemon } from "../interfaces/Pokemon";
 import { FightResult } from "../types";
-
+import {
+  TIMEOUT_MEDIUM_DURATION,
+  TIMEOUT_LONG_DURATION,
+} from "../assets/constants/timeouts";
 interface useBattleStateProps {
   selectedPokemon: Pokemon;
   opponentPokemon: Pokemon | null;
@@ -109,7 +112,7 @@ export const useBattleLogic = (
         setUserHP(newHP);
         setUserHit(hit);
         setCurrentTurn("user");
-      }, 2000);
+      }, TIMEOUT_MEDIUM_DURATION);
 
       return () => clearTimeout(timeout);
     }
@@ -182,7 +185,7 @@ export const useBattleLogic = (
         } else {
           setBattleResult("caught");
         }
-      }, 3000);
+      }, TIMEOUT_LONG_DURATION);
     }
   }, [
     opponentPokemon,
