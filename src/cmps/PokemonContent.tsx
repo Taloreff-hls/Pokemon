@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useQuery } from "react-query";
 import Typography from "../styles/Typography";
 import ActionBar from "./ActionBar";
@@ -39,9 +39,12 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
         selectedCtg === 1 ? pokemon.belongsToUser : true
       );
 
-    setPage(0);
     return filteredData;
   }, [pokemonData, searchValue, selectedCtg]);
+
+  useEffect(() => {
+    setPage(0);
+  }, [filteredPokemonData]);
 
   const sortedPokemonData = pokemonService.sort(
     filteredPokemonData,
