@@ -14,6 +14,7 @@ import {
   PokemonContainer,
   ResultInnerContainer,
 } from "../styles/StyledFightResultModal";
+import { TypographyType } from "../enums/TypographyEnum";
 
 interface FightResultModalProps {
   result: FightResult;
@@ -61,7 +62,7 @@ const FightResultModal = ({
           <Typography
             color={colors.primary[500]}
             fontWeight={700}
-            type="heading-md-lg"
+            type={TypographyType.HeadingMdLg}
           >
             {resultText}
           </Typography>
@@ -73,7 +74,7 @@ const FightResultModal = ({
             />
           </PokemonContainer>
           <Typography
-            type="heading-md"
+            type={TypographyType.HeadingMd}
             color={colors.greys[700]}
             margin={`0 0 ${SPACING[4]} 0`}
             fontWeight={600}
@@ -81,7 +82,7 @@ const FightResultModal = ({
             {titleDetailText}
           </Typography>
           <Typography
-            type="body"
+            type={TypographyType.Body}
             color={colors.greys[700]}
             margin={`0 0 ${SPACING[4]} 0`}
           >

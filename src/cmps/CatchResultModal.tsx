@@ -20,6 +20,7 @@ import colors from "../assets/constants/colors";
 import GenericButton from "../genericCmps/button/GenericButton";
 import { Link } from "react-router-dom";
 import { ResultInnerContainer } from "../styles/StyledFightResultModal";
+import { TypographyType } from "../enums/TypographyEnum";
 
 interface CatchResultModalProps {
   isCaught: boolean | null;
@@ -68,7 +69,7 @@ const CatchResultModal = ({
             <Typography
               color={colors.primary[500]}
               fontWeight={700}
-              type="subheading"
+              type={TypographyType.Subheading}
             >
               Congratulations! You just caught {pokemon.name.english}!
             </Typography>

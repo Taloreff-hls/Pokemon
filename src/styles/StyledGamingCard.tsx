@@ -51,7 +51,7 @@ export const StyledGamingCard = styled.div<{
           `
       : "none"};
   border: ${(props) =>
-    props.$activeTurn ? `2px solid ${colors.green[100]}` : "none"};
+    props.$activeTurn ? `${SPACING[0]} solid ${colors.green[100]}` : "none"};
 `;
 
 export const AvatarContainer = styled.div`
