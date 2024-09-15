@@ -23,6 +23,7 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
   const [sortOption, setSortOption] = useState<DropdownItem>(
     SORTING_OPTIONS[0]
   );
+  const [page, setPage] = useState(0);
 
   const { data: pokemonData = [] } = useQuery(
     "pokemonData",
@@ -30,13 +31,16 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
   );
 
   const filteredPokemonData = useMemo(() => {
-    return pokemonData
+    const filteredData = pokemonData
       .filter((pokemon: Pokemon) =>
         pokemon.name.english.toLowerCase().includes(searchValue.toLowerCase())
       )
       .filter((pokemon: Pokemon) =>
         selectedCtg === 1 ? pokemon.belongsToUser : true
       );
+
+    setPage(0);
+    return filteredData;
   }, [pokemonData, searchValue, selectedCtg]);
 
   const sortedPokemonData = pokemonService.sort(
@@ -60,7 +64,11 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
           setSortOption={setSortOption}
         />
         {viewMode === ViewModeEnum.List ? (
-          <PokemonTable pokemons={sortedPokemonData} />
+          <PokemonTable
+            pokemons={sortedPokemonData}
+            page={page}
+            onPageChange={setPage}
+          />
         ) : (
           <PokemonGrid pokemons={sortedPokemonData} />
         )}

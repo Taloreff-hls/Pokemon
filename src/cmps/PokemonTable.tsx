@@ -28,10 +28,11 @@ import { NO_VALUE } from "../assets/constants/placeholders";
 
 interface PokemonTableProps {
   pokemons: Pokemon[];
+  page: number;
+  onPageChange: (newPage: number) => void;
 }
 
-const PokemonTable = ({ pokemons }: PokemonTableProps) => {
-  const [page, setPage] = useState(0);
+const PokemonTable = ({ pokemons, page, onPageChange }: PokemonTableProps) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
 
@@ -39,14 +40,14 @@ const PokemonTable = ({ pokemons }: PokemonTableProps) => {
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
-    setPage(newPage);
+    onPageChange(newPage);
   };
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setRowsPerPage(+event.target.value);
-    setPage(0);
+    onPageChange(0);
   };
 
   const handleRowClick = (pokemon: Pokemon) => {
