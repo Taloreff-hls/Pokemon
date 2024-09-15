@@ -32,38 +32,34 @@ export const StyledGamingCard = styled.div<{
   $isAnimating: boolean;
   $hit: number;
 }>`
-  && {
-    padding: ${SPACING[8]};
-    border-radius: ${SPACING[2]};
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: ${colors.neutrals.white};
-    width: 28%;
-    max-width: 400px;
-    animation: ${(props) =>
-      props.$isAnimating
-        ? props.$hit === 0
-          ? css`
-              ${rotateAnimation} 0.5s ease-in-out 0s 2
-            `
-          : css`
-              ${damageAnimation} 0.5s ease-in-out 0s 3
-            `
-        : "none"};
-    border: ${(props) =>
-      props.$activeTurn ? `2px solid ${colors.green[100]}` : "none"};
-  }
+  padding: ${SPACING[8]};
+  border-radius: ${SPACING[2]};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: ${colors.neutrals.white};
+  width: 28%;
+  max-width: 400px;
+  animation: ${(props) =>
+    props.$isAnimating
+      ? props.$hit === 0
+        ? css`
+            ${rotateAnimation} 0.5s ease-in-out 0s 2
+          `
+        : css`
+            ${damageAnimation} 0.5s ease-in-out 0s 3
+          `
+      : "none"};
+  border: ${(props) =>
+    props.$activeTurn ? `2px solid ${colors.green[100]}` : "none"};
 `;
 
 export const AvatarContainer = styled.div`
-  && {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    padding: ${SPACING[7]};
-    padding-bottom: ${SPACING[2]};
-  }
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: ${SPACING[7]};
+  padding-bottom: ${SPACING[2]};
 `;
 
 export const InnerContainer = styled.div`
@@ -82,11 +78,9 @@ export const ImageContainer = styled.div`
 `;
 
 export const PowerLevelContainer = styled.div`
-  && {
-    position: absolute;
-    top: ${SPACING[8]};
-    right: 28px;
-  }
+  position: absolute;
+  top: ${SPACING[8]};
+  right: 28px;
 `;
 
 export const PokemonImage = styled.img`

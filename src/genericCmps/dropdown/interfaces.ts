@@ -1,5 +1,8 @@
+import { MenuPosition } from "../../enums/MenuPositionEnum";
+
 export interface DropdownItem {
   label: string;
+  id: number;
   icon?: React.ReactNode;
   attack?: number;
 }
@@ -10,5 +13,5 @@ export interface GenericDropdownProps {
   withSearch?: boolean;
   onSelect: (item: DropdownItem) => void;
   placeholder?: string;
-  menuPosition?: "left" | "right";
+  menuPosition?: MenuPosition;
 }

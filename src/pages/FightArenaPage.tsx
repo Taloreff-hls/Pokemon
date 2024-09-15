@@ -1,24 +1,31 @@
-import { useState, useEffect } from "react";
-import colors from "../assets/constants/colors";
+import { useState, useEffect, useMemo } from "react";
+import { useQuery } from "react-query";
+import { pokemonService } from "../services/pokemon.service";
 import FightArena from "../cmps/FightArena";
 import GenericDropdown from "../genericCmps/dropdown/GenericDropdown";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
-import { Pokemon } from "../interfaces/Pokemon";
 import { LayoutContainer, ContentLayout } from "../styles/LayoutContainer";
 import Typography from "../styles/Typography";
 import { SPACING } from "../assets/constants/spacings";
+import { TypographyType } from "../enums/TypographyEnum";
+import { MenuPosition } from "../enums/MenuPositionEnum";
+import { getRandomOpponent } from "../services/util.service";
+import { Pokemon } from "../interfaces/Pokemon";
+import colors from "../assets/constants/colors";
 
-interface FightArenaProps {
-  userPokemons: Pokemon[];
-  allPokemons: Pokemon[];
-}
+const FightArenaPage = () => {
+  const { data: allPokemons } = useQuery(
+    "pokemonData",
+    pokemonService.getPokemons
+  );
 
-const FightArenaPage = ({ userPokemons, allPokemons }: FightArenaProps) => {
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
   const [opponentPokemon, setOpponentPokemon] = useState<Pokemon | null>(null);
 
-  const nonUserPokemons = allPokemons.filter(
-    (pokemon) => !pokemon.belongsToUser
+  const userPokemons = useMemo(
+    () =>
+      allPokemons?.filter((pokemon: Pokemon) => pokemon.belongsToUser) || [],
+    [allPokemons]
   );
 
   useEffect(() => {
@@ -28,62 +35,78 @@ const FightArenaPage = ({ userPokemons, allPokemons }: FightArenaProps) => {
   }, [userPokemons]);
 
   useEffect(() => {
-    if (nonUserPokemons.length > 0) {
-      const randomOpponent =
-        nonUserPokemons[Math.floor(Math.random() * nonUserPokemons.length)];
-      setOpponentPokemon(randomOpponent);
+    if (allPokemons && userPokemons.length > 0) {
+      const nonUserPokemons = allPokemons.filter(
+        (pokemon: Pokemon) =>
+          !userPokemons.some(
+            (userPokemon: Pokemon) => userPokemon.id === pokemon.id
+          )
+      );
+      setOpponentPokemon(getRandomOpponent(nonUserPokemons));
     }
-  }, []);
+  }, [allPokemons, userPokemons]);
 
   const handleSelectPokemon = (selectedItem: DropdownItem) => {
     const pokemon = userPokemons.find(
-      (poke) => poke.name.english === selectedItem.label
+      (poke: Pokemon) => poke.id === selectedItem.id
     );
     if (pokemon) {
       setSelectedPokemon(pokemon);
     }
   };
 
-  const dropdownOptions: DropdownItem[] = userPokemons.map((pokemon) => ({
-    label: pokemon.name.english,
-    icon: (
-      <img
-        src={pokemon.image.thumbnail}
-        alt={pokemon.name.english}
-        width={SPACING[7]}
-        height={SPACING[7]}
-      />
-    ),
-    attack: pokemon.base.Attack,
-  }));
+  const dropdownOptions: DropdownItem[] = useMemo(
+    () =>
+      userPokemons.map((pokemon: Pokemon) => ({
+        label: pokemon.name.english,
+        icon: (
+          <img
+            src={pokemon.image.thumbnail}
+            alt={pokemon.name.english}
+            width={SPACING[7]}
+            height={SPACING[7]}
+          />
+        ),
+        attack: pokemon.base.Attack,
+        id: pokemon.id,
+      })),
+    [userPokemons]
+  );
+
+  const renderHeader = () => (
+    <Typography
+      fontWeight={700}
+      type={TypographyType.HeadingXxxl}
+      color={colors.neutrals[400]}
+      aligntext="center"
+    >
+      Fighting arena
+    </Typography>
+  );
+
+  const renderSubHeader = () => (
+    <Typography
+      fontWeight={400}
+      type={TypographyType.Medium}
+      color={colors.neutrals[500]}
+      aligntext="center"
+      marginRight={SPACING[6]}
+    >
+      Press fight button until your or your enemy's power ends
+    </Typography>
+  );
 
   return (
     <LayoutContainer>
       <ContentLayout>
-        <Typography
-          fontWeight={700}
-          type="heading-xxxl"
-          color={colors.neutrals[400]}
-          aligntext="center"
-          margin={`${SPACING[8]} 0 0 0`}
-        >
-          Fighting arena
-        </Typography>
-        <Typography
-          fontWeight={400}
-          type="medium"
-          color={colors.neutrals[500]}
-          aligntext="center"
-          margin={`0 0 -${SPACING[6]} 0`}
-        >
-          Press fight button until your or your enemy's power ends
-        </Typography>
+        {renderHeader()}
+        {renderSubHeader()}
         <GenericDropdown
           label="Choose Pokemon"
           options={dropdownOptions}
           onSelect={handleSelectPokemon}
           withSearch
-          menuPosition="left"
+          menuPosition={MenuPosition.Left}
         />
         {selectedPokemon && opponentPokemon && (
           <FightArena

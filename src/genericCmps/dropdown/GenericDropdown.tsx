@@ -4,6 +4,7 @@ import { GenericDropdownProps, DropdownItem } from "./interfaces";
 import { dropdownStyles } from "./styles";
 import GenericSearchbar from "../searchbar/GenericSearchbar";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { MenuPosition } from "../../enums/MenuPositionEnum";
 
 const GenericDropdown = ({
   options,
@@ -11,7 +12,7 @@ const GenericDropdown = ({
   withSearch = false,
   onSelect,
   placeholder,
-  menuPosition = "right",
+  menuPosition = MenuPosition.Right,
 }: GenericDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
