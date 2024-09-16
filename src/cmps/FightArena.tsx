@@ -132,14 +132,10 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
     return (
       <ArenaButton
         background={bgColor}
-        // background={colors.primary[300]}
         fontWeight={weight}
-        // fontWeight={700}
         type={type}
-        // type={TypographyType.HeadingXxxxl}
         width="237px"
         height={height}
-        // height="232px"
         onClick={handleClick}
       >
         {label}
