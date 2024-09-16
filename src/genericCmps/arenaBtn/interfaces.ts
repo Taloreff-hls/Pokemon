@@ -10,6 +10,7 @@ export interface ArenaButtonProps {
   type?: TypographyKeys;
   width?: string;
   height?: string;
+  disabled?: boolean;
   onClick?: () => void;
   children: React.ReactNode;
 }

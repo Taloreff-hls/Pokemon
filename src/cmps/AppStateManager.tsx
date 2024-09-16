@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import GlobalStyle from "../assets/globalStyles/GlobalStyle";
 import Header from "../cmps/Header";
-import PokemonContent from "../cmps/PokemonContent";
+import PokemonContent from "../pages/PokemonContent";
 import FightArenaPage from "../pages/FightArenaPage";
 import { useState } from "react";
 

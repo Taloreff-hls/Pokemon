@@ -47,6 +47,7 @@ export const searchbarStyles = {
     },
   },
   icon: {
+    fontSize: "2rem",
     position: "absolute",
     left: "12px",
     top: "50%",
@@ -61,7 +62,7 @@ export const searchbarStyles = {
     transform: "translateY(-50%)",
     cursor: "pointer",
     color: colors.greys[200],
-    height: "20px",
+    fontSize: "2rem",
   },
   filled: {
     border: `1px solid ${colors.neutrals[500]}`,

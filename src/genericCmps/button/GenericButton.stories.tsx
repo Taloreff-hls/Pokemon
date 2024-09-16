@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import GenericButton from "./GenericButton";
+import { ButtonSizeEnum, ButtonTypeEnum } from "../../enums/ButtonEnum";
 
 const meta: Meta<typeof GenericButton> = {
   component: GenericButton,
@@ -9,18 +10,22 @@ const meta: Meta<typeof GenericButton> = {
         type: "select",
       },
       options: [
-        "primary",
-        "secondary",
-        "secondary-grey",
-        "tertiary",
-        "tertiary-grey",
+        ButtonTypeEnum.Primary,
+        ButtonTypeEnum.Secondary,
+        ButtonTypeEnum.SecondaryGrey,
+        ButtonTypeEnum.Tertiary,
+        ButtonTypeEnum.TertiaryGrey,
       ],
     },
     size: {
       control: {
         type: "select",
       },
-      options: ["small", "medium", "large"],
+      options: [
+        ButtonSizeEnum.Small,
+        ButtonSizeEnum.Medium,
+        ButtonSizeEnum.Large,
+      ],
     },
     label: {
       control: "text",
@@ -38,8 +43,8 @@ type Story = StoryObj<typeof GenericButton>;
 
 export const Button: Story = {
   args: {
-    type: "primary",
-    size: "medium",
+    type: ButtonTypeEnum.Primary,
+    size: ButtonSizeEnum.Medium,
     label: "Button",
     disabled: false,
   },

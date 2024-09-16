@@ -22,6 +22,9 @@ export const dropdownStyles = {
     ...typography.body,
     fontFamily: fonts.roboto,
     color: colors.greys[300],
+    "&:hover": {
+      borderColor: colors.neutrals[300],
+    },
   },
   arrowIcon: {
     marginLeft: SPACING[1],
@@ -36,14 +39,18 @@ export const dropdownStyles = {
     borderRadius: `${SPACING[1]}`,
     boxShadow: `0px ${SPACING[1]} ${SPACING[1]} 0px ${colors.greys[50]}`,
     zIndex: 10,
+    maxHeight: "264px",
   },
   menuPosition: {
-    right: SPACING[1],
-    left: SPACING[1],
+    right: 0,
+    left: 0,
   },
   list: {
-    maxHeight: "264px",
+    maxHeight: "210px",
     overflowY: "auto",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
   item: {
     fontFamily: fonts.mulish,
@@ -55,7 +62,7 @@ export const dropdownStyles = {
     "&:hover": {
       backgroundColor: colors.neutrals[100],
     },
-    minWidth: "206px",
+    width: "190px",
   },
   leftItems: {
     display: "flex",

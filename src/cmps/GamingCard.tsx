@@ -1,39 +1,88 @@
-import colors from "../assets/constants/colors";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   StyledGamingCard,
-  ImageContainer,
   AvatarContainer,
-  StyledProgress,
+  ImageContainer,
   PowerLevelContainer,
   PokemonImage,
+  StyledProgress,
 } from "../styles/StyledGamingCard";
 import Typography from "../styles/Typography";
 import { Pokemon } from "../interfaces/Pokemon";
+import colors from "../assets/constants/colors";
 import { PowerLevel } from "../styles/StyledPokemonCard";
 import { SPACING } from "../assets/constants/spacings";
 import { TypographyType } from "../enums/TypographyEnum";
-
+import { TIMEOUT_SHORT_DURATION } from "../assets/constants/timeouts";
 interface GamingCardProps {
   pokemon: Pokemon;
+  hp: number;
+  isUser: boolean;
+  activeTurn: boolean;
+  hit: number;
+  isFightClicked: boolean;
 }
 
-const GamingCard = ({ pokemon }: GamingCardProps) => {
+const GamingCard = ({
+  pokemon,
+  hp,
+  isUser,
+  activeTurn,
+  hit,
+  isFightClicked,
+}: GamingCardProps) => {
+  const [animatedHP, setAnimatedHP] = useState(hp);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const prevHpRef = useRef(hp);
+
+  const formattedPokemonId = useMemo(() => {
+    return `#${pokemon.id.toString().padStart(4, "0")}`;
+  }, [pokemon.id]);
+
+  useEffect(() => {
+    if (hit > 0) {
+      setIsAnimating(true);
+      const interval = setInterval(() => {
+        setAnimatedHP((prevAnimatedHP) => {
+          const newHP = Math.max(prevAnimatedHP - 1, hp);
+          if (newHP === hp) {
+            clearInterval(interval);
+            setIsAnimating(false);
+          }
+          return newHP;
+        });
+      }, 30);
+
+      return () => clearInterval(interval);
+    } else if (hit === 0 && activeTurn && isFightClicked) {
+      setIsAnimating(true);
+      setTimeout(() => setIsAnimating(false), TIMEOUT_SHORT_DURATION);
+    }
+
+    prevHpRef.current = hp;
+  }, [activeTurn]);
+
+  useEffect(() => {
+    setAnimatedHP(pokemon.base.HP);
+  }, [pokemon]);
+
   return (
-    <StyledGamingCard>
+    <StyledGamingCard
+      $activeTurn={activeTurn}
+      $isAnimating={isAnimating}
+      $hit={hit}
+    >
       <Typography
         fontWeight={700}
         type={TypographyType.HeadingMdLg}
         color={colors.neutrals[400]}
         aligntext="center"
       >
-        You
+        {isUser ? "You" : "Opponent"}
       </Typography>
       <AvatarContainer>
         <ImageContainer>
-          <PokemonImage
-            src={pokemon?.image.hires}
-            alt={pokemon?.name.english}
-          />
+          <PokemonImage src={pokemon.image.hires} alt={pokemon.name.english} />
         </ImageContainer>
         <PowerLevelContainer>
           <PowerLevel>
@@ -42,7 +91,7 @@ const GamingCard = ({ pokemon }: GamingCardProps) => {
               fontWeight={700}
               color={colors.neutrals[500]}
             >
-              {pokemon?.base.Attack ?? 0}
+              {pokemon.base?.Attack ?? 0}
             </Typography>
             <Typography
               type={TypographyType.XSmall}
@@ -50,7 +99,7 @@ const GamingCard = ({ pokemon }: GamingCardProps) => {
               color={colors.neutrals[500]}
               marginRight={SPACING[1]}
             >
-              px
+              pwr
             </Typography>
           </PowerLevel>
         </PowerLevelContainer>
@@ -60,16 +109,18 @@ const GamingCard = ({ pokemon }: GamingCardProps) => {
         type={TypographyType.SubheadingMd}
         color={colors.neutrals[200]}
         aligntext="center"
-      >{`#${pokemon?.id.toString().padStart(4, "0")}`}</Typography>
+      >
+        {formattedPokemonId}
+      </Typography>
       <Typography
         fontWeight={400}
         type={TypographyType.HeadingLg}
         color={colors.neutrals[500]}
         aligntext="center"
       >
-        {pokemon?.name.english}
+        {pokemon.name.english}
       </Typography>
-      <StyledProgress value={70} max={100} />
+      <StyledProgress value={animatedHP} max={pokemon.base.HP || 100} />
     </StyledGamingCard>
   );
 };

@@ -11,6 +11,7 @@ const ArenaButton = ({
   width,
   height,
   children,
+  disabled,
   onClick,
 }: ArenaButtonProps) => {
   return (
@@ -23,6 +24,7 @@ const ArenaButton = ({
       width={width}
       height={height}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </StyledArenaButton>

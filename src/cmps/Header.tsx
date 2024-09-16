@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import logo from "../assets/imgs/logo.png";
 import GenericButton from "../genericCmps/button/GenericButton";
+import { ButtonSizeEnum, ButtonTypeEnum } from "../enums/ButtonEnum";
 
 interface HeaderProps {
   setSelectedCtg: (ctg: number) => void;
@@ -23,8 +24,8 @@ const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
         </Link>
         <NavigationBtnsContainer>
           <GenericButton
-            type="tertiary"
-            size="small"
+            type={ButtonTypeEnum.Tertiary}
+            size={ButtonSizeEnum.Small}
             label="All Pokemons"
             fontSize="1.4rem"
             onClick={() => setSelectedCtg(0)}
@@ -32,8 +33,8 @@ const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
             fontWeight={selectedCtg === 0 ? "700" : "400"}
           />
           <GenericButton
-            type="tertiary"
-            size="small"
+            type={ButtonTypeEnum.Tertiary}
+            size={ButtonSizeEnum.Small}
             label="My Pokemons"
             fontSize="1.4rem"
             onClick={() => setSelectedCtg(1)}
@@ -45,10 +46,10 @@ const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
 
       <Link to="/fight-arena">
         <GenericButton
-          type="primary"
-          size="large"
+          type={ButtonTypeEnum.Primary}
+          size={ButtonSizeEnum.Medium}
           label="Start a Fight"
-          fontSize="1.6rem"
+          fontSize="1.4rem"
           fontWeight="400"
           onClick={() => {}}
         />

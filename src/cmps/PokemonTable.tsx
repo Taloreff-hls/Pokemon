@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableRow from "@mui/material/TableRow";
@@ -14,10 +14,11 @@ import {
   EmptyPokemons,
   avatarStyles,
   paginationStyles,
+  StyledPokeball,
 } from "../styles/StyledTable";
 import PokemonModal from "./PokemonModal";
 import { Pokemon } from "../interfaces/Pokemon";
-
+import pokeball from "../assets/imgs/pokeball-pokemon-svgrepo-com.svg";
 import { Avatar, TableCell } from "@mui/material";
 import emptyPokemons from "../assets/imgs/no_pokemon.png";
 import typography from "../assets/constants/typography";
@@ -28,12 +29,17 @@ import { NO_VALUE } from "../assets/constants/placeholders";
 
 interface PokemonTableProps {
   pokemons: Pokemon[];
+  selectedCtg: number;
 }
 
-const PokemonTable = ({ pokemons }: PokemonTableProps) => {
+const PokemonTable = ({ pokemons, selectedCtg }: PokemonTableProps) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+
+  useEffect(() => {
+    setPage(0);
+  }, [selectedCtg]);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -90,6 +96,9 @@ const PokemonTable = ({ pokemons }: PokemonTableProps) => {
                         alt={pokemon.name.english}
                       />
                       {pokemon.name.english}
+                      {selectedCtg === 0 && pokemon.belongsToUser && (
+                        <StyledPokeball src={pokeball} alt="pokeball" />
+                      )}
                     </StyledTableCell>
                     <StyledTableCell
                       sx={{
@@ -118,7 +127,7 @@ const PokemonTable = ({ pokemons }: PokemonTableProps) => {
                 >
                   <EmptyPokemons>
                     <img src={emptyPokemons} alt="no pokemons" />
-                    No Pokemons found.
+                    No Pokemons were found.
                   </EmptyPokemons>
                 </TableCell>
               </StyledTableRow>

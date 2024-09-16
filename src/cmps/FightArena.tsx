@@ -1,11 +1,16 @@
-import { useState } from "react";
-import { StyledFightArena } from "../styles/StyledFightArena";
+import { useEffect } from "react";
 import GamingCard from "./GamingCard";
-import { Pokemon } from "../interfaces/Pokemon";
 import ArenaButton from "../genericCmps/arenaBtn/ArenaButton";
+import FightResultModal from "./FightResultModal";
+import CatchResultModal from "./CatchResultModal";
+import {
+  StyledFightArena,
+  StyledBtnsContainer,
+} from "../styles/StyledFightArena";
 import colors from "../assets/constants/colors";
-import { StyledBtnsContainer } from "../styles/StyledBtnContainer";
 import { TypographyType } from "../enums/TypographyEnum";
+import { useBattleState, useBattleLogic } from "../hooks/fightArenaHooks";
+import { Pokemon } from "../interfaces/Pokemon";
 
 interface FightArenaProps {
   selectedPokemon: Pokemon;
@@ -13,51 +18,148 @@ interface FightArenaProps {
 }
 
 const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
-  const [isFightClicked, setIsFightClicked] = useState(false);
+  const {
+    userHP,
+    setUserHP,
+    opponentHP,
+    setOpponentHP,
+    isFightClicked,
+    setIsFightClicked,
+    currentTurn,
+    setCurrentTurn,
+    battleResult,
+    setBattleResult,
+    catchAttempts,
+    setCatchAttempts,
+    userHit,
+    setUserHit,
+    opponentHit,
+    setOpponentHit,
+    showCatchModal,
+    setShowCatchModal,
+    catchResult,
+    setCatchResult,
+    gamePaused,
+    setGamePaused,
+  } = useBattleState({ selectedPokemon, opponentPokemon });
 
-  const handleFightClick = () => {
-    setIsFightClicked(true);
+  const { handleFightClick, handleAttack, handleCatch } = useBattleLogic(
+    selectedPokemon,
+    opponentPokemon,
+    {
+      userHP,
+      setUserHP,
+      opponentHP,
+      setOpponentHP,
+      isFightClicked,
+      setIsFightClicked,
+      currentTurn,
+      setCurrentTurn,
+      battleResult,
+      setBattleResult,
+      catchAttempts,
+      setCatchAttempts,
+      userHit,
+      setUserHit,
+      opponentHit,
+      setOpponentHit,
+      showCatchModal,
+      setShowCatchModal,
+      catchResult,
+      setCatchResult,
+      gamePaused,
+      setGamePaused,
+    }
+  );
+
+  useEffect(() => {
+    setUserHP(selectedPokemon.base.HP);
+    setUserHit(0);
+  }, [selectedPokemon, setUserHP, setUserHit]);
+
+  const handleCloseCatchModal = () => {
+    setShowCatchModal(false);
+    if (battleResult === null) {
+      setCatchResult(false);
+    }
+  };
+
+  const renderOpponent = () => {
+    if (!opponentPokemon) return null;
+    return (
+      <GamingCard
+        pokemon={opponentPokemon}
+        hp={opponentHP}
+        isUser={false}
+        activeTurn={currentTurn === "opponent"}
+        hit={opponentHit}
+        isFightClicked={isFightClicked}
+      />
+    );
+  };
+
+  const renderBattleResult = () => {
+    if (!battleResult) return null;
+    return (
+      <FightResultModal
+        result={battleResult}
+        onClose={() => setBattleResult(null)}
+        playerPokemon={selectedPokemon}
+        opponentPokemon={opponentPokemon}
+      />
+    );
+  };
+
+  const renderCatchModal = () => {
+    if (!showCatchModal || !opponentPokemon) return null;
+    return (
+      <CatchResultModal
+        isCaught={catchResult}
+        pokemon={opponentPokemon}
+        onClose={handleCloseCatchModal}
+      />
+    );
+  };
+
+  const renderButton = (label: string, handleClick: () => void) => {
+    return (
+      <ArenaButton
+        background={colors.primary[300]}
+        fontWeight={700}
+        type={TypographyType.HeadingXxxxl}
+        width="237px"
+        height="232px"
+        onClick={handleClick}
+      >
+        {label}
+      </ArenaButton>
+    );
   };
 
   return (
-    <StyledFightArena>
-      <GamingCard pokemon={selectedPokemon} />
-      {!isFightClicked ? (
-        <ArenaButton
-          background={colors.primary[300]}
-          fontWeight={700}
-          type={TypographyType.HeadingXxxxl}
-          width="237px"
-          height="232px"
-          onClick={handleFightClick}
-        >
-          Fight
-        </ArenaButton>
-      ) : (
-        <StyledBtnsContainer>
-          <ArenaButton
-            background={colors.primary[300]}
-            fontWeight={500}
-            type={TypographyType.SubheadingXl}
-            width="237px"
-            height="90px"
-          >
-            Attack
-          </ArenaButton>
-          <ArenaButton
-            background={colors.primary[50]}
-            fontWeight={500}
-            type={TypographyType.SubheadingXl}
-            color={colors.neutrals[200]}
-            width="237px"
-            height="90px"
-          >
-            Catch
-          </ArenaButton>
-        </StyledBtnsContainer>
-      )}
-      <GamingCard pokemon={opponentPokemon} />
-    </StyledFightArena>
+    <>
+      <StyledFightArena>
+        <GamingCard
+          pokemon={selectedPokemon}
+          hp={userHP}
+          isUser
+          activeTurn={currentTurn === "user"}
+          hit={userHit}
+          isFightClicked={isFightClicked}
+        />
+        {!isFightClicked ? (
+          renderButton("Fight", handleFightClick)
+        ) : (
+          <StyledBtnsContainer>
+            {renderButton("Attack", handleAttack)}
+            {renderButton("Catch", handleCatch)}
+          </StyledBtnsContainer>
+        )}
+        {renderOpponent()}
+      </StyledFightArena>
+      {renderBattleResult()}
+      {renderCatchModal()}
+    </>
   );
 };
 

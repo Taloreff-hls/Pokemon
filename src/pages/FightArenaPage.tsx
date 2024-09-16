@@ -29,10 +29,10 @@ const FightArenaPage = () => {
   );
 
   useEffect(() => {
-    if (userPokemons.length > 0 && !selectedPokemon) {
+    if (userPokemons.length > 0) {
       setSelectedPokemon(userPokemons[0]);
     }
-  }, [userPokemons, selectedPokemon]);
+  }, [userPokemons]);
 
   useEffect(() => {
     if (allPokemons && userPokemons.length > 0) {

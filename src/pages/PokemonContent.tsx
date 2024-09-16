@@ -1,9 +1,9 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "react-query";
 import Typography from "../styles/Typography";
-import ActionBar from "./ActionBar";
-import PokemonTable from "./PokemonTable";
-import PokemonGrid from "./PokemonGrid";
+import ActionBar from "../cmps/ActionBar";
+import PokemonTable from "../cmps/PokemonTable";
+import PokemonGrid from "../cmps/PokemonGrid";
 import { Pokemon } from "../interfaces/Pokemon";
 import { ViewModeEnum } from "../enums/ViewModeEnum";
 import colors from "../assets/constants/colors";
@@ -60,7 +60,10 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
           setSortOption={setSortOption}
         />
         {viewMode === ViewModeEnum.List ? (
-          <PokemonTable pokemons={sortedPokemonData} />
+          <PokemonTable
+            pokemons={sortedPokemonData}
+            selectedCtg={selectedCtg}
+          />
         ) : (
           <PokemonGrid pokemons={sortedPokemonData} />
         )}
