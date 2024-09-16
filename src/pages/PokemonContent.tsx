@@ -71,6 +71,7 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
             pokemons={sortedPokemonData}
             page={page}
             onPageChange={setPage}
+            selectedCtg={selectedCtg}
           />
         ) : (
           <PokemonGrid pokemons={sortedPokemonData} />

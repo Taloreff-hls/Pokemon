@@ -14,10 +14,11 @@ import {
   EmptyPokemons,
   avatarStyles,
   paginationStyles,
+  StyledPokeball,
 } from "../styles/StyledTable";
 import PokemonModal from "./PokemonModal";
 import { Pokemon } from "../interfaces/Pokemon";
-
+import pokeball from "../assets/imgs/pokeball-pokemon-svgrepo-com.svg";
 import { Avatar, TableCell } from "@mui/material";
 import emptyPokemons from "../assets/imgs/no_pokemon.png";
 import typography from "../assets/constants/typography";
@@ -30,9 +31,15 @@ interface PokemonTableProps {
   pokemons: Pokemon[];
   page: number;
   onPageChange: (newPage: number) => void;
+  selectedCtg: number;
 }
 
-const PokemonTable = ({ pokemons, page, onPageChange }: PokemonTableProps) => {
+const PokemonTable = ({
+  pokemons,
+  page,
+  onPageChange,
+  selectedCtg,
+}: PokemonTableProps) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
 
@@ -91,6 +98,9 @@ const PokemonTable = ({ pokemons, page, onPageChange }: PokemonTableProps) => {
                         alt={pokemon.name.english}
                       />
                       {pokemon.name.english}
+                      {selectedCtg === 0 && pokemon.belongsToUser && (
+                        <StyledPokeball src={pokeball} alt="pokeball" />
+                      )}
                     </StyledTableCell>
                     <StyledTableCell
                       sx={{
@@ -119,7 +129,7 @@ const PokemonTable = ({ pokemons, page, onPageChange }: PokemonTableProps) => {
                 >
                   <EmptyPokemons>
                     <img src={emptyPokemons} alt="no pokemons" />
-                    No Pokemons found.
+                    No Pokemons were found.
                   </EmptyPokemons>
                 </TableCell>
               </StyledTableRow>
