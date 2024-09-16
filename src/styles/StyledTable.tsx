@@ -17,13 +17,13 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 export const StyledTableContainer = styled(TableContainer)`
   && {
     width: 100%;
-    max-height: 622px; /* Default for smaller screens */
+    max-height: 622px;
     border-top-left-radius: ${SPACING[1]};
     border-top-right-radius: ${SPACING[1]};
     overflow-y: auto;
 
     @media (min-height: 860px) {
-      max-height: 757px; /* Adjust based on screen height */
+      max-height: 757px;
     }
   }
 `;

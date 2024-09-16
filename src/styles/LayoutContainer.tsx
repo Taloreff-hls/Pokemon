@@ -5,7 +5,7 @@ import { SPACING } from "../assets/constants/spacings";
 export const LayoutContainer = styled.div`
   display: flex;
   justify-content: center;
-  height: calc(100% - 95px);
+  height: calc(100% - 78px);
 `;
 
 export const ContentLayout = styled.div`

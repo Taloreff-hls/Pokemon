@@ -121,14 +121,25 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
     );
   };
 
-  const renderButton = (label: string, handleClick: () => void) => {
+  const renderButton = (
+    label: string,
+    handleClick: () => void,
+    bgColor: string,
+    weight: number,
+    type: TypographyType,
+    height: string
+  ) => {
     return (
       <ArenaButton
-        background={colors.primary[300]}
-        fontWeight={700}
-        type={TypographyType.HeadingXxxxl}
+        background={bgColor}
+        // background={colors.primary[300]}
+        fontWeight={weight}
+        // fontWeight={700}
+        type={type}
+        // type={TypographyType.HeadingXxxxl}
         width="237px"
-        height="232px"
+        height={height}
+        // height="232px"
         onClick={handleClick}
       >
         {label}
@@ -148,11 +159,32 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
           isFightClicked={isFightClicked}
         />
         {!isFightClicked ? (
-          renderButton("Fight", handleFightClick)
+          renderButton(
+            "Fight",
+            handleFightClick,
+            colors.primary[300],
+            700,
+            TypographyType.HeadingXxxxl,
+            "232px"
+          )
         ) : (
           <StyledBtnsContainer>
-            {renderButton("Attack", handleAttack)}
-            {renderButton("Catch", handleCatch)}
+            {renderButton(
+              "Attack",
+              handleAttack,
+              colors.primary[300],
+              500,
+              TypographyType.SubheadingXl,
+              "90px"
+            )}
+            {renderButton(
+              "Catch",
+              handleCatch,
+              colors.primary[50],
+              500,
+              TypographyType.SubheadingXl,
+              "90px"
+            )}
           </StyledBtnsContainer>
         )}
         {renderOpponent()}
