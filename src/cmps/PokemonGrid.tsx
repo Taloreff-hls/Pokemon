@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import PokemonCardComponent from "./PokemonCard";
 import { Pokemon } from "../interfaces/Pokemon";
-import { CardGrid } from "../styles/StyledPokemonCard";
+import { CardGrid, EmptyPokemonsContainer } from "../styles/StyledPokemonCard";
 import PokemonModal from "./PokemonModal";
+import { EmptyPokemons } from "../styles/StyledTable";
+import emptyPokemons from "../assets/imgs/no_pokemon.png";
 
 interface PokemonGridProps {
   pokemons: Pokemon[];
@@ -58,14 +60,19 @@ const PokemonGrid = ({ pokemons }: PokemonGridProps) => {
   return (
     <>
       <CardGrid spacing={2}>
-        {visiblePokemons.map((pokemon) => (
-          <PokemonCardComponent
-            key={pokemon.id}
-            pokemon={pokemon}
-            onClick={() => handleCardClick(pokemon)}
-          />
-        ))}
-        <div ref={observerRef} style={{ height: "20px" }} />
+        <EmptyState
+          isEmpty={visiblePokemons.length === 0}
+          emptyMessage="No Pokemons were found."
+        >
+          {visiblePokemons.map((pokemon) => (
+            <PokemonCardComponent
+              key={pokemon.id}
+              pokemon={pokemon}
+              onClick={() => handleCardClick(pokemon)}
+            />
+          ))}
+          <div ref={observerRef} style={{ height: "20px" }} />
+        </EmptyState>
       </CardGrid>
 
       {selectedPokemon && (
@@ -79,3 +86,26 @@ const PokemonGrid = ({ pokemons }: PokemonGridProps) => {
 };
 
 export default PokemonGrid;
+
+const EmptyState = ({
+  children,
+  isEmpty,
+  emptyMessage = "No data found.",
+}: {
+  children: React.ReactNode;
+  isEmpty: boolean;
+  emptyMessage?: string;
+}) => {
+  if (isEmpty) {
+    return (
+      <EmptyPokemonsContainer>
+        <EmptyPokemons>
+          <img src={emptyPokemons} alt="no pokemons" />
+          {emptyMessage}
+        </EmptyPokemons>
+      </EmptyPokemonsContainer>
+    );
+  }
+
+  return <>{children}</>;
+};

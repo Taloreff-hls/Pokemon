@@ -1,8 +1,13 @@
-import styled from "styled-components";
+import { styled, keyframes } from "styled-components";
 import colors from "../assets/constants/colors";
 import fonts from "../assets/constants/fonts";
 import { SPACING } from "../assets/constants/spacings";
 import typography from "../assets/constants/typography";
+
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -15,6 +20,7 @@ export const ModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 10;
+  animation: ${fadeIn} 0.3s ease-out;
 `;
 
 export const ModalContainer = styled.div`
@@ -22,13 +28,15 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   background-color: white;
   border-radius: ${SPACING[1]};
-  width: 22%;
+  width: 33%;
+  min-height: 42%;
   box-shadow: 0px ${SPACING[1]} 6px ${colors.greys[50]};
   position: relative;
+  animation: ${fadeIn} 0.3s ease-out;
 `;
 
 export const InnerContainer = styled.div`
-  padding: ${SPACING[5]} ${SPACING[7]};
+  padding: ${SPACING[5]} ${SPACING[7]} ${SPACING[6]};
 `;
 
 export const CloseButton = styled.button`
@@ -131,4 +139,18 @@ export const Footer = styled.footer`
   align-items: center;
   border-top: 1px solid ${colors.greys[800]};
   padding: ${SPACING[6]} 0;
+`;
+
+export const rotateAnimation = keyframes`
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
+`;
+
+export const RotatingPokeball = styled.img`
+  width: 100px;
+  height: 100px;
+  box-shadow: 0 0 ${SPACING[9]} ${SPACING[7]} white;
+  border-radius: 100%;
+  animation: ${rotateAnimation} 0.25s ease-in-out infinite;
 `;

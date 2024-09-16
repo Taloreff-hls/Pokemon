@@ -66,7 +66,7 @@ const GenericDropdown = ({
                 {option.attack && (
                   <Box sx={dropdownStyles.attack}>
                     {option.attack}
-                    <Box sx={dropdownStyles.px}>px</Box>
+                    <Box sx={dropdownStyles.px}>pwr</Box>
                   </Box>
                 )}
               </Box>

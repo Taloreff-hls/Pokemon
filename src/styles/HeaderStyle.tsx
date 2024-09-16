@@ -2,11 +2,10 @@ import styled from "styled-components";
 import { SPACING } from "../assets/constants/spacings";
 
 export const HeaderContainer = styled.div`
-  height: 79px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: ${SPACING[2]} ${SPACING[9]};
+  padding: ${SPACING[4]} ${SPACING[9]};
 `;
 
 export const HeaderNavigationContainer = styled.div`
@@ -23,5 +22,5 @@ export const Logo = styled.img`
 
 export const NavigationBtnsContainer = styled.div`
   display: flex;
-  gap: 14px;
+  gap: ${SPACING[6]};
 `;

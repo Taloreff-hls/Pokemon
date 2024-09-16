@@ -15,7 +15,7 @@ export const tabStyles = {
     textTransform: "capitalize",
     ...typography.body,
     "&:hover": {
-      backgroundColor: colors.neutrals[100],
+      backgroundColor: colors.primary[50],
     },
   },
   innerContainer: {

@@ -23,9 +23,10 @@ export const AvatarContainer = styled.div`
   && {
     display: flex;
     justify-content: center;
-    height: 190px;
+    height: 168px;
     position: relative;
     padding: ${SPACING[7]};
+    border-radius: ${SPACING[0]};
     background-color: ${colors.neutrals[600]};
     margin-bottom: ${SPACING[4]};
   }
@@ -49,7 +50,7 @@ export const PowerLevel = styled.div`
   && {
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: center;
   }
 `;
 
@@ -58,5 +59,20 @@ export const CardGrid = styled(Grid2)`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: ${SPACING[7]};
+    margin-top: ${SPACING[5]};
+  }
+`;
+
+export const EmptyPokemonsContainer = styled.div`
+  && {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 300px);
+    grid-column: 1/-1;
+    grid-row: 1/-1;
+    background-color: ${colors.neutrals.white};
+    border-top-left-radius: ${SPACING[1]};
+    border-top-right-radius: ${SPACING[1]};
   }
 `;

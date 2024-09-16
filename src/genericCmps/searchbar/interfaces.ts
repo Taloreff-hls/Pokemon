@@ -3,4 +3,5 @@ export interface GenericSearchbarProps {
   value?: string;
   onChange: (value: string) => void;
   disabled?: boolean;
+  width?: number;
 }

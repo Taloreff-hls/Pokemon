@@ -8,6 +8,7 @@ interface TypographyProps {
   fontWeight?: number;
   margin?: string;
   marginRight?: string;
+  marginBottom?: string;
   type?: TypographyType;
   color?: string;
   aligntext?: string;
@@ -23,6 +24,7 @@ const Typography = styled.p<TypographyProps>`
   color: ${(props) => props.color || colors.neutrals.white};
   margin: ${(props) => props.margin || "0"};
   margin-right: ${(props) => props.marginRight || "0"};
+  margin-bottom: ${(props) => props.marginBottom || "0"};
   text-align: ${(props) => props.aligntext || "left"};
 `;
 

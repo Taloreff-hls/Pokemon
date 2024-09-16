@@ -1,18 +1,14 @@
-export type ButtonSize = "small" | "medium" | "large";
-export type ButtonType =
-  | "primary"
-  | "secondary"
-  | "secondary-grey"
-  | "tertiary"
-  | "tertiary-grey";
+import { ButtonSizeEnum, ButtonTypeEnum } from "../../enums/ButtonEnum";
 
 export interface GenericButtonProps {
-  type: ButtonType;
-  size: ButtonSize;
+  type: ButtonTypeEnum;
+  size: ButtonSizeEnum;
   label: string;
   fontSize?: string;
   fontWeight?: string;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
   selected?: boolean;
+  margin?: string;
+  marginTop?: string;
 }
