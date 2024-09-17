@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { SPACING } from "../assets/constants/spacings";
+import colors from "../assets/constants/colors";
 
 export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: ${SPACING[4]} ${SPACING[9]};
+  background-color: ${colors.neutrals.white};
 `;
 
 export const HeaderNavigationContainer = styled.div`

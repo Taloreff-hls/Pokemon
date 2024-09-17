@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import colors from "../constants/colors";
 
 const GlobalStyle = createGlobalStyle`
   html{
@@ -9,6 +10,8 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     min-height: 100vh;
+      background-color: ${colors.neutrals[100]};
+
   }
 
   #root{
