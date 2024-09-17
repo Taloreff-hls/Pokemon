@@ -72,7 +72,7 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
             selectedCtg={selectedCtg}
           />
         ) : (
-          <PokemonGrid pokemons={sortedPokemonData} />
+          <PokemonGrid pokemons={sortedPokemonData} key={sortOption.label} />
         )}
       </ContentLayout>
     </LayoutContainer>
