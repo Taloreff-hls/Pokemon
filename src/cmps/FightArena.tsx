@@ -6,11 +6,11 @@ import CatchResultModal from "./CatchResultModal";
 import {
   StyledFightArena,
   StyledBtnsContainer,
+  buttonStyles,
 } from "../styles/StyledFightArena";
-import colors from "../assets/constants/colors";
-import { TypographyType } from "../enums/TypographyEnum";
 import { useBattleState, useBattleLogic } from "../hooks/fightArenaHooks";
 import { Pokemon } from "../interfaces/Pokemon";
+import { ButtonStyle } from "../interfaces/ArenaButton";
 
 interface FightArenaProps {
   selectedPokemon: Pokemon;
@@ -121,24 +121,17 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
     );
   };
 
-  const renderButton = (
-    label: string,
-    handleClick: () => void,
-    bgColor: string,
-    weight: number,
-    type: TypographyType,
-    height: string
-  ) => {
+  const renderButton = (handleClick: () => void, styleObj: ButtonStyle) => {
     return (
       <ArenaButton
-        background={bgColor}
-        fontWeight={weight}
-        type={type}
-        width="237px"
-        height={height}
+        background={styleObj.bgColor}
+        fontWeight={styleObj.weight}
+        type={styleObj.type}
+        height={styleObj.height}
+        width={styleObj.width}
         onClick={handleClick}
       >
-        {label}
+        {styleObj.label}
       </ArenaButton>
     );
   };
@@ -155,32 +148,11 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
           isFightClicked={isFightClicked}
         />
         {!isFightClicked ? (
-          renderButton(
-            "Fight",
-            handleFightClick,
-            colors.primary[300],
-            700,
-            TypographyType.HeadingXxxxl,
-            "232px"
-          )
+          renderButton(handleFightClick, buttonStyles.fight)
         ) : (
           <StyledBtnsContainer>
-            {renderButton(
-              "Attack",
-              handleAttack,
-              colors.primary[300],
-              500,
-              TypographyType.SubheadingXl,
-              "90px"
-            )}
-            {renderButton(
-              "Catch",
-              handleCatch,
-              colors.primary[50],
-              500,
-              TypographyType.SubheadingXl,
-              "90px"
-            )}
+            {renderButton(handleAttack, buttonStyles.attack)}
+            {renderButton(handleCatch, buttonStyles.catch)}
           </StyledBtnsContainer>
         )}
         {renderOpponent()}
