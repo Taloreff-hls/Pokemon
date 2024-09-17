@@ -31,15 +31,13 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
   );
 
   const filteredPokemonData = useMemo(() => {
-    const filteredData = pokemonData
-      .filter((pokemon: Pokemon) =>
-        pokemon.name.english.toLowerCase().includes(searchValue.toLowerCase())
-      )
-      .filter((pokemon: Pokemon) =>
-        selectedCtg === 1 ? pokemon.belongsToUser : true
-      );
-
-    return filteredData;
+    return pokemonData.filter(
+      (pokemon: Pokemon) =>
+        pokemon.name.english
+          .toLowerCase()
+          .includes(searchValue.toLowerCase()) &&
+        (selectedCtg === 1 ? pokemon.belongsToUser : true)
+    );
   }, [pokemonData, searchValue, selectedCtg]);
 
   useEffect(() => {
