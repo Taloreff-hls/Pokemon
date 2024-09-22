@@ -4,7 +4,7 @@ import { pokemonService } from "../services/pokemon.service";
 import FightArena from "../cmps/FightArena";
 import GenericDropdown from "../genericCmps/dropdown/GenericDropdown";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
-import { LayoutContainer, ContentLayout } from "../styles/LayoutContainer";
+import { FightLayoutContainer } from "../styles/FightLayoutContainer";
 import Typography from "../styles/Typography";
 import { SPACING } from "../assets/constants/spacings";
 import { TypographyType } from "../enums/TypographyEnum";
@@ -12,6 +12,7 @@ import { MenuPosition } from "../enums/MenuPositionEnum";
 import { getRandomOpponent } from "../services/util.service";
 import { Pokemon } from "../interfaces/Pokemon";
 import colors from "../assets/constants/colors";
+import { ContentLayout } from "../styles/LayoutContainer";
 
 const FightArenaPage = () => {
   const { data: allPokemons } = useQuery(
@@ -97,7 +98,7 @@ const FightArenaPage = () => {
   );
 
   return (
-    <LayoutContainer>
+    <FightLayoutContainer>
       <ContentLayout>
         {renderHeader()}
         {renderSubHeader()}
@@ -115,7 +116,7 @@ const FightArenaPage = () => {
           />
         )}
       </ContentLayout>
-    </LayoutContainer>
+    </FightLayoutContainer>
   );
 };
 

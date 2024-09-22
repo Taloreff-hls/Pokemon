@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { pokemonService } from "../services/pokemon.service";
 import { Pokemon } from "../interfaces/Pokemon";
-import { FightResult } from "../types";
 import {
   TIMEOUT_MEDIUM_DURATION,
   TIMEOUT_LONG_DURATION,
 } from "../assets/constants/timeouts";
+import { FightResultEnum } from "../enums/FightResultEnum";
 interface useBattleStateProps {
   selectedPokemon: Pokemon;
   opponentPokemon: Pokemon | null;
@@ -21,7 +21,9 @@ export const useBattleState = ({
   );
   const [isFightClicked, setIsFightClicked] = useState(false);
   const [currentTurn, setCurrentTurn] = useState<string>("user");
-  const [battleResult, setBattleResult] = useState<FightResult | null>(null);
+  const [battleResult, setBattleResult] = useState<FightResultEnum | null>(
+    null
+  );
   const [catchAttempts, setCatchAttempts] = useState(3);
   const [userHit, setUserHit] = useState(0);
   const [opponentHit, setOpponentHit] = useState(0);
@@ -90,7 +92,7 @@ export const useBattleLogic = (
       isFightClicked &&
       pokemonService.isBattleOver(userHP, opponentHP)
     ) {
-      const result = userHP > 0 ? "won" : "lost";
+      const result = userHP > 0 ? FightResultEnum.WON : FightResultEnum.LOST;
       setBattleResult(result);
     }
   }, [userHP, opponentHP, isFightClicked, gamePaused, setBattleResult]);
@@ -176,14 +178,14 @@ export const useBattleLogic = (
           setCatchAttempts((prevAttempts) => {
             const newAttempts = prevAttempts - 1;
             if (newAttempts === 0) {
-              setBattleResult("uncaught");
+              setBattleResult(FightResultEnum.UNCAUGHT);
             } else {
               setCurrentTurn("opponent");
             }
             return newAttempts;
           });
         } else {
-          setBattleResult("caught");
+          setBattleResult(FightResultEnum.CAUGHT);
         }
       }, TIMEOUT_LONG_DURATION);
     }

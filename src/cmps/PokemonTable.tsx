@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableRow from "@mui/material/TableRow";
@@ -29,30 +29,32 @@ import { NO_VALUE } from "../assets/constants/placeholders";
 
 interface PokemonTableProps {
   pokemons: Pokemon[];
+  page: number;
+  onPageChange: (newPage: number) => void;
   selectedCtg: number;
 }
 
-const PokemonTable = ({ pokemons, selectedCtg }: PokemonTableProps) => {
-  const [page, setPage] = useState(0);
+const PokemonTable = ({
+  pokemons,
+  page,
+  onPageChange,
+  selectedCtg,
+}: PokemonTableProps) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
-
-  useEffect(() => {
-    setPage(0);
-  }, [selectedCtg]);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
-    setPage(newPage);
+    onPageChange(newPage);
   };
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setRowsPerPage(+event.target.value);
-    setPage(0);
+    onPageChange(0);
   };
 
   const handleRowClick = (pokemon: Pokemon) => {

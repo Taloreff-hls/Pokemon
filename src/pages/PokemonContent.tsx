@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useQuery } from "react-query";
 import Typography from "../styles/Typography";
 import ActionBar from "../cmps/ActionBar";
@@ -23,6 +23,7 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
   const [sortOption, setSortOption] = useState<DropdownItem>(
     SORTING_OPTIONS[0]
   );
+  const [page, setPage] = useState(0);
 
   const { data: pokemonData = [] } = useQuery(
     "pokemonData",
@@ -30,14 +31,18 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
   );
 
   const filteredPokemonData = useMemo(() => {
-    return pokemonData
-      .filter((pokemon: Pokemon) =>
-        pokemon.name.english.toLowerCase().includes(searchValue.toLowerCase())
-      )
-      .filter((pokemon: Pokemon) =>
-        selectedCtg === 1 ? pokemon.belongsToUser : true
-      );
+    return pokemonData.filter(
+      (pokemon: Pokemon) =>
+        pokemon.name.english
+          .toLowerCase()
+          .includes(searchValue.toLowerCase()) &&
+        (selectedCtg === 1 ? pokemon.belongsToUser : true)
+    );
   }, [pokemonData, searchValue, selectedCtg]);
+
+  useEffect(() => {
+    setPage(0);
+  }, [filteredPokemonData]);
 
   const sortedPokemonData = pokemonService.sort(
     filteredPokemonData,
@@ -62,10 +67,12 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
         {viewMode === ViewModeEnum.List ? (
           <PokemonTable
             pokemons={sortedPokemonData}
+            page={page}
+            onPageChange={setPage}
             selectedCtg={selectedCtg}
           />
         ) : (
-          <PokemonGrid pokemons={sortedPokemonData} />
+          <PokemonGrid pokemons={sortedPokemonData} key={sortOption.label} />
         )}
       </ContentLayout>
     </LayoutContainer>

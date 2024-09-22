@@ -26,6 +26,7 @@ const PokemonGrid = ({ pokemons }: PokemonGridProps) => {
 
   useEffect(() => {
     const currentRef = observerRef.current;
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -44,7 +45,7 @@ const PokemonGrid = ({ pokemons }: PokemonGridProps) => {
         observer.unobserve(currentRef);
       }
     };
-  }, [observerRef, page, pokemons]);
+  }, [observerRef, visiblePokemons]);
 
   const loadMorePokemons = () => {
     const newPage = page + 1;

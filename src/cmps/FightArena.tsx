@@ -6,11 +6,11 @@ import CatchResultModal from "./CatchResultModal";
 import {
   StyledFightArena,
   StyledBtnsContainer,
+  buttonStyles,
 } from "../styles/StyledFightArena";
-import colors from "../assets/constants/colors";
-import { TypographyType } from "../enums/TypographyEnum";
 import { useBattleState, useBattleLogic } from "../hooks/fightArenaHooks";
 import { Pokemon } from "../interfaces/Pokemon";
+import { ButtonStyle } from "../interfaces/ArenaButton";
 
 interface FightArenaProps {
   selectedPokemon: Pokemon;
@@ -121,17 +121,17 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
     );
   };
 
-  const renderButton = (label: string, handleClick: () => void) => {
+  const renderButton = (handleClick: () => void, styleObj: ButtonStyle) => {
     return (
       <ArenaButton
-        background={colors.primary[300]}
-        fontWeight={700}
-        type={TypographyType.HeadingXxxxl}
-        width="237px"
-        height="232px"
+        background={styleObj.bgColor}
+        fontWeight={styleObj.weight}
+        type={styleObj.type}
+        height={styleObj.height}
+        width={styleObj.width}
         onClick={handleClick}
       >
-        {label}
+        {styleObj.label}
       </ArenaButton>
     );
   };
@@ -148,11 +148,11 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
           isFightClicked={isFightClicked}
         />
         {!isFightClicked ? (
-          renderButton("Fight", handleFightClick)
+          renderButton(handleFightClick, buttonStyles.fight)
         ) : (
           <StyledBtnsContainer>
-            {renderButton("Attack", handleAttack)}
-            {renderButton("Catch", handleCatch)}
+            {renderButton(handleAttack, buttonStyles.attack)}
+            {renderButton(handleCatch, buttonStyles.catch)}
           </StyledBtnsContainer>
         )}
         {renderOpponent()}

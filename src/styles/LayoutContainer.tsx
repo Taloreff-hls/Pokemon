@@ -5,7 +5,7 @@ import { SPACING } from "../assets/constants/spacings";
 export const LayoutContainer = styled.div`
   display: flex;
   justify-content: center;
-  min-height: 100%;
+  height: calc(100% - 78px);
 `;
 
 export const ContentLayout = styled.div`
@@ -15,6 +15,5 @@ export const ContentLayout = styled.div`
   flex-grow: 1;
   flex-direction: column;
   gap: ${SPACING[6]};
-  min-height: calc(100vh - 200px);
   max-width: 1900px;
 `;
