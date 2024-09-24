@@ -18,41 +18,56 @@ export const pokemonService = {
 function sort(pokemons: Pokemon[], selectedOption: DropdownItem): Pokemon[] {
   switch (selectedOption.label) {
     case "Alphabetical A-Z":
-      return pokemons.sort((a, b) =>
-        a.name.english.localeCompare(b.name.english)
-      );
+      return pokemons.sort((a, b) => a.name.localeCompare(b.name));
     case "Alphabetical Z-A":
-      return pokemons.sort((a, b) =>
-        b.name.english.localeCompare(a.name.english)
-      );
+      return pokemons.sort((a, b) => b.name.localeCompare(a.name));
     case "Power (High to low)":
-      return pokemons.sort(
-        (a, b) => (b.base?.Attack || 0) - (a.base?.Attack || 0)
-      );
+      return pokemons.sort((a, b) => (b.attack || 0) - (a.attack || 0));
     case "Power (Low to high)":
       console.log("selected:", selectedOption.label);
-      return pokemons.sort(
-        (a, b) => (a.base?.Attack || 0) - (b.base?.Attack || 0)
-      );
+      return pokemons.sort((a, b) => (a.attack || 0) - (b.attack || 0));
     case "HP (High to low)":
-      return pokemons.sort((a, b) => (b.base?.HP || 0) - (a.base?.HP || 0));
+      return pokemons.sort((a, b) => (b.hp || 0) - (a.hp || 0));
     case "HP (Low to high)":
-      return pokemons.sort((a, b) => (a.base?.HP || 0) - (b.base?.HP || 0));
+      return pokemons.sort((a, b) => (a.hp || 0) - (b.hp || 0));
     default:
       return pokemons;
   }
 }
 
-async function getPokemons() {
-  const { data } = await axios.get("/src/data/pokemon.json");
-  return data;
+async function getPokemons(
+  page: number,
+  rows: number,
+  sort_by: string,
+  sort_order: string,
+  name?: string,
+  user_id?: string
+) {
+  const queryParams = new URLSearchParams({
+    page: (page + 1).toString(),
+    limit: rows.toString(),
+    sort_by: sort_by,
+    sort_order: sort_order,
+  });
+
+  const body: { name?: string; user_id?: string } = {};
+  if (name) body.name = name;
+  if (user_id) body.user_id = user_id;
+
+  const { data } = await axios.post(
+    `http://localhost:4000/pokemons?${queryParams.toString()}`,
+    body
+  );
+
+  return {
+    pokemons: data.pokemons || [],
+    total: data.total || 0,
+  };
 }
 
 function fightTurn(userPokemon: Pokemon, opponentPokemon: Pokemon | null) {
   if (!opponentPokemon) return "user";
-  return userPokemon.base?.Speed >= opponentPokemon.base?.Speed
-    ? "user"
-    : "opponent";
+  return userPokemon.speed >= opponentPokemon.speed ? "user" : "opponent";
 }
 
 function calculateDamage(
@@ -62,9 +77,9 @@ function calculateDamage(
 ) {
   console.log("attacker:", attacker);
   console.log("defender:", defender);
-  const damage = Math.max(0, attacker.base.Attack - defender.base.Defense);
+  const damage = Math.max(0, attacker.attack - defender.defense);
   console.log(
-    `${attacker.name.english} is attacking ${defender.name.english} for ${damage}!, ${defender.name.english} new HP is ${defender.base.HP - damage}`
+    `${attacker.name} is attacking ${defender.name} for ${damage}!, ${defender.name} new HP is ${defender.hp - damage}`
   );
   const newHP = defenderHP - damage;
 

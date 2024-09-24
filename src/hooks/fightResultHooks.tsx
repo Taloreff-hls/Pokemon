@@ -22,18 +22,18 @@ export const useFightResult = (
     case FightResultEnum.WON:
       resultText = "You Won!";
       titleDetailText = "Congratulations!";
-      detailText = `Your ${playerPokemon.name.english} defeated ${opponentPokemon?.name.english}!`;
+      detailText = `Your ${playerPokemon.name} defeated ${opponentPokemon?.name}!`;
       resultPokemon = playerPokemon;
       break;
     case FightResultEnum.LOST:
       resultText = "You Lost!";
       titleDetailText = "Oh no!";
-      detailText = `Your ${playerPokemon.name.english} was defeated by ${opponentPokemon?.name.english}.`;
+      detailText = `Your ${playerPokemon.name} was defeated by ${opponentPokemon?.name}.`;
       resultPokemon = opponentPokemon;
       break;
     case FightResultEnum.UNCAUGHT:
-      resultText = `${opponentPokemon?.name.english} has fled!`;
-      detailText = `${opponentPokemon?.name.english} has fled after your last catch attempt.`;
+      resultText = `${opponentPokemon?.name} has fled!`;
+      detailText = `${opponentPokemon?.name} has fled after your last catch attempt.`;
       resultPokemon = opponentPokemon;
       break;
     default:

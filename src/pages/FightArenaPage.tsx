@@ -14,6 +14,8 @@ import { Pokemon } from "../interfaces/Pokemon";
 import colors from "../assets/constants/colors";
 import { ContentLayout } from "../styles/LayoutContainer";
 
+// TODO: implement this page with react query, once to get the user pokemons and once to get a random pokemon through the server
+
 const FightArenaPage = () => {
   const { data: allPokemons } = useQuery(
     "pokemonData",
@@ -59,16 +61,16 @@ const FightArenaPage = () => {
   const dropdownOptions: DropdownItem[] = useMemo(
     () =>
       userPokemons.map((pokemon: Pokemon) => ({
-        label: pokemon.name.english,
+        label: pokemon.name,
         icon: (
           <img
-            src={pokemon.image.thumbnail}
-            alt={pokemon.name.english}
+            src={pokemon.image}
+            alt={pokemon.name}
             width={SPACING[7]}
             height={SPACING[7]}
           />
         ),
-        attack: pokemon.base.Attack,
+        attack: pokemon.attack,
         id: pokemon.id,
       })),
     [userPokemons]

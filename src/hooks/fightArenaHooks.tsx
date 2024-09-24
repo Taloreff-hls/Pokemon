@@ -15,9 +15,9 @@ export const useBattleState = ({
   selectedPokemon,
   opponentPokemon,
 }: useBattleStateProps) => {
-  const [userHP, setUserHP] = useState<number>(selectedPokemon.base.HP);
+  const [userHP, setUserHP] = useState<number>(selectedPokemon.hp);
   const [opponentHP, setOpponentHP] = useState<number>(
-    opponentPokemon?.base.HP || 0
+    opponentPokemon?.hp || 0
   );
   const [isFightClicked, setIsFightClicked] = useState(false);
   const [currentTurn, setCurrentTurn] = useState<string>("user");
@@ -32,7 +32,7 @@ export const useBattleState = ({
   const [gamePaused, setGamePaused] = useState(false);
 
   useEffect(() => {
-    setUserHP(selectedPokemon.base.HP);
+    setUserHP(selectedPokemon.hp);
     setUserHit(0);
   }, [selectedPokemon]);
 
@@ -170,7 +170,7 @@ export const useBattleLogic = (
       setTimeout(() => {
         const isCaught = pokemonService.catchPokemon(
           opponentHP,
-          opponentPokemon.base.HP
+          opponentPokemon.hp
         );
         setCatchResult(isCaught);
 

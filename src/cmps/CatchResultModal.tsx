@@ -67,10 +67,10 @@ const CatchResultModal = ({
   }
 
   const stats = [
-    { category: "Height", value: pokemon.profile.height },
-    { category: "Weight", value: pokemon.profile.weight },
+    { category: "Height", value: pokemon.height },
+    { category: "Weight", value: pokemon.weight },
     { category: "Category", value: pokemon.type.join(", ") },
-    { category: "Abilities", value: pokemon.profile.ability[0][0] },
+    { category: "Abilities", value: pokemon.abilities[0] },
   ];
 
   if (isCaught) {
@@ -83,13 +83,10 @@ const CatchResultModal = ({
               fontWeight={700}
               type={TypographyType.Subheading}
             >
-              Congratulations! You just caught {pokemon.name.english}!
+              Congratulations! You just caught {pokemon.name}!
             </Typography>
             <ImageContainer>
-              <PokemonImage
-                src={pokemon.image.hires}
-                alt={pokemon.name.english}
-              />
+              <PokemonImage src={pokemon.image} alt={pokemon.name} />
             </ImageContainer>
             <DetailsContainer>
               <PokemonDetail>{pokemon.description}</PokemonDetail>

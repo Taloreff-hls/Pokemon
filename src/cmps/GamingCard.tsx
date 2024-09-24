@@ -63,7 +63,7 @@ const GamingCard = ({
   }, [activeTurn]);
 
   useEffect(() => {
-    setAnimatedHP(pokemon.base.HP);
+    setAnimatedHP(pokemon.hp);
   }, [pokemon]);
 
   return (
@@ -82,7 +82,7 @@ const GamingCard = ({
       </Typography>
       <AvatarContainer>
         <ImageContainer>
-          <PokemonImage src={pokemon.image.hires} alt={pokemon.name.english} />
+          <PokemonImage src={pokemon.image} alt={pokemon.name} />
         </ImageContainer>
         <PowerLevelContainer>
           <PowerLevel>
@@ -91,7 +91,7 @@ const GamingCard = ({
               fontWeight={700}
               color={colors.neutrals[500]}
             >
-              {pokemon.base?.Attack ?? 0}
+              {pokemon.attack}
             </Typography>
             <Typography
               type={TypographyType.XSmall}
@@ -118,9 +118,9 @@ const GamingCard = ({
         color={colors.neutrals[500]}
         aligntext="center"
       >
-        {pokemon.name.english}
+        {pokemon.name}
       </Typography>
-      <StyledProgress value={animatedHP} max={pokemon.base.HP || 100} />
+      <StyledProgress value={animatedHP} max={pokemon.hp} />
     </StyledGamingCard>
   );
 };

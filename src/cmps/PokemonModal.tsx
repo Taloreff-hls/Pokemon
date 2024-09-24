@@ -36,23 +36,20 @@ const PokemonModal: React.FC<PokemonModalProps> = ({ pokemon, onClose }) => {
             <CloseIcon fontSize="large" />
           </CloseButton>
           <PokemonId>{formattedId}</PokemonId>
-          <PokemonName>{pokemon.name.english}</PokemonName>
+          <PokemonName>{pokemon.name}</PokemonName>
           <ImageContainer>
-            <PokemonImage
-              src={pokemon.image.hires}
-              alt={pokemon.name.english}
-            />
+            <PokemonImage src={pokemon.image} alt={pokemon.name} />
           </ImageContainer>
           <DetailsContainer>
             <PokemonDetail>{pokemon.description}</PokemonDetail>
             <PokemonStats>
               <PokemonStat>
                 <StatCategory>Height</StatCategory>
-                <Ability>{pokemon.profile.height}</Ability>
+                <Ability>{pokemon.height}</Ability>
               </PokemonStat>
               <PokemonStat>
                 <StatCategory>Weight</StatCategory>
-                <Ability>{pokemon.profile.weight}</Ability>
+                <Ability>{pokemon.weight}</Ability>
               </PokemonStat>
               <PokemonStat>
                 <StatCategory>Category</StatCategory>
@@ -60,7 +57,7 @@ const PokemonModal: React.FC<PokemonModalProps> = ({ pokemon, onClose }) => {
               </PokemonStat>
               <PokemonStat>
                 <StatCategory>Abilities</StatCategory>
-                <Ability>{pokemon.profile.ability[0][0]}</Ability>
+                <Ability>{pokemon.abilities[0]}</Ability>
               </PokemonStat>
             </PokemonStats>
           </DetailsContainer>
