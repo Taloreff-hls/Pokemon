@@ -1,11 +1,5 @@
-import { Pokemon } from "../interfaces/Pokemon";
-
 export const utilService = {
   getSortParams,
-};
-
-export const getRandomOpponent = (pokemons: Pokemon[]): Pokemon => {
-  return pokemons[Math.floor(Math.random() * pokemons.length)];
 };
 
 function getSortParams(label: string): {

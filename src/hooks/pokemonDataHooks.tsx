@@ -60,3 +60,19 @@ export const usePokemonGridData = ({
     }
   );
 };
+
+export const useUserPokemons = (userId: string) => {
+  return useQuery(
+    ["userPokemons", userId],
+    () => pokemonService.getPokemons(userId),
+    { refetchOnWindowFocus: false }
+  );
+};
+
+export const useOpponentPokemon = (userId: string) => {
+  return useQuery(
+    ["opponentPokemon", userId],
+    () => pokemonService.getRandomPokemon(userId),
+    { refetchOnWindowFocus: false }
+  );
+};

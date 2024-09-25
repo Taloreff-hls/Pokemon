@@ -1,6 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-import { useQuery } from "react-query";
-import { pokemonService } from "../services/pokemon.service";
 import FightArena from "../cmps/FightArena";
 import GenericDropdown from "../genericCmps/dropdown/GenericDropdown";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
@@ -12,23 +10,14 @@ import { MenuPosition } from "../enums/MenuPositionEnum";
 import { Pokemon } from "../interfaces/Pokemon";
 import colors from "../assets/constants/colors";
 import { ContentLayout } from "../styles/LayoutContainer";
+import { useOpponentPokemon, useUserPokemons } from "../hooks/pokemonDataHooks";
 
 const userId = "02fea148-e9dc-4cae-89aa-8db50df0dd48"; // Replace with actual user ID
 
 const FightArenaPage = () => {
-  const { data: { pokemons = [] } = {}, isLoading: isLoadingUserPokemons } =
-    useQuery(
-      ["userPokemons", userId],
-      () => pokemonService.getPokemons(userId),
-      { refetchOnWindowFocus: false }
-    );
+  const { data: { pokemons = [] } = {} } = useUserPokemons(userId);
 
-  const { data: opponentPokemon, isLoading: isLoadingOpponentPokemon } =
-    useQuery(
-      ["opponentPokemon", userId],
-      () => pokemonService.getRandomPokemon(userId),
-      { refetchOnWindowFocus: false }
-    );
+  const { data: opponentPokemon } = useOpponentPokemon(userId);
 
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
 
@@ -87,10 +76,6 @@ const FightArenaPage = () => {
       Press fight button until your or your enemy's power ends
     </Typography>
   );
-
-  if (isLoadingUserPokemons || isLoadingOpponentPokemon) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <FightLayoutContainer>
