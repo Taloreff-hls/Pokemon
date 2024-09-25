@@ -8,6 +8,7 @@ export const pokemonService = {
   fightTurn,
   calculateDamage,
   catchPokemon,
+  sendCatchPokemonRequest,
   isBattleOver,
   endBattle,
   applyDamage,
@@ -64,6 +65,19 @@ async function getPokemons(
     pokemons: data.pokemons || [],
     total: data.total || 0,
   };
+}
+
+async function sendCatchPokemonRequest(userId: string, pokemonId: string) {
+  try {
+    const response = await axios.post(
+      `http://localhost:4000/pokemons/users/${userId}/catch`,
+      { pokemonId }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error catching the Pokémon:", error);
+    throw error;
+  }
 }
 
 async function getRandomPokemon(userId: string) {

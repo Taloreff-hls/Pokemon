@@ -162,12 +162,12 @@ export const useBattleLogic = (
     gamePaused,
   ]);
 
-  const handleCatch = useCallback(() => {
+  const handleCatch = useCallback(async () => {
     if (opponentPokemon && catchAttempts > 0) {
       setShowCatchModal(true);
       setCatchResult(false);
 
-      setTimeout(() => {
+      setTimeout(async () => {
         const isCaught = pokemonService.catchPokemon(
           opponentHP,
           opponentPokemon.hp
@@ -186,6 +186,20 @@ export const useBattleLogic = (
           });
         } else {
           setBattleResult(FightResultEnum.CAUGHT);
+
+          try {
+            const userId = "02fea148-e9dc-4cae-89aa-8db50df0dd48"; // Replace with actual user ID
+
+            await pokemonService.sendCatchPokemonRequest(
+              userId,
+              opponentPokemon.id
+            );
+            console.log(
+              `Successfully caught and saved ${opponentPokemon.name}`
+            );
+          } catch (error) {
+            console.error("Failed to save the caught Pokémon:", error);
+          }
         }
       }, TIMEOUT_LONG_DURATION);
     }
