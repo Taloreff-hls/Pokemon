@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Typography from "../styles/Typography";
 import ActionBar from "../cmps/ActionBar";
 import PokemonTable from "../cmps/PokemonTable";
@@ -45,6 +45,10 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
     searchValue,
     selectedCtg,
   });
+
+  useEffect(() => {
+    setPage(0);
+  }, [searchValue, sortOption, selectedCtg]);
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
