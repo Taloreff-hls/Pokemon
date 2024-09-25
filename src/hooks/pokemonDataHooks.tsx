@@ -29,7 +29,7 @@ export const usePokemonTableData = ({
         sort_order,
         searchValue
       ),
-    { keepPreviousData: true }
+    { refetchOnWindowFocus: false, keepPreviousData: true }
   );
 };
 
@@ -55,6 +55,7 @@ export const usePokemonGridData = ({
         const nextPage = allPages.length;
         return nextPage * 12 < lastPage.total ? nextPage : undefined;
       },
+      refetchOnWindowFocus: false,
       keepPreviousData: true,
     }
   );

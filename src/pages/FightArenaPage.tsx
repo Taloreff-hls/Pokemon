@@ -17,13 +17,17 @@ const userId = "02fea148-e9dc-4cae-89aa-8db50df0dd48"; // Replace with actual us
 
 const FightArenaPage = () => {
   const { data: { pokemons = [] } = {}, isLoading: isLoadingUserPokemons } =
-    useQuery(["userPokemons", userId], () =>
-      pokemonService.getPokemons(userId)
+    useQuery(
+      ["userPokemons", userId],
+      () => pokemonService.getPokemons(userId),
+      { refetchOnWindowFocus: false }
     );
 
   const { data: opponentPokemon, isLoading: isLoadingOpponentPokemon } =
-    useQuery(["opponentPokemon", userId], () =>
-      pokemonService.getRandomPokemon(userId)
+    useQuery(
+      ["opponentPokemon", userId],
+      () => pokemonService.getRandomPokemon(userId),
+      { refetchOnWindowFocus: false }
     );
 
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
