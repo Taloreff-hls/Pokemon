@@ -48,4 +48,5 @@ export interface Pokemon {
   height: string;
   weight: string;
   abilities: [string][];
+  belongsToUser?: boolean;
 }

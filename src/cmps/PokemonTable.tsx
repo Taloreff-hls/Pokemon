@@ -93,7 +93,7 @@ const PokemonTable = ({
                       alt={pokemon.name}
                     />
                     {pokemon.name}
-                    {selectedCtg === 0 && (
+                    {pokemon.belongsToUser && selectedCtg === 0 && (
                       <StyledPokeball src={pokeball} alt="pokeball" />
                     )}
                   </StyledTableCell>
