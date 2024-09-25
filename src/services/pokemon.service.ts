@@ -13,6 +13,7 @@ export const pokemonService = {
   applyDamage,
   determineFirstTurn,
   handleOpponentTurn,
+  getRandomPokemon,
 };
 
 function sort(pokemons: Pokemon[], selectedOption: DropdownItem): Pokemon[] {
@@ -36,12 +37,12 @@ function sort(pokemons: Pokemon[], selectedOption: DropdownItem): Pokemon[] {
 }
 
 async function getPokemons(
-  page: number,
-  rows: number,
-  sort_by: string,
-  sort_order: string,
-  name?: string,
-  user_id?: string
+  user_id?: string,
+  page: number = 0,
+  rows: number = 10,
+  sort_by: string = "name",
+  sort_order: string = "asc",
+  name?: string
 ) {
   const queryParams = new URLSearchParams({
     page: (page + 1).toString(),
@@ -63,6 +64,13 @@ async function getPokemons(
     pokemons: data.pokemons || [],
     total: data.total || 0,
   };
+}
+
+async function getRandomPokemon(userId: string) {
+  const { data } = await axios.get(
+    `http://localhost:4000/pokemons/random?userId=${userId}`
+  );
+  return data;
 }
 
 function fightTurn(userPokemon: Pokemon, opponentPokemon: Pokemon | null) {

@@ -40,12 +40,12 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
     ],
     () =>
       pokemonService.getPokemons(
+        selectedCtg === 1 ? "02fea148-e9dc-4cae-89aa-8db50df0dd48" : undefined,
         page,
         rowsPerPage,
         sort_by,
         sort_order,
-        searchValue,
-        selectedCtg === 1 ? "139bb823-ea3d-4d80-9287-e48fa374d105" : undefined
+        searchValue
       ),
     { keepPreviousData: true }
   );
