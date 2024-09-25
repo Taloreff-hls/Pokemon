@@ -4,6 +4,7 @@ import GlobalStyle from "../assets/globalStyles/GlobalStyle";
 import Header from "../cmps/Header";
 import PokemonContent from "../pages/PokemonContent";
 import FightArenaPage from "../pages/FightArenaPage";
+import AuthPage from "../pages/AuthPage";
 import { useState } from "react";
 
 const queryClient = new QueryClient();
@@ -15,16 +16,32 @@ function AppStateManager() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <GlobalStyle />
-        <Header setSelectedCtg={setSelectedCtg} selectedCtg={selectedCtg} />
         <Routes>
+          <Route path="/login" element={<AuthPage />} />
           <Route
-            path="/"
-            element={<PokemonContent selectedCtg={selectedCtg} />}
+            path="/*"
+            element={
+              <>
+                <Header
+                  setSelectedCtg={setSelectedCtg}
+                  selectedCtg={selectedCtg}
+                />
+                <ContentRoutes selectedCtg={selectedCtg} />
+              </>
+            }
           />
-          <Route path="/fight-arena" element={<FightArenaPage />} />
         </Routes>
       </Router>
     </QueryClientProvider>
+  );
+}
+
+function ContentRoutes({ selectedCtg }: { selectedCtg: number }) {
+  return (
+    <Routes>
+      <Route path="/" element={<PokemonContent selectedCtg={selectedCtg} />} />
+      <Route path="/fight-arena" element={<FightArenaPage />} />
+    </Routes>
   );
 }
 
