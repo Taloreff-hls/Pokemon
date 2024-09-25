@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useQuery, useInfiniteQuery } from "react-query";
 import Typography from "../styles/Typography";
 import ActionBar from "../cmps/ActionBar";
 import PokemonTable from "../cmps/PokemonTable";
@@ -8,10 +7,13 @@ import { ViewModeEnum } from "../enums/ViewModeEnum";
 import colors from "../assets/constants/colors";
 import { SORTING_OPTIONS } from "../assets/constants/sortingOptions";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
-import { pokemonService } from "../services/pokemon.service";
 import { LayoutContainer, ContentLayout } from "../styles/LayoutContainer";
 import { TypographyType } from "../enums/TypographyEnum";
 import { utilService } from "../services/util.service";
+import {
+  usePokemonGridData,
+  usePokemonTableData,
+} from "../hooks/pokemonDataHooks";
 
 interface PokemonContentProps {
   selectedCtg: number;
@@ -28,52 +30,21 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
 
   const { sort_by, sort_order } = utilService.getSortParams(sortOption.label);
 
-  const { data: pokemonResponse = { pokemons: [], total: 0 } } = useQuery(
-    [
-      "pokemonData",
-      page,
-      rowsPerPage,
-      sort_by,
-      sort_order,
-      searchValue,
-      selectedCtg,
-    ],
-    () =>
-      pokemonService.getPokemons(
-        selectedCtg === 1 ? "02fea148-e9dc-4cae-89aa-8db50df0dd48" : undefined,
-        page,
-        rowsPerPage,
-        sort_by,
-        sort_order,
-        searchValue
-      ),
-    { keepPreviousData: true }
-  );
+  const pokemonTableData = usePokemonTableData({
+    page,
+    rowsPerPage,
+    sort_by,
+    sort_order,
+    searchValue,
+    selectedCtg,
+  });
 
-  const {
-    data: gridData,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQuery(
-    ["infinitePokemonData", selectedCtg, sort_by, sort_order, searchValue],
-    ({ pageParam = 0 }) =>
-      pokemonService.getPokemons(
-        selectedCtg === 1 ? "02fea148-e9dc-4cae-89aa-8db50df0dd48" : undefined,
-        pageParam,
-        12,
-        sort_by,
-        sort_order,
-        searchValue
-      ),
-    {
-      getNextPageParam: (lastPage, allPages) => {
-        const nextPage = allPages.length;
-        return nextPage * 12 < lastPage.total ? nextPage : undefined;
-      },
-      keepPreviousData: true,
-    }
-  );
+  const pokemonGridData = usePokemonGridData({
+    sort_by,
+    sort_order,
+    searchValue,
+    selectedCtg,
+  });
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
@@ -103,20 +74,22 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
         />
         {viewMode === ViewModeEnum.List ? (
           <PokemonTable
-            pokemons={pokemonResponse.pokemons}
+            pokemons={pokemonTableData.data?.pokemons || []}
             page={page}
             onPageChange={handlePageChange}
             rowsPerPage={rowsPerPage}
-            total={pokemonResponse.total}
+            total={pokemonTableData.data?.total || 0}
             onRowsPerPageChange={handleRowsPerPageChange}
             selectedCtg={selectedCtg}
           />
         ) : (
           <PokemonGrid
-            pokemons={gridData?.pages.flatMap((page) => page.pokemons) || []}
-            fetchNextPage={fetchNextPage}
-            hasNextPage={hasNextPage}
-            isFetchingNextPage={isFetchingNextPage}
+            pokemons={
+              pokemonGridData.data?.pages.flatMap((page) => page.pokemons) || []
+            }
+            fetchNextPage={pokemonGridData.fetchNextPage}
+            hasNextPage={pokemonGridData.hasNextPage}
+            isFetchingNextPage={pokemonGridData.isFetchingNextPage}
           />
         )}
       </ContentLayout>
