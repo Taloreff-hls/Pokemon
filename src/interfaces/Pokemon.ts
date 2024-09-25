@@ -23,4 +23,5 @@ export interface PokemonQueryParams {
   selectedCtg: number;
   page?: number;
   rowsPerPage?: number;
+  userId: string;
 }

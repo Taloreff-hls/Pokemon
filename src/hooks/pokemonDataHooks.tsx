@@ -1,6 +1,6 @@
 import { useQuery, useInfiniteQuery } from "react-query";
 import { pokemonService } from "../services/pokemon.service";
-import { PokemonQueryParams } from "../interfaces/Pokemon";
+import { Pokemon, PokemonQueryParams } from "../interfaces/Pokemon";
 
 export const usePokemonTableData = ({
   page,
@@ -9,8 +9,9 @@ export const usePokemonTableData = ({
   sort_order,
   searchValue,
   selectedCtg,
+  userId,
 }: PokemonQueryParams) => {
-  return useQuery(
+  const queryResult = useQuery(
     [
       "pokemonData",
       page,
@@ -22,7 +23,7 @@ export const usePokemonTableData = ({
     ],
     () =>
       pokemonService.getPokemons(
-        selectedCtg === 1 ? "02fea148-e9dc-4cae-89aa-8db50df0dd48" : undefined,
+        selectedCtg === 1 ? userId : undefined,
         page!,
         rowsPerPage!,
         sort_by,
@@ -31,6 +32,25 @@ export const usePokemonTableData = ({
       ),
     { refetchOnWindowFocus: false, keepPreviousData: true }
   );
+
+  const { data: userPokemonData } = useUserPokemons(userId);
+
+  const pokemonsWithOwnership =
+    queryResult.data?.pokemons.map((pokemon: Pokemon) => ({
+      ...pokemon,
+      belongsToUser:
+        userPokemonData?.pokemons.some(
+          (userPokemon: Pokemon) => userPokemon.id === pokemon.id
+        ) || false,
+    })) || [];
+
+  return {
+    ...queryResult,
+    data: {
+      ...queryResult.data,
+      pokemons: pokemonsWithOwnership,
+    },
+  };
 };
 
 export const usePokemonGridData = ({
