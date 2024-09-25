@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useInfiniteQuery } from "react-query";
 import Typography from "../styles/Typography";
 import ActionBar from "../cmps/ActionBar";
 import PokemonTable from "../cmps/PokemonTable";
@@ -50,6 +50,31 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
     { keepPreviousData: true }
   );
 
+  const {
+    data: gridData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery(
+    ["infinitePokemonData", selectedCtg, sort_by, sort_order, searchValue],
+    ({ pageParam = 0 }) =>
+      pokemonService.getPokemons(
+        selectedCtg === 1 ? "02fea148-e9dc-4cae-89aa-8db50df0dd48" : undefined,
+        pageParam,
+        12,
+        sort_by,
+        sort_order,
+        searchValue
+      ),
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        const nextPage = allPages.length;
+        return nextPage * 12 < lastPage.total ? nextPage : undefined;
+      },
+      keepPreviousData: true,
+    }
+  );
+
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
@@ -58,7 +83,7 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setRowsPerPage(+event.target.value);
-    setPage(0); // Reset to the first page when changing rows per page
+    setPage(0);
   };
 
   return (
@@ -88,8 +113,10 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
           />
         ) : (
           <PokemonGrid
-            pokemons={pokemonResponse.pokemons}
-            key={sortOption.label}
+            pokemons={gridData?.pages.flatMap((page) => page.pokemons) || []}
+            fetchNextPage={fetchNextPage}
+            hasNextPage={hasNextPage}
+            isFetchingNextPage={isFetchingNextPage}
           />
         )}
       </ContentLayout>
