@@ -13,9 +13,10 @@ import { ButtonSizeEnum, ButtonTypeEnum } from "../enums/ButtonEnum";
 interface HeaderProps {
   setSelectedCtg: (ctg: number) => void;
   selectedCtg: number;
+  signOut?: () => void; // Make signOut optional
 }
 
-const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
+const Header = ({ setSelectedCtg, selectedCtg, signOut }: HeaderProps) => {
   return (
     <HeaderContainer>
       <HeaderNavigationContainer>
@@ -44,6 +45,7 @@ const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
         </NavigationBtnsContainer>
       </HeaderNavigationContainer>
 
+      {/* Start a Fight Button */}
       <Link to="/fight-arena">
         <GenericButton
           type={ButtonTypeEnum.Primary}
@@ -54,6 +56,18 @@ const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
           onClick={() => {}}
         />
       </Link>
+
+      {/* Sign Out Button */}
+      {signOut && (
+        <GenericButton
+          type={ButtonTypeEnum.Secondary} // Choose the type according to your style preferences
+          size={ButtonSizeEnum.Medium}
+          label="Sign Out"
+          fontSize="1.4rem"
+          fontWeight="400"
+          onClick={signOut} // Use the signOut prop
+        />
+      )}
     </HeaderContainer>
   );
 };
