@@ -7,6 +7,19 @@ import { SPACING } from "../assets/constants/spacings";
 export const StyledAuthenticator = styled.main`
   main {
     background-color: ${colors.neutrals[100]};
+    font-size: 1.4rem;
+  }
+
+  .amplify-heading {
+    font-size: 1.6rem;
+    font-family: ${fonts.roboto};
+    font-weight: 600;
+  }
+
+  .amplify-text {
+    font-size: 1.4rem;
+    font-family: ${fonts.roboto};
+    font-weight: 400;
   }
 
   [data-amplify-authenticator] {
@@ -43,8 +56,8 @@ export const StyledAuthenticator = styled.main`
           background-color: ${colors.neutrals.white};
           min-width: 425px;
           border: 1px solid ${colors.neutrals[100]};
-          border-radius: 12px;
-
+          border-radius: ${SPACING[5]};
+          
           .amplify-tabs__panel {
             padding: 0;
           }
@@ -53,16 +66,22 @@ export const StyledAuthenticator = styled.main`
             display: flex;
             justify-content: space-around;
             align-items: center;
-            border-top: none;
+            border-radius: ${SPACING[5]};
+            padding: ${SPACING[4]} 0;
           }
 
           .amplify-tabs__item {
             border: none;
-            text-align: start;
+            text-align: center;
             padding-inline: 1.5rem;
             padding-block-start: 1.5rem;
-            font-size: 1.2rem;
+            font-size: 1.6rem;
             background-color: ${colors.neutrals.white};
+            flex: 1;
+            border-radius: ${SPACING[5]} ${SPACING[5]} 0 0;
+            color: ${colors.greys[300]};
+            padding: ${SPACING[4]} 0;
+
             &:hover {
               color: ${colors.primary[300]};
               cursor: pointer;
@@ -71,7 +90,7 @@ export const StyledAuthenticator = styled.main`
 
           .amplify-tabs__item--active {
             color: ${colors.primary[300]};
-            border: none;
+            border-bottom: ${SPACING[0]} solid ${colors.primary[300]};
           }
         }
 
@@ -190,7 +209,7 @@ export const StyledAuthenticator = styled.main`
             button {
             color: ${colors.primary[300]};
             font-weight: 400;
-            font-size: 1rem;
+            font-size: 1.4rem;
               border: none;
               background-color: transparent;
               font-family: ${fonts.roboto};
@@ -206,11 +225,6 @@ export const StyledAuthenticator = styled.main`
           min-width: 50%;
 
           fieldset{
-
-            .amplify-heading {
-              font-family: ${fonts.roboto};
-              font-weight: 400;
-            }
 
             .amplify-flex:nth-of-type(2):not(.amplify-textfield) {
 

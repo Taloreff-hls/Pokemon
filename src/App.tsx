@@ -6,6 +6,7 @@ import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
 import { defaultStorage } from "aws-amplify/utils";
 import { Amplify } from "aws-amplify";
 import config from "./amplifyconfiguration.json";
+import GlobalStyle from "./assets/globalStyles/GlobalStyle";
 
 cognitoUserPoolsTokenProvider.setKeyValueStorage(defaultStorage);
 
@@ -23,15 +24,18 @@ const components = {
 
 function App() {
   return (
-    <StyledAuthenticator>
-      <Authenticator components={components}>
-        {({ signOut }) => (
-          <main>
-            <AppStateManager signOut={signOut} />
-          </main>
-        )}
-      </Authenticator>
-    </StyledAuthenticator>
+    <>
+      <GlobalStyle />
+      <StyledAuthenticator>
+        <Authenticator components={components}>
+          {({ signOut }) => (
+            <main>
+              <AppStateManager signOut={signOut} />
+            </main>
+          )}
+        </Authenticator>
+      </StyledAuthenticator>
+    </>
   );
 }
 
