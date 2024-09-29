@@ -9,7 +9,6 @@ import config from "./amplifyconfiguration.json";
 
 cognitoUserPoolsTokenProvider.setKeyValueStorage(defaultStorage);
 
-// Configure Amplify
 Amplify.configure(config);
 
 const components = {
@@ -26,15 +25,12 @@ function App() {
   return (
     <StyledAuthenticator>
       <Authenticator components={components}>
-        {({ user }) => (
+        {({ signOut }) => (
           <main>
-            <AppStateManager />
+            <AppStateManager signOut={signOut} />
           </main>
         )}
       </Authenticator>
-      {/* <main>
-        <AppStateManager />
-      </main> */}
     </StyledAuthenticator>
   );
 }
