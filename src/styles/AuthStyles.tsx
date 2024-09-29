@@ -10,6 +10,8 @@ export const StyledAuthenticator = styled.main`
     font-size: 1.4rem;
   }
 
+
+
   .amplify-heading {
     font-size: 1.6rem;
     font-family: ${fonts.roboto};
@@ -95,7 +97,8 @@ export const StyledAuthenticator = styled.main`
         }
 
         [data-amplify-form] {
-          padding: 1.5rem;
+          padding: ${SPACING[7]};
+          padding-bottom: 
           max-width: 500px;
           border-radius: 12px;
 
