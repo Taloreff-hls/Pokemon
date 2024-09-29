@@ -9,6 +9,7 @@ const colors = {
     500: "#2D3033",
     600: "#EBEFF699",
     700: "#FFFFFF99",
+    800: "#98A2B4",
   },
   primary: {
     50: "#EBEFF6",
