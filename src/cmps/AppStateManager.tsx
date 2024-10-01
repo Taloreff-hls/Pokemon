@@ -5,7 +5,6 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-// import GlobalStyle from "../assets/globalStyles/GlobalStyle";
 import Header from "../cmps/Header";
 import PokemonContent from "../pages/PokemonContent";
 import FightArenaPage from "../pages/FightArenaPage";
@@ -20,7 +19,6 @@ function AppStateManager({ signOut }: WithAuthenticatorProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        {/* <GlobalStyle /> */}
         <Header
           setSelectedCtg={setSelectedCtg}
           selectedCtg={selectedCtg}

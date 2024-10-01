@@ -53,7 +53,6 @@ const Header = ({ setSelectedCtg, selectedCtg, signOut }: HeaderProps) => {
             label="Start a Fight"
             fontSize="1.4rem"
             fontWeight="400"
-            onClick={() => {}}
           />
         </Link>
 
