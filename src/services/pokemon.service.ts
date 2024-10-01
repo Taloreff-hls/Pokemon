@@ -8,51 +8,88 @@ export const pokemonService = {
   fightTurn,
   calculateDamage,
   catchPokemon,
+  sendCatchPokemonRequest,
   isBattleOver,
   endBattle,
   applyDamage,
   determineFirstTurn,
   handleOpponentTurn,
+  getRandomPokemon,
 };
 
 function sort(pokemons: Pokemon[], selectedOption: DropdownItem): Pokemon[] {
   switch (selectedOption.label) {
     case "Alphabetical A-Z":
-      return pokemons.sort((a, b) =>
-        a.name.english.localeCompare(b.name.english)
-      );
+      return pokemons.sort((a, b) => a.name.localeCompare(b.name));
     case "Alphabetical Z-A":
-      return pokemons.sort((a, b) =>
-        b.name.english.localeCompare(a.name.english)
-      );
+      return pokemons.sort((a, b) => b.name.localeCompare(a.name));
     case "Power (High to low)":
-      return pokemons.sort(
-        (a, b) => (b.base?.Attack || 0) - (a.base?.Attack || 0)
-      );
+      return pokemons.sort((a, b) => (b.attack || 0) - (a.attack || 0));
     case "Power (Low to high)":
       console.log("selected:", selectedOption.label);
-      return pokemons.sort(
-        (a, b) => (a.base?.Attack || 0) - (b.base?.Attack || 0)
-      );
+      return pokemons.sort((a, b) => (a.attack || 0) - (b.attack || 0));
     case "HP (High to low)":
-      return pokemons.sort((a, b) => (b.base?.HP || 0) - (a.base?.HP || 0));
+      return pokemons.sort((a, b) => (b.hp || 0) - (a.hp || 0));
     case "HP (Low to high)":
-      return pokemons.sort((a, b) => (a.base?.HP || 0) - (b.base?.HP || 0));
+      return pokemons.sort((a, b) => (a.hp || 0) - (b.hp || 0));
     default:
       return pokemons;
   }
 }
 
-async function getPokemons() {
-  const { data } = await axios.get("/src/data/pokemon.json");
+async function getPokemons(
+  user_id?: string,
+  page: number = 0,
+  rows: number = 10,
+  sort_by: string = "name",
+  sort_order: string = "asc",
+  name?: string
+) {
+  const queryParams = new URLSearchParams({
+    page: (page + 1).toString(),
+    limit: rows.toString(),
+    sort_by: sort_by,
+    sort_order: sort_order,
+  });
+
+  const body: { name?: string; user_id?: string } = {};
+  if (name) body.name = name;
+  if (user_id) body.user_id = user_id;
+
+  const { data } = await axios.post(
+    `http://localhost:4000/pokemons?${queryParams.toString()}`,
+    body
+  );
+
+  return {
+    pokemons: data.pokemons || [],
+    total: data.total || 0,
+  };
+}
+
+async function sendCatchPokemonRequest(userId: string, pokemonId: string) {
+  try {
+    const response = await axios.post(
+      `http://localhost:4000/pokemons/users/${userId}/catch`,
+      { pokemonId }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error catching the Pokémon:", error);
+    throw error;
+  }
+}
+
+async function getRandomPokemon(userId: string) {
+  const { data } = await axios.get(
+    `http://localhost:4000/pokemons/random?userId=${userId}`
+  );
   return data;
 }
 
 function fightTurn(userPokemon: Pokemon, opponentPokemon: Pokemon | null) {
   if (!opponentPokemon) return "user";
-  return userPokemon.base?.Speed >= opponentPokemon.base?.Speed
-    ? "user"
-    : "opponent";
+  return userPokemon.speed >= opponentPokemon.speed ? "user" : "opponent";
 }
 
 function calculateDamage(
@@ -62,9 +99,9 @@ function calculateDamage(
 ) {
   console.log("attacker:", attacker);
   console.log("defender:", defender);
-  const damage = Math.max(0, attacker.base.Attack - defender.base.Defense);
+  const damage = Math.max(0, attacker.attack - defender.defense);
   console.log(
-    `${attacker.name.english} is attacking ${defender.name.english} for ${damage}!, ${defender.name.english} new HP is ${defender.base.HP - damage}`
+    `${attacker.name} is attacking ${defender.name} for ${damage}!, ${defender.name} new HP is ${defender.hp - damage}`
   );
   const newHP = defenderHP - damage;
 

@@ -25,12 +25,14 @@ import typography from "../assets/constants/typography";
 import fonts from "../assets/constants/fonts";
 import colors from "../assets/constants/colors";
 import { columns } from "../assets/constants/tableColumns";
-import { NO_VALUE } from "../assets/constants/placeholders";
 
 interface PokemonTableProps {
   pokemons: Pokemon[];
   page: number;
   onPageChange: (newPage: number) => void;
+  rowsPerPage: number;
+  total: number;
+  onRowsPerPageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   selectedCtg: number;
 }
 
@@ -38,9 +40,11 @@ const PokemonTable = ({
   pokemons,
   page,
   onPageChange,
+  rowsPerPage,
+  total,
+  onRowsPerPageChange,
   selectedCtg,
 }: PokemonTableProps) => {
-  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
 
   const handleChangePage = (
@@ -48,13 +52,6 @@ const PokemonTable = ({
     newPage: number
   ) => {
     onPageChange(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(+event.target.value);
-    onPageChange(0);
   };
 
   const handleRowClick = (pokemon: Pokemon) => {
@@ -81,43 +78,37 @@ const PokemonTable = ({
           </StyledTableHead>
           <TableBody>
             {pokemons.length > 0 ? (
-              pokemons
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((pokemon) => (
-                  <StyledTableRow
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={pokemon.id}
-                    onClick={() => handleRowClick(pokemon)}
-                  >
-                    <StyledTableCell>
-                      <Avatar
-                        src={pokemon.image.hires}
-                        sx={avatarStyles}
-                        alt={pokemon.name.english}
-                      />
-                      {pokemon.name.english}
-                      {selectedCtg === 0 && pokemon.belongsToUser && (
-                        <StyledPokeball src={pokeball} alt="pokeball" />
-                      )}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      sx={{
-                        ...typography.body,
-                        fontFamily: fonts.mulish,
-                        color: colors.neutrals[300],
-                      }}
-                    >{`#${pokemon.id.toString().padStart(4, "0")}`}</StyledTableCell>
-                    <StyledTableCell>{pokemon.description}</StyledTableCell>
-                    <StyledTableCell>
-                      {pokemon.base?.Attack ?? NO_VALUE} Power
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      {pokemon.base?.HP ?? NO_VALUE} HP
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))
+              pokemons.map((pokemon) => (
+                <StyledTableRow
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                  key={pokemon.id}
+                  onClick={() => handleRowClick(pokemon)}
+                >
+                  <StyledTableCell>
+                    <Avatar
+                      src={pokemon.image}
+                      sx={avatarStyles}
+                      alt={pokemon.name}
+                    />
+                    {pokemon.name}
+                    {pokemon.belongsToUser && selectedCtg === 0 && (
+                      <StyledPokeball src={pokeball} alt="pokeball" />
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    sx={{
+                      ...typography.body,
+                      fontFamily: fonts.mulish,
+                      color: colors.neutrals[300],
+                    }}
+                  >{`#${pokemon.id.toString().padStart(4, "0")}`}</StyledTableCell>
+                  <StyledTableCell>{pokemon.description}</StyledTableCell>
+                  <StyledTableCell>{pokemon.attack} Power</StyledTableCell>
+                  <StyledTableCell>{pokemon.hp} HP</StyledTableCell>
+                </StyledTableRow>
+              ))
             ) : (
               <StyledTableRow>
                 <TableCell
@@ -139,11 +130,11 @@ const PokemonTable = ({
             <TableRow>
               <StyledTablePagination
                 {...paginationStyles}
-                count={pokemons.length}
+                count={total}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
+                onRowsPerPageChange={onRowsPerPageChange}
               />
             </TableRow>
           </TableFooter>

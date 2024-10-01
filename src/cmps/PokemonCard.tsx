@@ -28,7 +28,7 @@ const PokemonCardComponent = ({ pokemon, onClick }: PokemonCardProps) => {
               fontWeight={700}
               color={colors.neutrals[500]}
             >
-              {pokemon.base?.Attack ?? 0}
+              {pokemon.attack}
             </Typography>
             <Typography
               type={TypographyType.XSmall}
@@ -41,7 +41,7 @@ const PokemonCardComponent = ({ pokemon, onClick }: PokemonCardProps) => {
             <img src={strength} />
           </PowerLevel>
         </PowerLevelContainer>
-        <PokemonAvatar src={pokemon.image.hires} alt={pokemon.name.english} />
+        <PokemonAvatar src={pokemon.image} alt={pokemon.name} />
       </AvatarContainer>
       <div>
         <Typography
@@ -55,7 +55,7 @@ const PokemonCardComponent = ({ pokemon, onClick }: PokemonCardProps) => {
           type={TypographyType.HeadingMdLg}
           color={colors.neutrals[500]}
         >
-          {pokemon.name.english}
+          {pokemon.name}
         </Typography>
       </div>
     </PokemonCard>

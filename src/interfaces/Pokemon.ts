@@ -1,36 +1,27 @@
 import { PokemonType } from "../enums/PokemonEnum";
 
 export interface Pokemon {
-  id: number;
-  name: {
-    english: string;
-    japanese?: string;
-    chinese?: string;
-    french?: string;
-  };
+  id: string;
+  name: string;
   type: PokemonType[];
-  base: {
-    HP: number;
-    Attack: number;
-    Defense: number;
-    "Sp. Attack": number;
-    "Sp. Defense": number;
-    Speed: number;
-  };
-  species: string;
+  hp: number;
+  attack: number;
+  defense: number;
+  speed: number;
   description: string;
-  evolution?: { prev?: string; next?: [string, string][] };
-  profile: {
-    height: string;
-    weight: string;
-    egg?: string[];
-    ability: [string, string][];
-    gender?: string;
-  };
-  image: {
-    sprite: string;
-    thumbnail: string;
-    hires: string;
-  };
-  belongsToUser: boolean;
+  image: string;
+  height: string;
+  weight: string;
+  abilities: [string][];
+  belongsToUser?: boolean;
+}
+
+export interface PokemonQueryParams {
+  sort_by: string;
+  sort_order: string;
+  searchValue: string;
+  selectedCtg: number;
+  page?: number;
+  rowsPerPage?: number;
+  userId: string;
 }

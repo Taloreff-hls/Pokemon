@@ -48,8 +48,8 @@ const FightResultModal = ({
 
           <PokemonContainer>
             <PokemonImage
-              src={resultPokemon?.image.hires}
-              alt={resultPokemon?.name.english}
+              src={resultPokemon?.image}
+              alt={resultPokemon?.name}
             />
           </PokemonContainer>
           <Typography

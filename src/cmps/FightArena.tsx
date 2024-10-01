@@ -73,7 +73,7 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
   );
 
   useEffect(() => {
-    setUserHP(selectedPokemon.base.HP);
+    setUserHP(selectedPokemon.hp);
     setUserHit(0);
   }, [selectedPokemon, setUserHP, setUserHit]);
 

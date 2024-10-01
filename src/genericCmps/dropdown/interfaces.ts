@@ -2,7 +2,7 @@ import { MenuPosition } from "../../enums/MenuPositionEnum";
 
 export interface DropdownItem {
   label: string;
-  id: number;
+  id?: string;
   icon?: React.ReactNode;
   attack?: number;
 }

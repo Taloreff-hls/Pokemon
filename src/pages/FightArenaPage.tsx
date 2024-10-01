@@ -1,6 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-import { useQuery } from "react-query";
-import { pokemonService } from "../services/pokemon.service";
 import FightArena from "../cmps/FightArena";
 import GenericDropdown from "../genericCmps/dropdown/GenericDropdown";
 import { DropdownItem } from "../genericCmps/dropdown/interfaces";
@@ -9,46 +7,28 @@ import Typography from "../styles/Typography";
 import { SPACING } from "../assets/constants/spacings";
 import { TypographyType } from "../enums/TypographyEnum";
 import { MenuPosition } from "../enums/MenuPositionEnum";
-import { getRandomOpponent } from "../services/util.service";
 import { Pokemon } from "../interfaces/Pokemon";
 import colors from "../assets/constants/colors";
 import { ContentLayout } from "../styles/LayoutContainer";
+import { useOpponentPokemon, useUserPokemons } from "../hooks/pokemonDataHooks";
+
+const userId = "02fea148-e9dc-4cae-89aa-8db50df0dd48"; // Replace with actual user ID
 
 const FightArenaPage = () => {
-  const { data: allPokemons } = useQuery(
-    "pokemonData",
-    pokemonService.getPokemons
-  );
+  const { data: { pokemons = [] } = {} } = useUserPokemons(userId);
+
+  const { data: opponentPokemon } = useOpponentPokemon(userId);
 
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
-  const [opponentPokemon, setOpponentPokemon] = useState<Pokemon | null>(null);
-
-  const userPokemons = useMemo(
-    () =>
-      allPokemons?.filter((pokemon: Pokemon) => pokemon.belongsToUser) || [],
-    [allPokemons]
-  );
 
   useEffect(() => {
-    if (userPokemons.length > 0) {
-      setSelectedPokemon(userPokemons[0]);
+    if (pokemons.length > 0) {
+      setSelectedPokemon(pokemons[0]);
     }
-  }, [userPokemons]);
-
-  useEffect(() => {
-    if (allPokemons && userPokemons.length > 0) {
-      const nonUserPokemons = allPokemons.filter(
-        (pokemon: Pokemon) =>
-          !userPokemons.some(
-            (userPokemon: Pokemon) => userPokemon.id === pokemon.id
-          )
-      );
-      setOpponentPokemon(getRandomOpponent(nonUserPokemons));
-    }
-  }, [allPokemons, userPokemons]);
+  }, [pokemons]);
 
   const handleSelectPokemon = (selectedItem: DropdownItem) => {
-    const pokemon = userPokemons.find(
+    const pokemon = pokemons.find(
       (poke: Pokemon) => poke.id === selectedItem.id
     );
     if (pokemon) {
@@ -58,20 +38,20 @@ const FightArenaPage = () => {
 
   const dropdownOptions: DropdownItem[] = useMemo(
     () =>
-      userPokemons.map((pokemon: Pokemon) => ({
-        label: pokemon.name.english,
+      pokemons.map((pokemon: Pokemon) => ({
+        label: pokemon.name,
         icon: (
           <img
-            src={pokemon.image.thumbnail}
-            alt={pokemon.name.english}
+            src={pokemon.image}
+            alt={pokemon.name}
             width={SPACING[7]}
             height={SPACING[7]}
           />
         ),
-        attack: pokemon.base.Attack,
         id: pokemon.id,
+        attack: pokemon.attack,
       })),
-    [userPokemons]
+    [pokemons]
   );
 
   const renderHeader = () => (
