@@ -13,9 +13,10 @@ import { ButtonSizeEnum, ButtonTypeEnum } from "../enums/ButtonEnum";
 interface HeaderProps {
   setSelectedCtg: (ctg: number) => void;
   selectedCtg: number;
+  signOut?: () => void;
 }
 
-const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
+const Header = ({ setSelectedCtg, selectedCtg, signOut }: HeaderProps) => {
   return (
     <HeaderContainer>
       <HeaderNavigationContainer>
@@ -44,16 +45,28 @@ const Header = ({ setSelectedCtg, selectedCtg }: HeaderProps) => {
         </NavigationBtnsContainer>
       </HeaderNavigationContainer>
 
-      <Link to="/fight-arena">
-        <GenericButton
-          type={ButtonTypeEnum.Primary}
-          size={ButtonSizeEnum.Medium}
-          label="Start a Fight"
-          fontSize="1.4rem"
-          fontWeight="400"
-          onClick={() => {}}
-        />
-      </Link>
+      <NavigationBtnsContainer>
+        <Link to="/fight-arena">
+          <GenericButton
+            type={ButtonTypeEnum.Primary}
+            size={ButtonSizeEnum.Medium}
+            label="Start a Fight"
+            fontSize="1.4rem"
+            fontWeight="400"
+          />
+        </Link>
+
+        {signOut && (
+          <GenericButton
+            type={ButtonTypeEnum.Secondary}
+            size={ButtonSizeEnum.Medium}
+            label="Sign Out"
+            fontSize="1.4rem"
+            fontWeight="400"
+            onClick={signOut}
+          />
+        )}
+      </NavigationBtnsContainer>
     </HeaderContainer>
   );
 };

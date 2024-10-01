@@ -12,10 +12,11 @@ interface TypographyProps {
   type?: TypographyType;
   color?: string;
   aligntext?: string;
+  fontFamily?: string;
 }
 
 const Typography = styled.p<TypographyProps>`
-  font-family: ${fonts.mulish};
+  font-family: ${(props) => props.fontFamily || fonts.mulish};
   font-weight: ${(props) => props.fontWeight || 400};
   font-size: ${(props) =>
     props.type ? typography[props.type].fontSize : "14px"};
