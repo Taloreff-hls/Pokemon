@@ -31,7 +31,7 @@ const GenericDropdown = ({
   );
 
   return (
-    <Box sx={dropdownStyles.container}>
+    <Box sx={dropdownStyles.container} data-test="sort-dropdown">
       <Box onClick={toggleDropdown} sx={dropdownStyles.trigger}>
         {selectedItem?.label ?? label}
         <KeyboardArrowDownIcon sx={dropdownStyles.arrowIcon} />

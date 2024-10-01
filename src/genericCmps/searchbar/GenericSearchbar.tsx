@@ -21,6 +21,7 @@ const GenericSearchbar = ({
     <Box sx={searchbarStyles.container}>
       <SearchIcon sx={searchbarStyles.icon} />
       <Box
+        data-test="pokemon-search-input"
         component="input"
         type="text"
         sx={{
@@ -38,6 +39,7 @@ const GenericSearchbar = ({
       />
       {!isFocused && value && (
         <CloseIcon
+          data-test="search-input-close"
           sx={searchbarStyles.closeIcon}
           onClick={() => onChange("")}
         />

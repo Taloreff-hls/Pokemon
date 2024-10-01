@@ -1,0 +1,57 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pokedex-dev-198b1-authRole",
+      "UnauthRoleArn": "arn:aws:iam::779000067130:role/amplify-pokedex-dev-198b1-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::779000067130:role/amplify-pokedex-dev-198b1-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-pokedex-dev-198b1-deployment",
+      "UnauthRoleName": "amplify-pokedex-dev-198b1-unauthRole",
+      "StackName": "amplify-pokedex-dev-198b1",
+      "StackId": "arn:aws:cloudformation:eu-north-1:779000067130:stack/amplify-pokedex-dev-198b1/d7608980-7c0a-11ef-af13-0adc8fc5207d",
+      "AmplifyAppId": "d3pxb5mnocluv2"
+    }
+  },
+  "auth": {
+    "pokedexedc47131": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "output": {
+        "UserPoolId": "eu-north-1_zF0vboMrJ",
+        "AppClientIDWeb": "15700pacc2v3h7vjr41gikuio2",
+        "AppClientID": "5foj73fbs75q5282karvkggbob",
+        "IdentityPoolId": "eu-north-1:035f401e-7e70-4236-beff-2fa93ee6bd07",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-north-1:779000067130:userpool/eu-north-1_zF0vboMrJ",
+        "IdentityPoolName": "pokedexedc47131_identitypool_edc47131__dev",
+        "UserPoolName": "pokedexedc47131_userpool_edc47131"
+      },
+      "lastPushTimeStamp": "2024-10-01T08:35:12.191Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pokedex-dev-198b1-deployment/amplify-cfn-templates/auth/pokedexedc47131-cloudformation-template.json",
+        "logicalId": "authpokedexedc47131"
+      }
+    }
+  }
+}

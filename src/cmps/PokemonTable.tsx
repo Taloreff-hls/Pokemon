@@ -61,9 +61,9 @@ const PokemonTable = ({
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <StyledTableContainer>
-        <Table stickyHeader aria-label="pokemon table">
+        <Table stickyHeader aria-label="pokemon-table">
           <StyledTableHead>
-            <TableRow>
+            <TableRow data-test="table-head-row">
               {columns.map((column) => (
                 <StyledTableHeadCell
                   key={column.id}
@@ -76,7 +76,7 @@ const PokemonTable = ({
               ))}
             </TableRow>
           </StyledTableHead>
-          <TableBody>
+          <TableBody data-test="pokemon-list">
             {pokemons.length > 0 ? (
               pokemons.map((pokemon) => (
                 <StyledTableRow
@@ -118,7 +118,7 @@ const PokemonTable = ({
                     height: "433px",
                   }}
                 >
-                  <EmptyPokemons>
+                  <EmptyPokemons data-test="no-results-message">
                     <img src={emptyPokemons} alt="no pokemons" />
                     No Pokemons were found.
                   </EmptyPokemons>
