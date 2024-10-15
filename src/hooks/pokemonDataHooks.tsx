@@ -58,12 +58,13 @@ export const usePokemonGridData = ({
   sort_order,
   searchValue,
   selectedCtg,
+  userId,
 }: PokemonQueryParams) => {
   return useInfiniteQuery(
     ["infinitePokemonData", selectedCtg, sort_by, sort_order, searchValue],
     ({ pageParam = 0 }) =>
       pokemonService.getPokemons(
-        selectedCtg === 1 ? "02fea148-e9dc-4cae-89aa-8db50df0dd48" : undefined,
+        selectedCtg === 1 ? userId : undefined,
         pageParam,
         12,
         sort_by,

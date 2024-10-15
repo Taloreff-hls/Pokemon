@@ -11,13 +11,15 @@ import { Pokemon } from "../interfaces/Pokemon";
 import colors from "../assets/constants/colors";
 import { ContentLayout } from "../styles/LayoutContainer";
 import { useOpponentPokemon, useUserPokemons } from "../hooks/pokemonDataHooks";
+import { AuthUser } from "aws-amplify/auth";
 
-const userId = "02fea148-e9dc-4cae-89aa-8db50df0dd48"; // Replace with actual user ID
+interface FightArenaPageProps {
+  user: AuthUser;
+}
+const FightArenaPage = ({ user }: FightArenaPageProps) => {
+  const { data: { pokemons = [] } = {} } = useUserPokemons(user.userId);
 
-const FightArenaPage = () => {
-  const { data: { pokemons = [] } = {} } = useUserPokemons(userId);
-
-  const { data: opponentPokemon } = useOpponentPokemon(userId);
+  const { data: opponentPokemon } = useOpponentPokemon(user.userId);
 
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
 
@@ -93,6 +95,7 @@ const FightArenaPage = () => {
           <FightArena
             selectedPokemon={selectedPokemon}
             opponentPokemon={opponentPokemon}
+            user={user}
           />
         )}
       </ContentLayout>

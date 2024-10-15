@@ -11,13 +11,19 @@ import {
 import { useBattleState, useBattleLogic } from "../hooks/fightArenaHooks";
 import { Pokemon } from "../interfaces/Pokemon";
 import { ButtonStyle } from "../interfaces/ArenaButton";
+import { AuthUser } from "aws-amplify/auth";
 
 interface FightArenaProps {
   selectedPokemon: Pokemon;
   opponentPokemon: Pokemon;
+  user: AuthUser;
 }
 
-const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
+const FightArena = ({
+  selectedPokemon,
+  opponentPokemon,
+  user,
+}: FightArenaProps) => {
   const {
     userHP,
     setUserHP,
@@ -69,7 +75,8 @@ const FightArena = ({ selectedPokemon, opponentPokemon }: FightArenaProps) => {
       setCatchResult,
       gamePaused,
       setGamePaused,
-    }
+    },
+    user.userId
   );
 
   useEffect(() => {

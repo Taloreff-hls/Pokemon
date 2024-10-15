@@ -28,9 +28,9 @@ function App() {
       <GlobalStyle />
       <StyledAuthenticator>
         <Authenticator components={components}>
-          {({ signOut }) => (
+          {({ signOut, user }) => (
             <main>
-              <AppStateManager signOut={signOut} />
+              <AppStateManager signOut={signOut} user={user} />
             </main>
           )}
         </Authenticator>

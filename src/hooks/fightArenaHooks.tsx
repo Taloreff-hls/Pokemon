@@ -65,7 +65,8 @@ export const useBattleState = ({
 export const useBattleLogic = (
   selectedPokemon: Pokemon,
   opponentPokemon: Pokemon | null,
-  battleState: ReturnType<typeof useBattleState>
+  battleState: ReturnType<typeof useBattleState>,
+  userId: string
 ) => {
   const {
     userHP,
@@ -188,8 +189,6 @@ export const useBattleLogic = (
           setBattleResult(FightResultEnum.CAUGHT);
 
           try {
-            const userId = "02fea148-e9dc-4cae-89aa-8db50df0dd48"; // Replace with actual user ID
-
             await pokemonService.sendCatchPokemonRequest(
               userId,
               opponentPokemon.id
@@ -212,6 +211,7 @@ export const useBattleLogic = (
     setCatchAttempts,
     setBattleResult,
     setCurrentTurn,
+    userId,
   ]);
 
   return { handleFightClick, handleAttack, handleCatch };

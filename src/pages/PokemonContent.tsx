@@ -14,14 +14,14 @@ import {
   usePokemonGridData,
   usePokemonTableData,
 } from "../hooks/pokemonDataHooks";
+import { AuthUser } from "aws-amplify/auth";
 
 interface PokemonContentProps {
   selectedCtg: number;
+  user: AuthUser;
 }
 
-const userId = "02fea148-e9dc-4cae-89aa-8db50df0dd48"; // Replace with actual user ID
-
-const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
+const PokemonContent = ({ selectedCtg, user }: PokemonContentProps) => {
   const [viewMode, setViewMode] = useState<ViewModeEnum>(ViewModeEnum.List);
   const [searchValue, setSearchValue] = useState("");
   const [sortOption, setSortOption] = useState<DropdownItem>(
@@ -39,7 +39,7 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
     sort_order,
     searchValue,
     selectedCtg,
-    userId,
+    userId: user.userId,
   });
 
   const pokemonGridData = usePokemonGridData({
@@ -47,7 +47,7 @@ const PokemonContent = ({ selectedCtg }: PokemonContentProps) => {
     sort_order,
     searchValue,
     selectedCtg,
-    userId,
+    userId: user.userId,
   });
 
   useEffect(() => {

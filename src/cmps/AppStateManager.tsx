@@ -13,28 +13,33 @@ import { WithAuthenticatorProps } from "@aws-amplify/ui-react";
 
 const queryClient = new QueryClient();
 
-function AppStateManager({ signOut }: WithAuthenticatorProps) {
+function AppStateManager({ signOut, user }: WithAuthenticatorProps) {
   const [selectedCtg, setSelectedCtg] = useState(0);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <Header
-          setSelectedCtg={setSelectedCtg}
-          selectedCtg={selectedCtg}
-          signOut={signOut}
-        />
-        <Routes>
-          <Route
-            path="/"
-            element={<PokemonContent selectedCtg={selectedCtg} />}
+  if (user) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Header
+            setSelectedCtg={setSelectedCtg}
+            selectedCtg={selectedCtg}
+            signOut={signOut}
           />
-          <Route path="/fight-arena" element={<FightArenaPage />} />
-          <Route path="/login" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Router>
-    </QueryClientProvider>
-  );
+          <Routes>
+            <Route
+              path="/"
+              element={<PokemonContent selectedCtg={selectedCtg} user={user} />}
+            />
+            <Route
+              path="/fight-arena"
+              element={<FightArenaPage user={user} />}
+            />
+            <Route path="/login" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Router>
+      </QueryClientProvider>
+    );
+  }
 }
 
 export default AppStateManager;
