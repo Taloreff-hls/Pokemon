@@ -129,6 +129,8 @@ const FightArena = ({
   };
 
   const renderButton = (handleClick: () => void, styleObj: ButtonStyle) => {
+    const isDisabled = currentTurn === "opponent";
+
     return (
       <ArenaButton
         background={styleObj.bgColor}
@@ -137,6 +139,7 @@ const FightArena = ({
         height={styleObj.height}
         width={styleObj.width}
         onClick={handleClick}
+        disabled={isDisabled}
       >
         {styleObj.label}
       </ArenaButton>

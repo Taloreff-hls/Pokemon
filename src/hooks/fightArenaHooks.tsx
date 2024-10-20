@@ -25,8 +25,8 @@ export const useBattleState = ({
     null
   );
   const [catchAttempts, setCatchAttempts] = useState(3);
-  const [userHit, setUserHit] = useState(0);
-  const [opponentHit, setOpponentHit] = useState(0);
+  const [userHit, setUserHit] = useState(-1);
+  const [opponentHit, setOpponentHit] = useState(-1);
   const [showCatchModal, setShowCatchModal] = useState(false);
   const [catchResult, setCatchResult] = useState<boolean>(false);
   const [gamePaused, setGamePaused] = useState(false);
